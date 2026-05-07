@@ -3,7 +3,10 @@ import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'Habba | حبّة',
-  description: 'Handmade bead accessories catalog'
+  description: 'Handmade bead accessories, colorful and giftable.',
+  icons: {
+    icon: '/images/habba/brand/hbb-favicon.png'
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
