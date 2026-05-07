@@ -11,7 +11,7 @@ export function ProductCard({ product }: { product: HabbaProduct }) {
         <h3 className="text-right text-lg font-bold leading-tight">{product.titleAr}</h3>
         <p className="text-sm leading-tight text-[#514740]">{product.titleEn}</p>
         <p className="text-xs text-[#7B6F68]">{product.category} • {product.collectionAr}</p>
-        <p className="text-xs text-[#7B6F68]">السعر: قريبًا</p>
+        <p className="text-xs text-[#7B6F68]">{product.price}</p>
       </div>
       <a
         href={createWhatsAppLink(product.titleAr)}

@@ -4,7 +4,7 @@ import { HabbaHeader } from '@/components/habba/header';
 import { ProductCard } from '@/components/habba/product-card';
 import { launchProducts } from '@/content/habba-products';
 
-const featured = launchProducts.filter((p) => p.featured);
+const featured = launchProducts.filter((p) => p.featured).slice(0, 8);
 
 export default function HabbaHomePage() {
   return (
