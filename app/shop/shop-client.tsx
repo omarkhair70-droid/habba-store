@@ -6,34 +6,18 @@ import { HabbaFooter } from '@/components/habba/footer';
 import { HabbaHeader } from '@/components/habba/header';
 import { ProductCard } from '@/components/habba/product-card';
 import { launchProducts } from '@/content/habba-products';
+import { getHabbaFilterFromQuery, habbaFilterChips, type HabbaFilterKey } from '@/content/habba-filters';
 
-type FilterKey = 'all' | 'bracelets' | 'necklaces' | 'sets' | 'cute-gift' | 'green-mood';
-
-const chips: { key: FilterKey; label: string }[] = [
-  { key: 'all', label: 'الكل' },
-  { key: 'bracelets', label: 'أساور' },
-  { key: 'necklaces', label: 'عقود' },
-  { key: 'sets', label: 'أطقم' },
-  { key: 'cute-gift', label: 'هدايا صغيرة' },
-  { key: 'green-mood', label: 'جرين مود' }
-];
-
-const validFilters: FilterKey[] = ['all', 'bracelets', 'necklaces', 'sets', 'cute-gift', 'green-mood'];
-
-function getFilterFromQuery(value: string | null): FilterKey {
-  if (!value) return 'all';
-  return validFilters.includes(value as FilterKey) ? (value as FilterKey) : 'all';
-}
 
 export default function ShopClient() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
-  const initialFilter = getFilterFromQuery(searchParams.get('filter'));
-  const [activeFilter, setActiveFilter] = useState<FilterKey>(initialFilter);
+  const initialFilter = getHabbaFilterFromQuery(searchParams.get('filter'));
+  const [activeFilter, setActiveFilter] = useState<HabbaFilterKey>(initialFilter);
 
   useEffect(() => {
-    const queryFilter = getFilterFromQuery(searchParams.get('filter'));
+    const queryFilter = getHabbaFilterFromQuery(searchParams.get('filter'));
     if (queryFilter !== activeFilter) setActiveFilter(queryFilter);
   }, [searchParams, activeFilter]);
 
@@ -46,7 +30,7 @@ export default function ShopClient() {
     return launchProducts.filter((p) => p.collectionAr === 'جرين مود');
   }, [activeFilter]);
 
-  const onFilterChange = (filter: FilterKey) => {
+  const onFilterChange = (filter: HabbaFilterKey) => {
     setActiveFilter(filter);
     const params = new URLSearchParams(searchParams.toString());
     if (filter === 'all') {
@@ -67,7 +51,7 @@ export default function ShopClient() {
           اختاري القطعة اللي شبهك، واسألي على واتساب للتوفر والتفاصيل.
         </p>
         <div className="mb-5 mt-4 flex flex-wrap justify-end gap-1.5 sm:gap-2">
-          {chips.map((chip) => (
+          {habbaFilterChips.map((chip) => (
             <button
               key={chip.key}
               type="button"
