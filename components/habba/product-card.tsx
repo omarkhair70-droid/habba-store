@@ -14,8 +14,8 @@ export function ProductCard({ product }: { product: HabbaProduct }) {
           </Link>
         </h3>
         <p className="text-sm leading-tight text-[#514740]">{product.titleEn}</p>
-        <p className="text-xs text-[#7B6F68]">{product.category} • {product.collectionAr}</p>
-        <p className="text-xs text-[#7B6F68]">{product.price}</p>
+        <p className="text-xs text-[#7B6F68]">{product.categoryAr} • {product.collectionAr}</p>
+        <p className="text-xs text-[#7B6F68]">{product.priceLabelAr}</p>
         <Link
           href={`/product/${product.slug}`}
           aria-label={`عرض تفاصيل ${product.titleAr}`}
