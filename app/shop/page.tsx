@@ -1,6 +1,7 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { HabbaFooter } from '@/components/habba/footer';
 import { HabbaHeader } from '@/components/habba/header';
 import { ProductCard } from '@/components/habba/product-card';
@@ -18,8 +19,24 @@ const chips: { key: FilterKey; label: string }[] = [
   { key: 'green-mood', label: 'جرين مود' }
 ];
 
+const validFilters: FilterKey[] = ['all', 'bracelets', 'necklaces', 'sets', 'cute-gift', 'green-mood'];
+
+function getFilterFromQuery(value: string | null): FilterKey {
+  if (!value) return 'all';
+  return validFilters.includes(value as FilterKey) ? (value as FilterKey) : 'all';
+}
+
 export default function ShopPage() {
-  const [activeFilter, setActiveFilter] = useState<FilterKey>('all');
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const initialFilter = getFilterFromQuery(searchParams.get('filter'));
+  const [activeFilter, setActiveFilter] = useState<FilterKey>(initialFilter);
+
+  useEffect(() => {
+    const queryFilter = getFilterFromQuery(searchParams.get('filter'));
+    if (queryFilter !== activeFilter) setActiveFilter(queryFilter);
+  }, [searchParams, activeFilter]);
 
   const filteredProducts = useMemo(() => {
     if (activeFilter === 'all') return launchProducts;
@@ -29,6 +46,18 @@ export default function ShopPage() {
     if (activeFilter === 'cute-gift') return launchProducts.filter((p) => p.collectionAr === 'هدايا صغيرة');
     return launchProducts.filter((p) => p.collectionAr === 'جرين مود');
   }, [activeFilter]);
+
+  const onFilterChange = (filter: FilterKey) => {
+    setActiveFilter(filter);
+    const params = new URLSearchParams(searchParams.toString());
+    if (filter === 'all') {
+      params.delete('filter');
+    } else {
+      params.set('filter', filter);
+    }
+    const next = params.toString() ? `${pathname}?${params.toString()}` : pathname;
+    router.replace(next, { scroll: false });
+  };
 
   return (
     <main>
@@ -43,7 +72,7 @@ export default function ShopPage() {
             <button
               key={chip.key}
               type="button"
-              onClick={() => setActiveFilter(chip.key)}
+              onClick={() => onFilterChange(chip.key)}
               className={`rounded-full border px-3 py-1 text-xs font-semibold transition sm:px-4 sm:py-1.5 sm:text-sm ${
                 activeFilter === chip.key
                   ? 'border-[#F87070] bg-[#F87070] text-white'

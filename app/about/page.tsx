@@ -26,7 +26,7 @@ export default function AboutPage() {
         <article className="rounded-3xl border border-[#F0DED0] bg-[#fff7ee] p-5 md:p-7">
           <h1 className="text-right text-2xl font-bold leading-tight sm:text-3xl">عن حبّة</h1>
           <p className="mt-3 max-w-2xl text-right text-sm leading-relaxed text-[#615651] sm:text-base">
-            حبّة مش براند فخامة. حبّة تفاصيل صغيرة، ألوان خفيفة، وقطع خرز handmade تتلبس بسهولة وتتنفع كهدية بسيطة.
+            حبّة مش براند فخامة. حبّة تفاصيل صغيرة، ألوان خفيفة، وقطع خرز handmade تتلبس بسهولة وتنفع كهدية بسيطة.
           </p>
           <p className="mt-2 text-right text-xs leading-relaxed text-[#8A7D76] sm:text-sm">
             Habba is a handmade bead accessories brand for colorful everyday pieces and simple gifting.
