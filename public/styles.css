@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Tajawal:wght@400;500;700;800&display=swap');
+:root{--cream:#FFF7ED;--white:#FFFCF7;--blush:#FDE2E4;--coral:#F87070;--soft:#FFA6A0;--sage:#A8B994;--mint:#B8E6D2;--lav:#A99AD6;--yellow:#FFE08A;--text:#3A2F2A;--muted:#7B6F68;--border:#F0DED0}
+*{box-sizing:border-box}body{margin:0;font-family:'Nunito',sans-serif;background:var(--cream);color:var(--text)}
+.ar{font-family:'Tajawal',sans-serif;direction:rtl}.container{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;background:rgba(255,252,247,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--border);z-index:10}
+.nav{display:flex;align-items:center;justify-content:space-between;padding:.8rem 0}.nav a{color:var(--text);text-decoration:none;margin-inline:.4rem}
+.logo{height:38px}.btn{display:inline-block;padding:.7rem 1rem;border-radius:999px;text-decoration:none;font-weight:700;border:1px solid transparent}
+.btn-primary{background:var(--coral);color:#fff}.btn-secondary{background:var(--white);border-color:var(--border);color:var(--text)}
+.hero{padding:2rem 0}.hero-wrap{display:grid;gap:1rem}.hero img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:24px;box-shadow:0 8px 20px #00000012}
+section{padding:2rem 0}.cards{display:grid;gap:1rem}.value{background:var(--white);padding:1rem;border:1px solid var(--border);border-radius:18px}
+.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.product-card{background:var(--white);border:1px solid var(--border);border-radius:18px;padding:.7rem;box-shadow:0 8px 20px #0000000d}
+.product-card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px}.meta{font-size:.84rem;color:var(--muted)}
+.collections{display:grid;gap:1rem}.collection{background:var(--blush);border-radius:20px;padding:1rem}
+.collection img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:14px}
+.footer{padding:2rem 0;background:var(--white);border-top:1px solid var(--border)}
+@media(min-width:700px){.hero-wrap{grid-template-columns:1.1fr .9fr;align-items:center}.products{grid-template-columns:repeat(3,minmax(0,1fr))}.collections,.cards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(min-width:1000px){.products{grid-template-columns:repeat(4,minmax(0,1fr))}}

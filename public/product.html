@@ -1,0 +1,9 @@
+<!doctype html><html lang="ar"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Product | Habba</title><link rel="stylesheet" href="/styles.css"></head><body>
+<header><div class="container nav"><a href="/"><img class="logo" src="/images/habba/brand/hbb-logo-bilingual.png"></a></div></header>
+<main class="container"><section id="product"></section><section><h3 class="ar">منتجات مشابهة</h3><div id="related" class="products"></div></section></main>
+<script src="/products.js"></script><script src="/app.js"></script><script>
+const id=new URLSearchParams(location.search).get('id');
+const p=launchProducts.find(x=>x.id===id)||launchProducts[0];
+document.getElementById('product').innerHTML=`<img src="${p.image}" style="width:100%;max-width:460px;aspect-ratio:1/1;object-fit:cover;border-radius:24px"><h1 class="ar">${p.titleAr}</h1><h2>${p.titleEn}</h2><p class="meta">${p.category} • ${p.collectionAr}</p><p class="ar">${p.descriptionAr}</p><p>${p.descriptionEn}</p><p class="ar">السعر: قريبًا</p><a class="btn btn-primary ar" target="_blank" href="${buildWhatsAppLink(p.titleAr)}">اسأل على واتساب</a>`;
+document.getElementById('related').innerHTML=launchProducts.filter(x=>x.collection===p.collection&&x.id!==p.id).map(productCard).join('');
+</script></body></html>
