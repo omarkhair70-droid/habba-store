@@ -4,8 +4,12 @@ export function HabbaHeader() {
   return (
     <header className="sticky top-0 z-20 border-b border-[#F0DED0] bg-[#FFFCF7]/95 backdrop-blur">
       <div className="mx-auto flex w-[92%] max-w-6xl items-center justify-between gap-3 py-3">
-        <Link href="/" aria-label="Habba home">
-          <img src="/images/habba/brand/hbb-logo-bilingual.png" alt="Habba | حبّة" className="h-12 w-auto" />
+        <Link href="/" aria-label="Habba home" className="flex h-14 w-40 items-center">
+          <img
+            src="/images/habba/brand/hbb-logo-bilingual.png"
+            alt="Habba | حبّة"
+            className="h-auto w-auto max-h-12 max-w-full object-contain"
+          />
         </Link>
         <nav className="flex items-center gap-3 text-sm font-medium text-[#514740] md:gap-5">
           <Link href="/" className="transition hover:text-[#F87070]">Home</Link>
