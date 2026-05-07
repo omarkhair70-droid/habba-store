@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { HabbaFooter } from '@/components/habba/footer';
 import { HabbaHeader } from '@/components/habba/header';
 import { createWhatsAppLink } from '@/content/habba-products';
+import { habbaOrderSteps } from '@/content/habba-sections';
 
 export const metadata: Metadata = {
   title: 'عن حبّة',
@@ -15,7 +16,6 @@ export const metadata: Metadata = {
   }
 };
 
-const orderSteps = ['اختاري القطعة', 'اضغطي اسأل على واتساب', 'نأكد التوفر والتفاصيل', 'نتفق على الاستلام أو التوصيل'];
 const trustNotes = ['كل قطعة handmade', 'التوفر حسب الخامات المتاحة', 'الألوان ممكن تختلف اختلاف بسيط حسب الإضاءة', 'الطلب عبر واتساب فقط'];
 
 export default function AboutPage() {
@@ -50,7 +50,7 @@ export default function AboutPage() {
         <article className="rounded-3xl border border-[#F0DED0] bg-[#FFFCF7] p-5 md:p-6">
           <h2 className="text-right text-xl font-bold leading-tight">طريقة الطلب</h2>
           <ol className="mt-3 space-y-2 text-right text-sm text-[#615651] sm:text-base">
-            {orderSteps.map((step, idx) => (
+            {habbaOrderSteps.map((step, idx) => (
               <li key={step}>{idx + 1}. {step}</li>
             ))}
           </ol>
