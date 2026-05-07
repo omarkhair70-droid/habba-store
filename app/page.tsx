@@ -77,15 +77,24 @@ export default function HabbaHomePage() {
       </section>
 
       <section className="mx-auto w-[92%] max-w-6xl py-5">
-        <article className="rounded-3xl border border-[#F0DED0] bg-[#fff7ee] p-5 md:p-6">
-          <h2 className="text-right text-2xl font-bold">معمولة بإيد، بألوان تفرّح</h2>
-          <p className="mt-3 max-w-2xl text-right text-sm leading-relaxed text-[#615651] sm:text-base">
-            حبّة بتقدّم قطع خرز خفيفة وملونة، معمولة بإيد وبشكل صادق. كل قطعة بسيطة، لطيفة، ومناسبة لتفصيلة يومية أو هدية صغيرة.
-          </p>
-          <div className="mt-4 flex flex-wrap justify-end gap-2 text-sm text-[#6B615B]">
-            <span className="rounded-full border border-[#F0DED0] bg-[#FFFCF7] px-3 py-1">handmade</span>
-            <span className="rounded-full border border-[#F0DED0] bg-[#FFFCF7] px-3 py-1">ألوان خفيفة</span>
-            <span className="rounded-full border border-[#F0DED0] bg-[#FFFCF7] px-3 py-1">مناسبة كهدايا بسيطة</span>
+        <article className="grid items-center gap-5 rounded-3xl border border-[#F0DED0] bg-[#fff7ee] p-5 md:grid-cols-2 md:gap-8 md:p-6">
+          <div className="order-2 md:order-1 rounded-3xl border border-[#F0DED0] bg-[#FFFCF7] p-3">
+            <img
+              src="/images/habba/products/hbb-lavender-rose-bracelet-card.png"
+              alt="Lavender rose bracelet"
+              className="mx-auto aspect-square w-full max-w-xs rounded-2xl object-contain"
+            />
+          </div>
+          <div className="order-1 md:order-2">
+            <h2 className="text-right text-2xl font-bold">معمولة بإيد، بألوان تفرّح</h2>
+            <p className="mt-3 text-right text-sm leading-relaxed text-[#615651] sm:text-base">
+              حبّة بتقدّم قطع خرز خفيفة وملونة، معمولة بإيد وبشكل صادق. كل قطعة بسيطة، لطيفة، ومناسبة لتفصيلة يومية أو هدية صغيرة.
+            </p>
+            <div className="mt-4 flex flex-wrap justify-end gap-2 text-sm text-[#6B615B]">
+              <span className="rounded-full border border-[#F0DED0] bg-[#FFFCF7] px-3 py-1">handmade</span>
+              <span className="rounded-full border border-[#F0DED0] bg-[#FFFCF7] px-3 py-1">ألوان خفيفة</span>
+              <span className="rounded-full border border-[#F0DED0] bg-[#FFFCF7] px-3 py-1">مناسبة كهدايا بسيطة</span>
+            </div>
           </div>
         </article>
       </section>
@@ -103,18 +112,27 @@ export default function HabbaHomePage() {
         <h2 className="mb-3 text-right text-2xl font-bold">Collections</h2>
         <p className="mb-4 text-right text-sm text-[#7B6F68]">تشكيلات ملونة تناسب يومك وهدية بسيطة بنفس روح حبّة.</p>
         <div className="grid gap-3 md:grid-cols-3">
-          <article className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-4 text-right">
-            <h3 className="font-bold">أطقم مبهجة</h3>
-            <p className="mt-1 text-sm text-[#615651]">أطقم خرز خفيفة بتفاصيل مرحة.</p>
-          </article>
-          <article className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-4 text-right">
-            <h3 className="font-bold">قطع يومية</h3>
+          <Link href="/shop" className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-3 text-right transition hover:border-[#E8CDBA]">
+            <div className="rounded-2xl bg-[#FFFCF7] p-2.5">
+              <img src="/images/habba/products/hbb-green-speckle-bracelet-card.png" alt="Green Mood collection" className="aspect-square w-full rounded-xl object-contain" />
+            </div>
+            <h3 className="mt-3 font-bold">قطع يومية</h3>
             <p className="mt-1 text-sm text-[#615651]">أساور وعقود بسيطة وسهلة اللبس.</p>
-          </article>
-          <article className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-4 text-right">
-            <h3 className="font-bold">هدايا صغيرة</h3>
+          </Link>
+          <Link href="/shop" className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-3 text-right transition hover:border-[#E8CDBA]">
+            <div className="rounded-2xl bg-[#FFFCF7] p-2.5">
+              <img src="/images/habba/products/hbb-lavender-rose-bracelet-card.png" alt="Cute Gift collection" className="aspect-square w-full rounded-xl object-contain" />
+            </div>
+            <h3 className="mt-3 font-bold">هدايا صغيرة</h3>
             <p className="mt-1 text-sm text-[#615651]">اختيارات لطيفة للهدايا البسيطة.</p>
-          </article>
+          </Link>
+          <Link href="/shop" className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-3 text-right transition hover:border-[#E8CDBA]">
+            <div className="rounded-2xl bg-[#FFFCF7] p-2.5">
+              <img src="/images/habba/products/hbb-colorful-star-set-card.png" alt="Colorful Star collection" className="aspect-square w-full rounded-xl object-contain" />
+            </div>
+            <h3 className="mt-3 font-bold">أطقم مبهجة</h3>
+            <p className="mt-1 text-sm text-[#615651]">أطقم خرز خفيفة بتفاصيل مرحة.</p>
+          </Link>
         </div>
       </section>
 
