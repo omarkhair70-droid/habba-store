@@ -12,9 +12,14 @@ export function HabbaFooter() {
           />
         </div>
         <p className="text-sm text-[#514740]">حبّة — إكسسوارات خرز handmade، ملونة، بسيطة، ومناسبة كهدايا صغيرة.</p>
+        <p className="text-xs text-[#7B6F68]">Handmade bead accessories</p>
         <a href={createWhatsAppLink('منتجات حبّة')} target="_blank" rel="noreferrer" className="text-sm font-semibold text-[#F87070]">
-          Order on WhatsApp: +20 101 154 9509
+          اطلبي أو اسألي عن أي قطعة عبر واتساب.
         </a>
+        <div className="text-sm text-[#7B6F68]">
+          <p>Instagram قريبًا</p>
+          <a href="#" className="text-xs">#</a>
+        </div>
       </div>
     </footer>
   );

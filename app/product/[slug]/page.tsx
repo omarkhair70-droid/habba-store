@@ -1,8 +1,42 @@
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { HabbaFooter } from '@/components/habba/footer';
 import { HabbaHeader } from '@/components/habba/header';
 import { ProductCard } from '@/components/habba/product-card';
 import { createWhatsAppLink, launchProducts } from '@/content/habba-products';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const product = launchProducts.find((p) => p.slug === slug);
+
+  if (!product) {
+    return {
+      title: 'المنتج غير موجود | Habba',
+      description: 'هذا المنتج غير متاح حاليًا على حبّة.'
+    };
+  }
+
+  const title = `${product.titleAr} | Habba`;
+  const description = `${product.descriptionAr} ${product.descriptionEn}`;
+  return {
+    title,
+    description,
+    alternates: { canonical: `/product/${product.slug}` },
+    openGraph: {
+      title: `${product.titleAr} | ${product.titleEn} | Habba`,
+      description,
+      url: `/product/${product.slug}`,
+      images: [product.image],
+      type: 'website'
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [product.image]
+    }
+  };
+}
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
