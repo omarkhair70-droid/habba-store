@@ -2,4 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
-body { background: #FFF7ED; color: #3A2F2A; }
+body {
+  background: #FFF7ED;
+  color: #3A2F2A;
+  line-height: 1.65;
+  text-rendering: optimizeLegibility;
+}
