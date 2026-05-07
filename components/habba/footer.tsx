@@ -1,3 +1,5 @@
+import { createWhatsAppLink } from '@/content/habba-products';
+
 export function HabbaFooter() {
   return (
     <footer className="mt-10 border-t border-[#F0DED0] bg-[#FFFCF7]">
@@ -10,7 +12,7 @@ export function HabbaFooter() {
           />
         </div>
         <p className="text-sm text-[#514740]">حبّة — إكسسوارات خرز handmade، ملونة، بسيطة، ومناسبة كهدايا صغيرة.</p>
-        <a href="https://wa.me/201011549509" target="_blank" rel="noreferrer" className="text-sm font-semibold text-[#F87070]">
+        <a href={createWhatsAppLink('منتجات حبّة')} target="_blank" rel="noreferrer" className="text-sm font-semibold text-[#F87070]">
           Order on WhatsApp: +20 101 154 9509
         </a>
       </div>
