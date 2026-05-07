@@ -1,4 +1,14 @@
-export type HabbaFilterKey = 'all' | 'bracelets' | 'necklaces' | 'sets' | 'cute-gift' | 'green-mood';
+export type HabbaFilterKey =
+  | 'all'
+  | 'bracelets'
+  | 'necklaces'
+  | 'sets'
+  | 'cute-gift'
+  | 'green-mood'
+  | 'colorful-star'
+  | 'soft-colors'
+  | 'calm-basics'
+  | 'natural';
 
 export const habbaFilterChips: { key: HabbaFilterKey; label: string }[] = [
   { key: 'all', label: 'الكل' },
@@ -6,10 +16,22 @@ export const habbaFilterChips: { key: HabbaFilterKey; label: string }[] = [
   { key: 'necklaces', label: 'عقود' },
   { key: 'sets', label: 'أطقم' },
   { key: 'cute-gift', label: 'هدايا صغيرة' },
-  { key: 'green-mood', label: 'جرين مود' }
+  { key: 'green-mood', label: 'جرين مود' },
+  { key: 'colorful-star', label: 'كولرفل ستار' }
 ];
 
-export const habbaValidFilters: HabbaFilterKey[] = ['all', 'bracelets', 'necklaces', 'sets', 'cute-gift', 'green-mood'];
+export const habbaValidFilters: HabbaFilterKey[] = [
+  'all',
+  'bracelets',
+  'necklaces',
+  'sets',
+  'cute-gift',
+  'green-mood',
+  'colorful-star',
+  'soft-colors',
+  'calm-basics',
+  'natural'
+];
 
 export function getHabbaFilterFromQuery(value: string | null): HabbaFilterKey {
   if (!value) return 'all';

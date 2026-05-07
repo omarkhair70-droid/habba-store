@@ -4,11 +4,11 @@ import { HabbaFooter } from '@/components/habba/footer';
 import { HabbaHeader } from '@/components/habba/header';
 import { ProductDetailView } from '@/components/habba/product-detail/product-detail-view';
 import { RelatedProducts } from '@/components/habba/product-detail/related-products';
-import { launchProducts } from '@/content/habba-products';
+import { visibleProducts } from '@/content/habba-products';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
-  const product = launchProducts.find((p) => p.slug === slug);
+  const product = visibleProducts.find((p) => p.slug === slug);
 
   if (!product) {
     return {
@@ -41,11 +41,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const product = launchProducts.find((p) => p.slug === slug);
+  const product = visibleProducts.find((p) => p.slug === slug);
 
   if (!product) notFound();
 
-  const related = launchProducts.filter((p) => p.collection === product.collection && p.slug !== product.slug);
+  const related = visibleProducts.filter((p) => p.collection === product.collection && p.slug !== product.slug);
 
   return (
     <main>

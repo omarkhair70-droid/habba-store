@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { HabbaFooter } from '@/components/habba/footer';
 import { HabbaHeader } from '@/components/habba/header';
 import { ProductCard } from '@/components/habba/product-card';
-import { launchProducts } from '@/content/habba-products';
+import { visibleProducts } from '@/content/habba-products';
 import { getHabbaFilterFromQuery, habbaFilterChips, type HabbaFilterKey } from '@/content/habba-filters';
 
 
@@ -22,12 +22,17 @@ export default function ShopClient() {
   }, [searchParams, activeFilter]);
 
   const filteredProducts = useMemo(() => {
-    if (activeFilter === 'all') return launchProducts;
-    if (activeFilter === 'bracelets') return launchProducts.filter((p) => p.category === 'Bracelets');
-    if (activeFilter === 'necklaces') return launchProducts.filter((p) => p.category === 'Necklaces');
-    if (activeFilter === 'sets') return launchProducts.filter((p) => p.category === 'Sets');
-    if (activeFilter === 'cute-gift') return launchProducts.filter((p) => p.collectionAr === 'هدايا صغيرة');
-    return launchProducts.filter((p) => p.collectionAr === 'جرين مود');
+    if (activeFilter === 'all') return visibleProducts;
+    if (activeFilter === 'bracelets') return visibleProducts.filter((p) => p.category === 'Bracelets');
+    if (activeFilter === 'necklaces') return visibleProducts.filter((p) => p.category === 'Necklaces');
+    if (activeFilter === 'sets') return visibleProducts.filter((p) => p.category === 'Sets');
+    if (activeFilter === 'cute-gift') return visibleProducts.filter((p) => p.collectionAr === 'هدايا صغيرة');
+    if (activeFilter === 'green-mood') return visibleProducts.filter((p) => p.collectionAr === 'جرين مود');
+    if (activeFilter === 'colorful-star') return visibleProducts.filter((p) => p.collectionAr === 'كولرفل ستار');
+    if (activeFilter === 'soft-colors') return visibleProducts.filter((p) => p.collectionAr === 'ألوان ناعمة');
+    if (activeFilter === 'calm-basics') return visibleProducts.filter((p) => p.collectionAr === 'أساسيات هادية');
+    if (activeFilter === 'natural') return visibleProducts.filter((p) => p.collectionAr === 'ناتشورال');
+    return visibleProducts;
   }, [activeFilter]);
 
   const onFilterChange = (filter: HabbaFilterKey) => {
