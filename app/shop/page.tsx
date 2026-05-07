@@ -32,15 +32,15 @@ export default function ShopPage() {
   return (
     <main>
       <HabbaHeader />
-      <section className="mx-auto w-[92%] max-w-6xl py-8">
-        <h1 className="mb-4 text-right text-3xl font-bold">تسوّقي المنتجات</h1>
-        <div className="mb-5 flex flex-wrap justify-end gap-2">
+      <section className="mx-auto w-[92%] max-w-6xl py-6 sm:py-8">
+        <h1 className="mb-4 text-right text-2xl font-bold sm:text-3xl">تسوّقي المنتجات</h1>
+        <div className="mb-5 flex flex-wrap justify-end gap-1.5 sm:gap-2">
           {chips.map((chip) => (
             <button
               key={chip.key}
               type="button"
               onClick={() => setActiveFilter(chip.key)}
-              className={`rounded-full border px-4 py-1.5 text-sm font-semibold ${
+              className={`rounded-full border px-3 py-1 text-xs font-semibold sm:px-4 sm:py-1.5 sm:text-sm ${
                 activeFilter === chip.key ? 'border-[#F87070] bg-[#F87070] text-white' : 'border-[#F0DED0] bg-[#FFFCF7]'
               }`}
             >
