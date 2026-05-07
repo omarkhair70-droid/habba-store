@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { HabbaFooter } from '@/components/habba/footer';
 import { HabbaHeader } from '@/components/habba/header';
 import { ProductCard } from '@/components/habba/product-card';
-import { launchProducts } from '@/content/habba-products';
+import { createWhatsAppLink, launchProducts } from '@/content/habba-products';
 
 const featured = launchProducts.filter((p) => p.featured).slice(0, 8);
 
@@ -18,7 +18,7 @@ export default function HabbaHomePage() {
           <p className="text-sm text-[#7B6F68]">Handmade bead accessories, colorful, light, and giftable. Made to feel playful, honest, and easy to wear.</p>
           <div className="mt-4 flex flex-wrap gap-2">
             <Link href="/shop" className="rounded-full bg-[#F87070] px-4 py-2 font-bold text-white">تسوّقي المنتجات</Link>
-            <a href="https://wa.me/201011549509" className="rounded-full border border-[#F0DED0] bg-[#FFFCF7] px-4 py-2 font-bold">اطلب عبر واتساب</a>
+            <a href={createWhatsAppLink('منتجات حبّة')} className="rounded-full border border-[#F0DED0] bg-[#FFFCF7] px-4 py-2 font-bold">اطلب عبر واتساب</a>
           </div>
         </div>
         <img src="/images/habba/products/hbb-colorful-star-set-card.png" alt="Colorful star set" className="aspect-square w-full rounded-3xl object-contain bg-white shadow" />
