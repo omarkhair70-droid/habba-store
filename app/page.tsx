@@ -1,8 +1,30 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { HabbaFooter } from '@/components/habba/footer';
 import { HabbaHeader } from '@/components/habba/header';
 import { ProductCard } from '@/components/habba/product-card';
 import { createWhatsAppLink, launchProducts } from '@/content/habba-products';
+
+export const metadata: Metadata = {
+  title: 'حبّة إكسسوارات خرز handmade',
+  description:
+    'حبّة — إكسسوارات خرز handmade، ملونة، بسيطة، ومناسبة كهدايا صغيرة. Handmade bead accessories, colorful, light, and giftable.',
+  alternates: {
+    canonical: '/'
+  },
+  openGraph: {
+    title: 'Habba | حبّة',
+    description: 'حبّة براند إكسسوارات خرز handmade، ملونة وخفيفة ومناسبة للهدايا البسيطة.',
+    url: '/',
+    images: ['/images/habba/brand/hbb-logo-preview.png']
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Habba | حبّة',
+    description: 'Handmade bead accessories, colorful, light, and giftable.',
+    images: ['/images/habba/brand/hbb-logo-preview.png']
+  }
+};
 
 const featured = launchProducts.filter((p) => p.featured).slice(0, 8);
 
@@ -55,20 +77,29 @@ export default function HabbaHomePage() {
         <h2 className="mb-3 text-right text-2xl font-bold">لمسة حبّة</h2>
         <div className="grid gap-3 md:grid-cols-3">
           <article className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-4">
-            <h3 className="text-right font-bold">وعد الهاندميد</h3>
-            <p className="mt-2 text-right text-sm text-[#615651]">معمولة بإيد، بألوان خفيفة، وبتفاصيل بسيطة.</p>
-          </article>
-          <article className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-4">
             <h3 className="text-right font-bold">طريقة الطلب</h3>
             <ol className="mt-2 space-y-1 text-right text-sm text-[#615651]">
               <li>1. اختاري القطعة</li>
-              <li>2. اسألي على واتساب</li>
+              <li>2. اضغطي اسأل على واتساب</li>
               <li>3. نأكد التوفر والتفاصيل</li>
+              <li>4. يتم الاتفاق على الاستلام أو التوصيل</li>
             </ol>
           </article>
           <article className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-4">
-            <h3 className="text-right font-bold">Giftable note</h3>
-            <p className="mt-2 text-right text-sm text-[#615651]">مناسبة كهدايا صغيرة أو تفصيلة حلوة في اليوم.</p>
+            <h3 className="text-right font-bold">ملاحظات بسيطة</h3>
+            <ul className="mt-2 space-y-1 text-right text-sm text-[#615651]">
+              <li>• كل قطعة handmade</li>
+              <li>• التوفر حسب الخامات المتاحة</li>
+              <li>• الألوان ممكن تختلف اختلاف بسيط حسب الإضاءة</li>
+              <li>• لا يوجد دفع أونلاين حاليًا، الطلب عبر واتساب فقط</li>
+            </ul>
+          </article>
+          <article className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-4">
+            <h3 className="text-right font-bold">تواصل سريع</h3>
+            <p className="mt-2 text-right text-sm text-[#615651]">اطلبي أو اسألي عن أي قطعة عبر واتساب.</p>
+            <a href="https://wa.me/201011549509" target="_blank" rel="noreferrer" className="mt-2 inline-block text-sm font-semibold text-[#F87070]">
+              WhatsApp: +20 101 154 9509
+            </a>
           </article>
         </div>
       </section>

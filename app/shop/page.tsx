@@ -6,6 +6,7 @@ import { HabbaHeader } from '@/components/habba/header';
 import { ProductCard } from '@/components/habba/product-card';
 import { launchProducts } from '@/content/habba-products';
 
+
 type FilterKey = 'all' | 'bracelets' | 'necklaces' | 'sets' | 'cute-gift' | 'green-mood';
 
 const chips: { key: FilterKey; label: string }[] = [
