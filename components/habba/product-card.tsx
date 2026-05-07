@@ -3,19 +3,19 @@ import { HabbaProduct, createWhatsAppLink } from '@/content/habba-products';
 
 export function ProductCard({ product }: { product: HabbaProduct }) {
   return (
-    <article className="flex h-full flex-col rounded-2xl border border-[#F0DED0] bg-[#FFFCF7] p-3 shadow-sm">
-      <Link href={`/product/${product.slug}`}>
-        <img src={product.image} alt={product.titleEn} className="aspect-square w-full rounded-xl object-contain bg-white" />
+    <article className="flex h-full flex-col rounded-2xl border border-[#F0DED0] bg-[#FFFCF7] p-2.5 shadow-sm sm:p-3">
+      <Link href={`/product/${product.slug}`} className="block rounded-xl bg-white p-1.5">
+        <img src={product.image} alt={product.titleEn} className="aspect-square w-full rounded-lg object-contain" />
       </Link>
-      <div className="mt-3 space-y-1.5">
-        <h3 className="text-right text-lg font-bold leading-tight">
+      <div className="mt-2.5 flex flex-1 flex-col space-y-1.5">
+        <h3 className="text-right text-base font-bold leading-snug sm:text-lg">
           <Link href={`/product/${product.slug}`} className="transition-colors hover:text-[#D86F64] focus-visible:text-[#D86F64]">
             {product.titleAr}
           </Link>
         </h3>
-        <p className="text-sm leading-tight text-[#514740]">{product.titleEn}</p>
-        <p className="text-xs text-[#7B6F68]">{product.categoryAr} • {product.collectionAr}</p>
-        <p className="text-xs text-[#7B6F68]">{product.priceLabelAr}</p>
+        <p className="line-clamp-2 text-xs leading-snug text-[#6B615B] sm:text-sm">{product.titleEn}</p>
+        <p className="text-[11px] text-[#8A7D76]">{product.categoryAr} • {product.collectionAr}</p>
+        <p className="text-[11px] text-[#7B6F68]">{product.priceLabelAr}</p>
         <Link
           href={`/product/${product.slug}`}
           aria-label={`عرض تفاصيل ${product.titleAr}`}
@@ -28,7 +28,7 @@ export function ProductCard({ product }: { product: HabbaProduct }) {
         href={createWhatsAppLink(product.titleAr)}
         target="_blank"
         rel="noreferrer"
-        className="mt-3 inline-block rounded-full bg-[#F87070] px-4 py-2 text-center text-sm font-bold text-white"
+        className="mt-2.5 inline-block rounded-full bg-[#F87070] px-3 py-1.5 text-center text-xs font-bold text-white sm:px-4 sm:py-2 sm:text-sm"
       >
         اسأل على واتساب
       </a>
