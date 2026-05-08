@@ -16,6 +16,13 @@ export function MatchEntrySection() {
             اعملي باندل
           </Link>
         </div>
+        <div className="mt-3 rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-3 text-right">
+          <p className="text-sm font-bold text-[#4D413C]">عايزة مجموعة كاملة؟</p>
+          <p className="mt-1 text-xs text-[#6D625C]">اعملي Drop صغير من قطع حبّة حسب المود والألوان، واسألي عنهم مرة واحدة على واتساب.</p>
+          <Link href="/drops" className="mt-2 inline-block rounded-full border border-[#F0B8AE] px-3 py-1.5 text-xs font-bold text-[#A85A4D] transition hover:bg-[#FEE9E2]">
+            اعملي Drop
+          </Link>
+        </div>
       </div>
     </section>
   );
