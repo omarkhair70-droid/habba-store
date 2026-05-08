@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import type { HabbaProduct } from '@/content/habba-products';
 import { createWhatsAppLink } from '@/content/habba-products';
 
@@ -22,6 +23,11 @@ export function ProductDetailView({ product }: { product: HabbaProduct }) {
         </div>
         <p className="mt-3 text-right text-xs text-[#7B6F68]">كل قطعة handmade، وقد تختلف التفاصيل البسيطة حسب الخامات المتاحة.</p>
         <a href={createWhatsAppLink(product.titleAr)} target="_blank" rel="noreferrer" className="mt-4 inline-block rounded-full bg-[#F87070] px-5 py-2 text-sm font-bold text-white transition hover:bg-[#ef6666]">اسأل على واتساب</a>
+        <div className="mt-3 text-right">
+          <Link href="/bundle" className="text-xs text-[#A85A4D] underline decoration-[#E5B5A8] underline-offset-2 hover:text-[#8f4d43]">
+            كمّلي القطعة في باندل
+          </Link>
+        </div>
       </div>
     </section>
   );
