@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { visibleProducts, type HabbaProduct } from '@/content/habba-products';
 
+type RecommendationPick = {
+  slug: string;
+  reasonAr: string;
+};
+
 type MatchInput = {
   shoppingFor: 'for-me' | 'gift';
   productType: 'any' | 'bracelet' | 'necklace' | 'set';
@@ -60,7 +65,7 @@ function scoreProduct(product: HabbaProduct, input: MatchInput) {
   return score;
 }
 
-function fallback(input: MatchInput) {
+function fallback(input: MatchInput): RecommendationPick[] {
   return [...visibleProducts]
     .sort((a, b) => scoreProduct(b, input) - scoreProduct(a, input) || a.slug.localeCompare(b.slug))
     .slice(0, 3)
@@ -80,12 +85,12 @@ export async function POST(req: NextRequest) {
   }
 
   const input: MatchInput = { shoppingFor: body.shoppingFor as MatchInput['shoppingFor'], productType: body.productType as MatchInput['productType'], mood: body.mood as MatchInput['mood'], colorPreference: body.colorPreference as MatchInput['colorPreference'], optionalNote };
-  const fallbackPicks = fallback(input);
+  const fallbackPicks: RecommendationPick[] = fallback(input);
 
   const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
   const key = process.env.OPENAI_API_KEY;
 
-  const formatProducts = (picks: Array<{ slug: string; reasonAr: string }>, source: 'ai' | 'fallback', headlineAr: string, summaryAr: string, whatsappMessageAr: string) => ({
+  const formatProducts = (picks: RecommendationPick[], source: 'ai' | 'fallback', headlineAr: string, summaryAr: string, whatsappMessageAr: string) => ({
     headlineAr,
     summaryAr,
     products: picks.map((pick) => {
@@ -118,16 +123,31 @@ export async function POST(req: NextRequest) {
 
     const raw = await aiRes.json();
     const text = raw?.output_text || raw?.output?.[0]?.content?.map((c: { text?: string }) => c.text).join('') || '';
-    const parsed = JSON.parse(text);
-    const recs = Array.isArray(parsed?.recommendations) ? parsed.recommendations : [];
-    const valid = Array.from(new Map(recs.filter((r: { slug?: string; reasonAr?: string }) => visibleProducts.some((p) => p.slug === r.slug)).map((r: { slug: string; reasonAr?: string }) => [r.slug, { slug: r.slug, reasonAr: typeof r.reasonAr === 'string' && r.reasonAr.trim() ? r.reasonAr.trim() : 'اختيار مناسب لذوقك الحالي.' }])).values()).slice(0, 3);
-    const padded = [...valid];
+    const parsed: unknown = JSON.parse(text);
+    const parsedObj = typeof parsed === 'object' && parsed !== null ? parsed as Record<string, unknown> : {};
+    const rawRecommendations = Array.isArray(parsedObj.recommendations) ? parsedObj.recommendations : [];
+    const validAiPicks: RecommendationPick[] = Array.from(
+      new Map(
+        rawRecommendations
+          .filter((item): item is RecommendationPick => {
+            return (
+              typeof item === 'object' &&
+              item !== null &&
+              typeof (item as { slug?: unknown }).slug === 'string' &&
+              typeof (item as { reasonAr?: unknown }).reasonAr === 'string'
+            );
+          })
+          .filter((item) => visibleProducts.some((product) => product.slug === item.slug))
+          .map((item) => [item.slug, { slug: item.slug, reasonAr: item.reasonAr.trim() || 'اختيار مناسب لذوقك الحالي.' }])
+      ).values()
+    ).slice(0, 3);
+    const padded: RecommendationPick[] = [...validAiPicks];
     for (const pick of fallbackPicks) {
       if (padded.length >= 3) break;
       if (!padded.some((p) => p.slug === pick.slug)) padded.push(pick);
     }
     const names = padded.map((pick) => visibleProducts.find((p) => p.slug === pick.slug)?.titleAr).filter(Boolean).join('\n- ');
-    return NextResponse.json(formatProducts(padded, 'ai', parsed.headlineAr || 'اختيارات مناسبة لمودك', parsed.summaryAr || 'اختيارات من منتجات حبّة حسب إجاباتك.', parsed.whatsappMessageAr || `أهلًا، حابة أسأل عن الترشيحات دي:\n- ${names}\nهل متاحين؟ والتفاصيل إيه؟`));
+    return NextResponse.json(formatProducts(padded, 'ai', (typeof parsedObj.headlineAr === 'string' ? parsedObj.headlineAr : '') || 'اختيارات مناسبة لمودك', (typeof parsedObj.summaryAr === 'string' ? parsedObj.summaryAr : '') || 'اختيارات من منتجات حبّة حسب إجاباتك.', (typeof parsedObj.whatsappMessageAr === 'string' ? parsedObj.whatsappMessageAr : '') || `أهلًا، حابة أسأل عن الترشيحات دي:\n- ${names}\nهل متاحين؟ والتفاصيل إيه؟`));
   } catch {
     const names = fallbackPicks.map((pick) => visibleProducts.find((p) => p.slug === pick.slug)?.titleAr).filter(Boolean).join('\n- ');
     return NextResponse.json(formatProducts(fallbackPicks, 'fallback', 'اختيارات قريبة من مودك', 'دي قطع من الكتالوج مناسبة لاختياراتك.', `أهلًا، حابة أسأل عن الترشيحات دي:\n- ${names}\nهل متاحين؟ والتفاصيل إيه؟`));
