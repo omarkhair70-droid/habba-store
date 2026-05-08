@@ -27,11 +27,14 @@ export async function callHabbaOpenAIJson<T>(input: { system: string; user: unkn
         max_output_tokens: input.maxTokens ?? 500
       })
     });
+    if (!res.ok) return { ok: false, error: `openai_http_${res.status}` };
     const raw = await res.json();
     const text = raw?.output_text || raw?.output?.[0]?.content?.map((c: { text?: string }) => c.text || '').join('') || '';
+    if (!text.trim()) return { ok: false, error: 'openai_empty_output' };
     const data = JSON.parse(text) as T;
     return { ok: true, data };
-  } catch {
+  } catch (error) {
+    if (error instanceof SyntaxError) return { ok: false, error: 'openai_invalid_json' };
     return { ok: false, error: 'openai_failed' };
   }
 }
