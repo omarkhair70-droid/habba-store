@@ -12,13 +12,13 @@ const terms = {
   gift: ['هديه', 'gift', 'صاحبتي'],
   calm: ['هادي', 'calm'],
   cute: ['كيوت', 'cute', 'لطيف'],
-  colorful: ['ملون', 'الوان', 'star', 'colorful'],
+  colorful: ['ملون', 'الوان', 'star', 'colorful', 'ملونه'],
   green: ['اخضر', 'خضرا', 'جرين', 'green', 'sage', 'aqua', 'lime'],
-  pink: ['وردي', 'pink', 'لافندر', 'pastel', 'berry'],
-  natural: ['ناتشورال', 'natural', 'neutral', 'wood', 'خشب', 'بسيط'],
+  pink: ['وردي', 'pink', 'بينك', 'لافندر', 'pastel', 'berry'],
+  natural: ['ناتشورال', 'natural', 'neutral', 'wood', 'خشب', 'بسيط', 'هادي'],
   daily: ['يومي', 'لبس اليومي', 'خفيف'],
-  negativeChildish: ['مش طفوليه', 'مش طفولي', 'مش childish'],
-  negativeColorful: ['مش ملون', 'مش ملونه', 'مش ملونه اوي', 'مش اوفر', 'مش صريحه']
+  negativeChildish: ['مش طفوليه', 'مش طفولي', 'مش childish', 'مش طفولية'],
+  negativeColorful: ['مش ملون', 'مش ملونه', 'مش ملونة', 'مش ملونه اوي', 'مش ملونة اوي', 'مش اوفر', 'مش صريحه', 'مش صريحة', 'مش عايزه حاجه ملونه', 'مش عايزة حاجة ملونة']
 };
 
 export function scoreProductsForIntent(input: HabbaIntent): ScoredProduct[] {
@@ -26,6 +26,8 @@ export function scoreProductsForIntent(input: HabbaIntent): ScoredProduct[] {
   const blob = normalizeArabic([input.query, input.productType, input.mood, input.colorPreference, input.shoppingFor, input.bundleIntent, input.dropMood, input.focusType, input.colorDirection, input.optionalNote].filter(Boolean).join(' '));
   const wantsNonChildish = hasAny(blob, terms.negativeChildish);
   const wantsMuted = hasAny(blob, terms.negativeColorful);
+  const wantsBlue = hasAny(blob, ['ازرق', 'أزرق', 'blue']);
+  const wantsRed = hasAny(blob, ['احمر', 'أحمر', 'red', 'heart']);
 
   return profiles.map((p) => {
     let score = 0;
@@ -37,15 +39,17 @@ export function scoreProductsForIntent(input: HabbaIntent): ScoredProduct[] {
     if (hasAny(blob, terms.gift) && p.inferredUseCases.includes('gift')) { score += 8; reasons.push('ناعمة وبتفاصيل لطيفة، فتنفع كهدية بسيطة.'); }
     if ((input.mood === 'calm' || hasAny(blob, terms.calm)) && p.inferredMoods.includes('calm')) { score += 6; reasons.push('قريبة من مود هادي ومريحة للبس اليومي.'); }
     if ((input.mood === 'cute' || hasAny(blob, terms.cute)) && p.inferredMoods.includes('cute')) { score += 6; reasons.push('كيوت وناعمة من غير ما تبقى طفولية زيادة.'); }
-    if ((input.mood === 'natural' || hasAny(blob, terms.natural)) && (p.inferredMoods.includes('natural') || p.inferredColors.includes('neutral'))) { score += 7; reasons.push('ستايل ناتشورال بسيط بألوان هادية.'); }
+    if ((input.mood === 'natural' || hasAny(blob, terms.natural)) && (p.inferredMoods.includes('natural') || p.inferredColors.includes('neutral'))) { score += 8; reasons.push('بسيطة وهادية ومناسبة للبس اليومي.'); }
     if (hasAny(blob, terms.green) && p.inferredColors.includes('green')) { score += 7; reasons.push('قريبة من مود الأخضر الهادي ولبسها يومي.'); }
     if (hasAny(blob, terms.pink) && p.inferredColors.includes('pink')) { score += 7; reasons.push('فيها درجة وردي/لافندر ناعمة وهادية.'); }
     if ((input.mood === 'colorful' || hasAny(blob, terms.colorful)) && p.inferredMoods.includes('colorful')) { score += 5; reasons.push('ألوانها مرحة بس مش أوفر.'); }
+    if (wantsBlue && p.inferredColors.some((c) => c === 'blue' || c === 'aqua')) score += 7;
+    if (wantsRed && p.inferredColors.some((c) => c === 'red' || c === 'heart')) score += 7;
     if (hasAny(blob, terms.daily) && p.inferredUseCases.includes('everyday')) score += 5;
     if (wantsNonChildish && p.inferredMoods.includes('cute')) score -= 3;
     if (wantsMuted && p.inferredMoods.includes('colorful')) score -= 6;
     if (blob && normalizeArabic(p.searchableText).includes(blob)) score += 2;
 
-    return { slug: p.slug, score, reasonAr: reasons[0] || 'اختيار متناسق مع طلبك الحالي.' };
+    return { slug: p.slug, score, reasonAr: reasons[0] || 'ناعمة وبتفاصيل بسيطة ومناسبة لطلبك.' };
   }).sort((a, b) => b.score - a.score || a.slug.localeCompare(b.slug));
 }

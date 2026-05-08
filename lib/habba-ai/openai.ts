@@ -1,3 +1,4 @@
+import { getHabbaAiMode } from './config';
 export const HABBA_AI_BRAND_RULES = [
   'Arabic-first tone.',
   'Habba is handmade bead accessories: soft, colorful, honest, giftable.',
@@ -12,6 +13,9 @@ export const HABBA_AI_BRAND_RULES = [
 ].join(' ');
 
 export async function callHabbaOpenAIJson<T>(input: { system: string; user: unknown; maxTokens?: number }): Promise<{ ok: true; data: T } | { ok: false; error: string }> {
+  const mode = getHabbaAiMode();
+  if (mode === 'local') return { ok: false, error: 'local_mode' };
+
   const key = process.env.OPENAI_API_KEY;
   if (!key) return { ok: false, error: 'missing_openai_key' };
   try {
