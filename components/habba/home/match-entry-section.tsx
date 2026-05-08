@@ -9,6 +9,13 @@ export function MatchEntrySection() {
         <Link href="/match" className="mt-3 inline-block rounded-full bg-[#F87070] px-4 py-2 text-sm font-bold text-white transition hover:bg-[#ef6666]">
           جربي Habba Match
         </Link>
+              <div className="mt-3 rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-3 text-right">
+          <p className="text-sm font-bold text-[#4D413C]">عايزة أكتر من قطعة؟</p>
+          <p className="mt-1 text-xs text-[#6D625C]">اعملي باندل بسيط من قطع حبّة، واسألي عنهم مرة واحدة على واتساب.</p>
+          <Link href="/bundle" className="mt-2 inline-block rounded-full border border-[#F0B8AE] px-3 py-1.5 text-xs font-bold text-[#A85A4D] transition hover:bg-[#FEE9E2]">
+            اعملي باندل
+          </Link>
+        </div>
       </div>
     </section>
   );
