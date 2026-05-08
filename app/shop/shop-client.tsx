@@ -22,9 +22,10 @@ type AiSearchPayload = {
   }>;
   interpretedMoodAr: string;
   suggestedFilterKey: string | null;
-  source: 'ai' | 'fallback';
+  source: 'ai' | 'local' | 'fallback';
 };
 
+const aiSourceLabel = (source: 'ai' | 'local' | 'fallback') => source === 'ai' ? 'openai' : source === 'local' ? 'local-brain' : 'fallback';
 const filterContext: Partial<Record<HabbaFilterKey, string>> = {
   'green-mood': 'قطع بدرجات هادية وأخضر خفيف للبس اليومي.',
   'cute-gift': 'اختيارات لطيفة تنفع كهدية بسيطة.',
@@ -128,7 +129,7 @@ export default function ShopClient() {
         </div>
 
         {aiResults ? (
-          <div className="mt-3 text-right text-[11px] text-[#8a7d76]">{isAiDebug ? `AI source: ${aiResults.source}${aiResults.interpretedMoodAr ? ` • المود: ${aiResults.interpretedMoodAr}` : ""}${aiResults.suggestedFilterKey ? ` • فلتر: ${aiResults.suggestedFilterKey}` : ""}` : null}</div>
+          <div className="mt-3 text-right text-[11px] text-[#8a7d76]">{isAiDebug ? `AI source: ${aiSourceLabel(aiResults.source)}${aiResults.interpretedMoodAr ? ` • المود: ${aiResults.interpretedMoodAr}` : ""}${aiResults.suggestedFilterKey ? ` • فلتر: ${aiResults.suggestedFilterKey}` : ""}` : null}</div>
         ) : null}
 
         {aiResults ? (

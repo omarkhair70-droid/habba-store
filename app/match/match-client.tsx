@@ -17,9 +17,10 @@ type MatchResponse = {
   summaryAr: string;
   products: Array<{slug:string;titleAr:string;titleEn:string;image:string;categoryAr:string;collectionAr:string;reasonAr:string}>;
   whatsappMessageAr: string;
-  source: 'ai' | 'fallback';
+  source: 'ai' | 'local' | 'fallback';
 };
 
+const aiSourceLabel = (source: 'ai' | 'local' | 'fallback') => source === 'ai' ? 'openai' : source === 'local' ? 'local-brain' : 'fallback';
 const chips = {
   shoppingFor: [
     { value: 'for-me', label: 'لنفسي' },
@@ -107,7 +108,7 @@ export function MatchClient() {
         {error ? <p className="mt-3 text-sm text-[#B14E4E]">{error}</p> : null}
       </div>
 
-      {result && isAiDebug ? <div className="mt-4 text-right text-[11px] text-[#8a7d76]">AI source: {result.source}</div> : null}
+      {result && isAiDebug ? <div className="mt-4 text-right text-[11px] text-[#8a7d76]">AI source: {aiSourceLabel(result.source)}</div> : null}
 
       {result ? <div className="mt-6 rounded-3xl border border-[#EEDFD2] bg-[#FFFCF8] p-4 shadow-sm sm:p-6"><h2 className="text-xl font-bold text-[#3E322D]">اختيارات حبّة ليكي</h2><h3 className="mt-2 text-lg font-semibold text-[#4D413C]">{result.headlineAr}</h3><p className="mt-1 text-sm text-[#6D625C]">{result.summaryAr}</p><div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">{result.products.map((product)=><article key={product.slug} className="rounded-2xl border border-[#F0DED0] bg-white p-3"><img src={product.image} alt={product.titleEn} className="aspect-square w-full rounded-xl border border-[#F4E5D8] object-contain" /><h4 className="mt-2 text-sm font-bold text-[#3E322D]">{product.titleAr}</h4><p className="text-xs text-[#7E736D]">{product.titleEn}</p><p className="text-xs text-[#8A7D76]">{product.categoryAr} • {product.collectionAr}</p><p className="mt-1 text-xs text-[#6A5E58]">{product.reasonAr}</p><Link href={`/product/${product.slug}`} className="mt-2 inline-block text-xs font-medium text-[#D07D70] hover:underline">عرض القطعة ←</Link></article>)}</div><a href={whatsappHref} target="_blank" rel="noreferrer" className="mt-5 inline-block w-full rounded-full bg-[#F87070] px-4 py-3 text-center text-sm font-bold text-white hover:bg-[#ef6666]">اسألي عن الترشيحات على واتساب</a></div> : null}
     </section>
