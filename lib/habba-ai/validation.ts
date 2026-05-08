@@ -15,10 +15,16 @@ export function fillWithFallback<T extends { slug: string }>(validPicks: T[], fa
   return out.slice(0, count);
 }
 
-export const mapPicksToProducts = <T extends { slug: string; reasonAr?: string }>(picks: T[]): Array<HabbaProduct & { reasonAr?: string }> =>
-  picks
-    .map((pick) => {
-      const product = visibleProducts.find((p) => p.slug === pick.slug);
-      return product ? { ...product, reasonAr: pick.reasonAr } : null;
-    })
-    .filter((x): x is HabbaProduct & { reasonAr?: string } => Boolean(x));
+export function mapPicksToProducts<T extends { slug: string; reasonAr?: string }>(
+  picks: T[]
+): Array<HabbaProduct & { reasonAr?: string }> {
+  return picks.flatMap((pick) => {
+    const product = visibleProducts.find((p) => p.slug === pick.slug);
+
+    if (!product) {
+      return [];
+    }
+
+    return [{ ...product, reasonAr: pick.reasonAr }];
+  });
+}
