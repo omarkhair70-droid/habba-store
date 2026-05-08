@@ -37,6 +37,7 @@ export default function ShopClient() {
   const pathname = usePathname();
   const router = useRouter();
   const initialFilter = getHabbaFilterFromQuery(searchParams.get('filter'));
+  const isAiDebug = searchParams.get('debug') === 'ai';
   const [activeFilter, setActiveFilter] = useState<HabbaFilterKey>(initialFilter);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
@@ -125,6 +126,10 @@ export default function ShopClient() {
           {isSearching ? <p className="mt-2 text-right text-xs text-[#7A6D66]">بندورلك على أنسب قطع...</p> : null}
           {searchError ? <p className="mt-2 text-right text-xs text-[#C25656]">{searchError}</p> : null}
         </div>
+
+        {aiResults ? (
+          <div className="mt-3 text-right text-[11px] text-[#8a7d76]">{isAiDebug ? `AI source: ${aiResults.source}${aiResults.interpretedMoodAr ? ` • المود: ${aiResults.interpretedMoodAr}` : ""}${aiResults.suggestedFilterKey ? ` • فلتر: ${aiResults.suggestedFilterKey}` : ""}` : null}</div>
+        ) : null}
 
         {aiResults ? (
           <div className="mt-4 rounded-2xl border border-[#F3E2D7] bg-[#FFF8F0] p-3 sm:p-4">
