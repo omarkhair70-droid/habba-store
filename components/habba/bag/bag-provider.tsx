@@ -1,16 +1,20 @@
 'use client';
 
-import { createContext, useContext, useEffect, useMemo, useState } from 'react';
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { HABBA_BAG_STORAGE_KEY, HabbaBagItem, readBagFromStorage, sanitizeBagItems } from '@/lib/habba-bag';
+
+type BagToastState = { open: boolean; productTitle: string };
 
 type BagContextValue = {
   items: HabbaBagItem[];
   itemCount: number;
-  addItem: (slug: string) => void;
+  addItem: (slug: string, productTitle?: string) => void;
   removeItem: (slug: string) => void;
   incrementItem: (slug: string) => void;
   decrementItem: (slug: string) => void;
   clearBag: () => void;
+  toast: BagToastState;
+  closeToast: () => void;
 };
 
 const BagContext = createContext<BagContextValue | null>(null);
@@ -18,6 +22,7 @@ const BagContext = createContext<BagContextValue | null>(null);
 export function BagProvider({ children }: { children: React.ReactNode }) {
   const [items, setItems] = useState<HabbaBagItem[]>([]);
   const [isHydrated, setIsHydrated] = useState(false);
+  const [toast, setToast] = useState<BagToastState>({ open: false, productTitle: '' });
 
   useEffect(() => {
     setItems(readBagFromStorage());
@@ -48,15 +53,24 @@ export function BagProvider({ children }: { children: React.ReactNode }) {
     });
   };
 
+  const closeToast = useCallback(() => setToast((current) => ({ ...current, open: false })), []);
+
   const value = useMemo<BagContextValue>(() => ({
     items: sanitizeBagItems(items),
     itemCount: items.reduce((sum, item) => sum + item.quantity, 0),
-    addItem: (slug) => mutateItem(slug, 1),
+    addItem: (slug, productTitle) => {
+      mutateItem(slug, 1);
+      if (productTitle) {
+        setToast({ open: true, productTitle });
+      }
+    },
     removeItem: (slug) => setItems((current) => sanitizeBagItems(current).filter((item) => item.slug !== slug)),
     incrementItem: (slug) => mutateItem(slug, 1),
     decrementItem: (slug) => mutateItem(slug, -1),
-    clearBag: () => setItems([])
-  }), [items]);
+    clearBag: () => setItems([]),
+    toast,
+    closeToast
+  }), [items, toast, closeToast]);
 
   return <BagContext.Provider value={value}>{children}</BagContext.Provider>;
 }

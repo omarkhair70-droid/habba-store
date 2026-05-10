@@ -1,4 +1,4 @@
-import { visibleProducts, whatsappNumber } from '@/content/habba-products';
+import { featuredProducts, visibleProducts, whatsappNumber } from '@/content/habba-products';
 
 export const HABBA_BAG_STORAGE_KEY = 'habba-bag-v1';
 
@@ -54,6 +54,27 @@ export const readBagFromStorage = (): HabbaBagItem[] => {
   } catch {
     return [];
   }
+};
+
+export const getBagRecommendations = (items: HabbaBagItem[], maxCount = 3) => {
+  const safeItems = sanitizeBagItems(items);
+  const bagSlugSet = new Set(safeItems.map((item) => item.slug));
+  if (safeItems.length === 0) {
+    return featuredProducts.filter((product) => !bagSlugSet.has(product.slug)).slice(0, maxCount);
+  }
+
+  const mostRecentSlug = safeItems[safeItems.length - 1]?.slug;
+  const mostRecentProduct = visibleProducts.find((product) => product.slug === mostRecentSlug);
+  const preferredCollection = mostRecentProduct?.collection;
+
+  const fromPreferredCollection = preferredCollection
+    ? visibleProducts.filter((product) => product.collection === preferredCollection && !bagSlugSet.has(product.slug))
+    : [];
+
+  const fromFeatured = featuredProducts.filter((product) => !bagSlugSet.has(product.slug) && !fromPreferredCollection.some((candidate) => candidate.slug === product.slug));
+  const fromVisible = visibleProducts.filter((product) => !bagSlugSet.has(product.slug) && !fromPreferredCollection.some((candidate) => candidate.slug === product.slug) && !fromFeatured.some((candidate) => candidate.slug === product.slug));
+
+  return [...fromPreferredCollection, ...fromFeatured, ...fromVisible].slice(0, maxCount);
 };
 
 export const createBagWhatsAppLink = (items: HabbaBagItem[]): string | null => {

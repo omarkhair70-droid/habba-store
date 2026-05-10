@@ -28,7 +28,7 @@ export function ProductDetailView({ product }: { product: HabbaProduct }) {
         </div>
         <p className="mt-3 text-right text-xs text-[#7B6F68]">كل قطعة handmade، وقد تختلف التفاصيل البسيطة حسب الخامات المتاحة.</p>
         <div className="mt-4 grid gap-2 sm:max-w-xs">
-          <button onClick={() => addItem(product.slug)} className="rounded-full bg-[#F87070] px-5 py-2 text-sm font-bold text-white transition hover:bg-[#ef6666]">ضيفي لشنطتك</button>
+          <button onClick={() => addItem(product.slug, product.titleAr)} className="rounded-full bg-[#F87070] px-5 py-2 text-sm font-bold text-white transition hover:bg-[#ef6666]">ضيفي لشنطتك</button>
           <a href={createWhatsAppLink(product.titleAr)} target="_blank" rel="noreferrer" className="rounded-full border border-[#EBCFBE] bg-white px-5 py-2 text-center text-sm font-semibold text-[#5E534C] transition hover:border-[#F87070] hover:text-[#F87070]">اسأل على واتساب</a>
         </div>
         <div className="mt-3 text-right">

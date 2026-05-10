@@ -31,7 +31,7 @@ export function ProductCard({ product }: { product: HabbaProduct }) {
       </div>
       <div className="mt-3 grid gap-2">
         <button
-          onClick={() => addItem(product.slug)}
+          onClick={() => addItem(product.slug, product.titleAr)}
           className="rounded-full bg-[#F87070] px-3 py-1.5 text-center text-xs font-bold text-white transition hover:bg-[#ef6666] sm:px-4 sm:py-2"
         >
           ضيفي لشنطتك
