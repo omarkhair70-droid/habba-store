@@ -1,7 +1,12 @@
+'use client';
+
 import Link from 'next/link';
 import { HabbaProduct, createWhatsAppLink } from '@/content/habba-products';
+import { useBag } from '@/components/habba/bag/bag-provider';
 
 export function ProductCard({ product }: { product: HabbaProduct }) {
+  const { addItem } = useBag();
+
   return (
     <article className="flex h-full flex-col rounded-2xl border border-[#F0DED0] bg-[#FFFCF7] p-2.5 shadow-sm transition hover:border-[#E8CDBA] sm:p-3">
       <Link href={`/product/${product.slug}`} className="block rounded-xl border border-[#F4E5D8] bg-white p-2">
@@ -24,14 +29,22 @@ export function ProductCard({ product }: { product: HabbaProduct }) {
           تفاصيل القطعة ←
         </Link>
       </div>
-      <a
-        href={createWhatsAppLink(product.titleAr)}
-        target="_blank"
-        rel="noreferrer"
-        className="mt-3 inline-block rounded-full bg-[#F87070] px-3 py-1.5 text-center text-xs font-bold text-white transition hover:bg-[#ef6666] sm:px-4 sm:py-2"
-      >
-        اسأل على واتساب
-      </a>
+      <div className="mt-3 grid gap-2">
+        <button
+          onClick={() => addItem(product.slug)}
+          className="rounded-full bg-[#F87070] px-3 py-1.5 text-center text-xs font-bold text-white transition hover:bg-[#ef6666] sm:px-4 sm:py-2"
+        >
+          ضيفي لشنطتك
+        </button>
+        <a
+          href={createWhatsAppLink(product.titleAr)}
+          target="_blank"
+          rel="noreferrer"
+          className="rounded-full border border-[#EBCFBE] bg-white px-3 py-1.5 text-center text-xs font-semibold text-[#5E534C] transition hover:border-[#F87070] hover:text-[#F87070]"
+        >
+          اسأل على واتساب
+        </a>
+      </div>
     </article>
   );
 }
