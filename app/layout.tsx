@@ -1,5 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
+import { BagRoot } from '@/components/habba/bag/bag-root';
 
 const siteTitle = 'Habba | حبّة';
 const descriptionAr = 'حبّة — إكسسوارات خرز handmade، ملونة، بسيطة، ومناسبة كهدايا صغيرة.';
@@ -48,5 +49,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="ar"><body>{children}</body></html>;
+  return <html lang="ar"><body><BagRoot>{children}</BagRoot></body></html>;
 }
