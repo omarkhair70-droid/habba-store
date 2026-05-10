@@ -20,7 +20,7 @@ export function BagToast({ open, title, body, onClose }: BagToastProps) {
   return (
     <div className="pointer-events-none fixed inset-x-0 top-20 z-50 flex justify-center px-4">
       <div
-        className={`pointer-events-auto w-full max-w-sm rounded-2xl border border-[#EFC8B6] bg-[#FFF7EE] p-3 text-right shadow-[0_10px_30px_rgba(213,124,109,0.16)] transition-all duration-250 ${
+        className={`${open ? 'pointer-events-auto' : 'pointer-events-none'} w-full max-w-sm rounded-2xl border border-[#EFC8B6] bg-[#FFF7EE] p-3 text-right shadow-[0_10px_30px_rgba(213,124,109,0.16)] transition-all duration-250 ${
           open ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'
         }`}
         aria-live="polite"
