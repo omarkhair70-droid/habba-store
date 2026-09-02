@@ -1,22 +1,56 @@
 import Link from 'next/link';
 import { habbaCollections } from '@/content/habba-sections';
 
+const collectionTone = {
+  'green-mood': { bg: '#DDE9CF', accent: '#6E8B5E', span: 'md:col-span-5' },
+  'cute-gift': { bg: '#F4DDE8', accent: '#A85E7D', span: 'md:col-span-4' },
+  sets: { bg: '#F2E1AE', accent: '#856F34', span: 'md:col-span-3' }
+} as const;
+
 export function CollectionsSection() {
   return (
-    <section className="mx-auto w-[92%] max-w-6xl py-6">
-      <h2 className="mb-3 text-right text-2xl font-bold leading-tight sm:text-3xl">Collections</h2>
-      <p className="mb-4 text-right text-sm leading-relaxed text-[#7B6F68]">تشكيلات ملونة تناسب يومك وهدية بسيطة بنفس روح حبّة.</p>
-      <div className="grid gap-3 md:grid-cols-3">
-        {habbaCollections.map((collection) => (
-          <Link key={collection.key} href={collection.href} className="rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-3 text-right transition hover:border-[#E8CDBA]">
-            <div className="rounded-2xl bg-[#FFFCF7] p-2.5">
-              <img src={collection.image} alt={collection.imageAlt} className="aspect-square w-full rounded-xl object-contain" />
-            </div>
-            <h3 className="mt-3 text-base font-bold leading-tight">{collection.title}</h3>
-            <p className="mt-1 text-sm leading-relaxed text-[#6A5F59]">{collection.description}</p>
-            <p className="mt-1 text-xs text-[#D07D70]">شاهدي المجموعة</p>
-          </Link>
-        ))}
+    <section className="mx-auto w-[94%] max-w-7xl py-16 sm:py-20">
+      <div className="mb-8 max-w-2xl text-right">
+        <p className="text-xs font-extrabold text-[#A9534D]">مش مجرد Categories</p>
+        <h2 className="mt-2 text-3xl font-black tracking-[-0.03em] sm:text-4xl">اختاري بالمود</h2>
+        <p className="mt-3 text-sm leading-7 text-[#6E605A] sm:text-base">
+          نفس نوع القطعة ممكن يحس مختلف تمامًا حسب اللون والتفاصيل. عشان كده حبّة بتجمع المنتجات كمودات قبل ما تكون أقسام.
+        </p>
+      </div>
+
+      <div className="grid gap-4 md:grid-cols-12">
+        {habbaCollections.map((collection) => {
+          const tone = collectionTone[collection.key];
+          return (
+            <Link
+              key={collection.key}
+              href={collection.href}
+              className={'group relative min-h-[390px] overflow-hidden rounded-[2.5rem] p-5 transition hover:-translate-y-1 ' + tone.span}
+              style={{ backgroundColor: tone.bg }}
+            >
+              <div className="relative z-10">
+                <span
+                  className="inline-flex rounded-full border border-black/10 bg-white/50 px-3 py-1 text-[11px] font-extrabold"
+                  style={{ color: tone.accent }}
+                >
+                  mood collection
+                </span>
+                <h3 className="mt-3 text-2xl font-black leading-tight">{collection.title}</h3>
+                <p className="mt-2 max-w-xs text-sm leading-7 text-[#655851]">{collection.description}</p>
+              </div>
+
+              <div className="absolute bottom-[-7%] left-[-4%] w-[82%] transition duration-500 group-hover:-translate-y-3 group-hover:rotate-2 group-hover:scale-[1.03] md:w-[92%]">
+                <div className="rounded-full bg-white/45 p-5">
+                  <img src={collection.image} alt={collection.imageAlt} className="aspect-square w-full object-contain" />
+                </div>
+              </div>
+
+              <span className="absolute bottom-5 right-5 z-20 text-xs font-extrabold underline decoration-black/20 underline-offset-4">
+                شوفي المجموعة
+              </span>
+            </Link>
+          );
+        })}
       </div>
     </section>
   );

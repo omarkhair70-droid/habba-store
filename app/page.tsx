@@ -39,9 +39,9 @@ export default function HabbaHomePage() {
       <HeroSection />
       <FeaturedProductsSection />
       <MatchEntrySection />
+      <CollectionsSection />
       <BrandPromiseSection />
       <GiftableSection />
-      <CollectionsSection />
       <HowToOrderSection />
       <TrustNotesSection />
       <FinalCtaSection />
