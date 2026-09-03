@@ -18,20 +18,23 @@ export function BagToast({ open, title, body, onClose }: BagToastProps) {
   }, [open, onClose]);
 
   return (
-    <div className="pointer-events-none fixed inset-x-0 top-20 z-50 flex justify-center px-4">
+    <div className="pointer-events-none fixed inset-x-0 top-24 z-50 flex justify-center px-4">
       <div
-        className={`${open ? 'pointer-events-auto' : 'pointer-events-none'} w-full max-w-sm rounded-2xl border border-[#EFC8B6] bg-[#FFF7EE] p-3 text-right shadow-[0_10px_30px_rgba(213,124,109,0.16)] transition-all duration-250 ${
-          open ? 'translate-y-0 opacity-100' : '-translate-y-2 opacity-0'
-        }`}
+        className={(open ? 'pointer-events-auto translate-y-0 opacity-100' : 'pointer-events-none -translate-y-2 opacity-0') + ' w-full max-w-sm overflow-hidden rounded-[1.75rem] bg-[#302722] p-3.5 text-right text-white shadow-2xl transition-all duration-200'}
         aria-live="polite"
       >
-        <p className="text-sm font-bold text-[#5A4B44]">{title}</p>
-        <p className="mt-0.5 text-xs text-[#7A6C65]">{body}</p>
-        <div className="mt-2 flex items-center justify-between">
-          <button onClick={onClose} className="text-xs text-[#9A857B] transition hover:text-[#6A5B55]">
-            إغلاق
+        <div className="flex items-start gap-3">
+          <span className="habba-bead mt-1 h-5 w-5 shrink-0 bg-[#F56F67]" aria-hidden="true" />
+          <div className="flex-1">
+            <p className="text-sm font-black">{title}</p>
+            <p className="mt-0.5 text-xs leading-5 text-[#DCCFC9]">{body}</p>
+          </div>
+        </div>
+        <div className="mt-3 flex items-center justify-between border-t border-white/10 pt-2.5">
+          <button onClick={onClose} className="text-xs font-bold text-[#BFAEA7]">
+            كمّلي تصفح
           </button>
-          <Link href="/bag" className="rounded-full bg-[#F7D7C6] px-3 py-1.5 text-xs font-semibold text-[#6A5248] transition hover:bg-[#F3C5AF]">
+          <Link href="/bag" className="rounded-full bg-[#F56F67] px-3.5 py-1.5 text-xs font-extrabold text-white">
             افتحي الشنطة
           </Link>
         </div>

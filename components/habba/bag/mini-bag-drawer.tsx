@@ -26,36 +26,78 @@ export function MiniBagDrawer({ open, onClose }: MiniBagDrawerProps) {
       <button
         onClick={onClose}
         aria-hidden={!open}
-        className={`fixed inset-0 z-40 bg-[#3E302A]/25 transition-opacity duration-200 ${open ? 'opacity-100' : 'pointer-events-none opacity-0'}`}
+        tabIndex={open ? 0 : -1}
+        className={'fixed inset-0 z-40 bg-[#302722]/35 backdrop-blur-[2px] transition-opacity duration-200 ' + (open ? 'opacity-100' : 'pointer-events-none opacity-0')}
       />
-      <aside className={`fixed bottom-0 right-0 z-50 w-full rounded-t-3xl border border-[#F1DDD0] bg-[#FFFCF7] p-4 shadow-2xl transition-transform duration-200 sm:top-0 sm:h-full sm:max-w-sm sm:rounded-none sm:rounded-l-3xl ${open ? 'translate-y-0 sm:translate-x-0' : 'translate-y-full sm:translate-x-full sm:translate-y-0'}`}>
-        <div className="flex items-center justify-between">
-          <button onClick={onClose} className="rounded-full border border-[#ECD8C9] px-2.5 py-1 text-xs text-[#6C5D56] hover:bg-white">إغلاق</button>
-          <h2 className="text-base font-bold text-[#51433D]">شنطتك ({itemCount})</h2>
+      <aside
+        aria-hidden={!open}
+        className={'fixed bottom-0 right-0 z-50 w-full overflow-hidden rounded-t-[2.5rem] bg-[#FFF9F2] shadow-2xl transition-transform duration-200 sm:top-0 sm:h-full sm:max-w-md sm:rounded-none sm:rounded-l-[2.5rem] ' + (open ? 'translate-y-0 sm:translate-x-0' : 'translate-y-full sm:translate-x-full sm:translate-y-0')}
+      >
+        <div className="bg-[#302722] p-5 text-white">
+          <div className="flex items-center justify-between gap-4">
+            <button
+              onClick={onClose}
+              className="rounded-full border border-white/20 px-3 py-1.5 text-xs font-bold text-white"
+            >
+              إغلاق
+            </button>
+            <div className="text-right">
+              <p className="text-[10px] font-extrabold text-[#F0BBB5]">اختياراتك</p>
+              <h2 className="text-xl font-black">شنطتك ({itemCount})</h2>
+            </div>
+          </div>
         </div>
 
-        {bagProducts.length === 0 ? (
-          <div className="mt-8 rounded-2xl border border-dashed border-[#EDD8CA] bg-[#FFF7EE] p-4 text-right">
-            <p className="text-sm font-semibold text-[#5E524B]">لسه الشنطة فاضية 🌸</p>
-            <p className="mt-1 text-xs text-[#81736D]">اختاري قطعة أو قطعتين، واحنا نكمّل معك على واتساب.</p>
-          </div>
-        ) : (
-          <div className="mt-4 space-y-2">
-            {bagProducts.map(({ slug, quantity, product }) => (
-              <article key={slug} className="grid grid-cols-[58px_1fr] gap-2 rounded-2xl border border-[#F1DED0] bg-white p-2">
-                <img src={product.image} alt={product.titleEn} className="h-14 w-14 rounded-xl border border-[#F2E4D7] bg-[#FFFCF8] object-contain p-1" />
-                <div className="text-right">
-                  <p className="text-xs font-semibold text-[#584A44]">{product.titleAr}</p>
-                  <p className="mt-1 text-[11px] text-[#8A7A73]">الكمية: {quantity}</p>
-                </div>
-              </article>
-            ))}
-          </div>
-        )}
+        <div className="max-h-[58vh] overflow-y-auto p-4 sm:max-h-[calc(100vh-210px)]">
+          {bagProducts.length === 0 ? (
+            <div className="rounded-[2rem] bg-[#F2DFE9] p-5 text-right">
+              <span className="habba-bead h-5 w-5 bg-[#F56F67]" aria-hidden="true" />
+              <p className="mt-3 text-base font-black text-[#302722]">لسه فاضية</p>
+              <p className="mt-1 text-xs leading-6 text-[#6F625C]">اختاري قطعة، أو ابدئي بـHabba Match لو محتاجة ترشيح.</p>
+            </div>
+          ) : (
+            <div className="space-y-2">
+              {bagProducts.map(({ slug, quantity, product }, index) => {
+                const tones = ['#F2DFE9', '#DDE9CF', '#E1EAF0', '#F3E6B8'];
+                return (
+                  <Link
+                    key={slug}
+                    href={'/product/' + product.slug}
+                    onClick={onClose}
+                    className="grid grid-cols-[72px_1fr] gap-3 rounded-[1.75rem] p-2.5"
+                    style={{ backgroundColor: tones[index % tones.length] }}
+                  >
+                    <img src={product.image} alt={product.titleEn} className="aspect-square h-[72px] w-[72px] rounded-[1.25rem] bg-white/55 object-contain" />
+                    <div className="self-center text-right">
+                      <p className="text-xs font-black text-[#302722]">{product.titleAr}</p>
+                      <p className="mt-1 text-[10px] font-bold text-[#786A63]">{product.collectionAr}</p>
+                      <p className="mt-1 text-[11px] text-[#746761]">الكمية: {quantity}</p>
+                    </div>
+                  </Link>
+                );
+              })}
+            </div>
+          )}
+        </div>
 
-        <div className="mt-4 space-y-2">
-          <Link href="/bag" onClick={onClose} className="block rounded-full bg-[#F87070] px-4 py-2.5 text-center text-sm font-bold text-white transition hover:bg-[#ef6666]">افتحي الشنطة</Link>
-          {waLink ? <a href={waLink} target="_blank" rel="noreferrer" className="block rounded-full border border-[#EBCFBE] bg-white px-4 py-2.5 text-center text-sm font-semibold text-[#5E534C] transition hover:border-[#F87070] hover:text-[#F87070]">ابعتيها واتساب</a> : null}
+        <div className="border-t border-[#4F3B31]/10 bg-white/70 p-4">
+          <Link
+            href="/bag"
+            onClick={onClose}
+            className="block rounded-full bg-[#302722] px-4 py-3 text-center text-sm font-extrabold text-white"
+          >
+            افتحي الشنطة
+          </Link>
+          {waLink ? (
+            <a
+              href={waLink}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-2 block rounded-full bg-[#F56F67] px-4 py-3 text-center text-sm font-extrabold text-white"
+            >
+              ابعتيها واتساب
+            </a>
+          ) : null}
         </div>
       </aside>
     </>
