@@ -152,3 +152,52 @@ The site should remain:
 4. Optimize image delivery.
 5. Final performance / accessibility gate.
 6. Only then mark PR ready for merge.
+
+
+## H5.1 — Responsive image delivery closure
+
+Latest verified commit:
+`ae5d707fb18cfc6d1806a6bcec4bb9b16cba7a89`
+
+Vercel deployment:
+- status: READY
+- compile: PASS
+- TypeScript / lint: PASS
+- static generation: 15 / 15
+- Home request: HTTP 200
+- Arabic document direction confirmed
+
+### Runtime image behavior
+
+The large source PNG library is no longer used as direct product-image delivery across the core shopping journey.
+
+Implemented:
+- shared `ProductVisual` built on Next.js `Image`;
+- responsive `sizes` for catalog cards, guided results, Home art, PDP, Bag, MiniBag, Match, Bundle, and Drop;
+- only the primary Hero / PDP visual gets elevated priority where appropriate;
+- below-fold imagery remains lazy by default;
+- Header and Footer brand imagery use Next Image as well.
+
+Rendered Home verification:
+- `srcset` is present;
+- Next image optimizer URLs are present;
+- direct `src="/images/habba/products/..."` product-image requests: **0**.
+
+The repository still contains:
+- 26 PNG product sources;
+- 41.62 MB total raw source weight;
+- 1.60 MB average raw source image.
+
+That raw size is now primarily an asset-management / repository concern rather than the core runtime-delivery blocker it was before H5.1.
+
+### Remaining performance gate
+
+Do not claim a final performance score yet.
+
+Still required after direct visual closure:
+1. production-grade Lighthouse / Web Vitals;
+2. confirm LCP image sizing on real mobile viewport;
+3. inspect image optimizer cache / delivered formats under normal public deployment;
+4. optionally create smaller archival source derivatives later if repository size itself becomes a concern.
+
+The creative system should **not** be rolled back to solve these items.
