@@ -135,7 +135,7 @@ export function MatchClient() {
                 <span className="habba-bead h-5 w-5 bg-[#A88636]" />
               </div>
 
-              <div className="mt-8 overflow-hidden rounded-[2rem] bg-white/55">
+              <div className="mt-8 overflow-hidden rounded-[2rem] bg-white/[0.55]">
                 <ProductVisual
                   src="/images/habba/products/hbb-pastel-candy-bracelet-card.png"
                   alt="أسورة ألوان باستيل"
@@ -148,7 +148,7 @@ export function MatchClient() {
         </div>
 
         <div>
-          <div className="rounded-[2.75rem] bg-white/78 p-5 habba-tray-shadow sm:p-7">
+          <div className="rounded-[2.75rem] bg-white/[0.78] p-5 habba-tray-shadow sm:p-7">
             <GuidedChoiceGroup
               step="01"
               label="بتشتري لمين؟"

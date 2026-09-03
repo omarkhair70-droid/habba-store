@@ -35,7 +35,7 @@ const discoveryPaths = [
 
 export function MatchEntrySection() {
   return (
-    <section className="border-y border-[#4F3B31]/10 bg-white/45 py-16 sm:py-20">
+    <section className="border-y border-[#4F3B31]/10 bg-white/[0.45] py-16 sm:py-20">
       <div className="mx-auto w-[94%] max-w-7xl">
         <div className="grid gap-7 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
           <div className="text-right">

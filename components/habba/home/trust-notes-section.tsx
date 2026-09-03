@@ -12,7 +12,7 @@ export function TrustNotesSection() {
           {habbaTrustNotes.map((note, index) => {
             const colors = ['#F56F67', '#9F83C1', '#75A795', '#C19B43'];
             return (
-              <li key={note} className="flex items-start gap-3 rounded-2xl bg-white/65 p-3 text-sm leading-7 text-[#655851]">
+              <li key={note} className="flex items-start gap-3 rounded-2xl bg-white/[0.65] p-3 text-sm leading-7 text-[#655851]">
                 <span className="habba-bead mt-2 h-3 w-3 shrink-0" style={{ backgroundColor: colors[index % colors.length] }} />
                 <span>{note}</span>
               </li>

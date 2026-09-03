@@ -29,7 +29,7 @@ export function MiniBagDrawer({ open, onClose }: MiniBagDrawerProps) {
         aria-hidden={!open}
         aria-label="إغلاق شنطة حبّة"
         tabIndex={open ? 0 : -1}
-        className={'fixed inset-0 z-40 bg-[#302722]/35 backdrop-blur-[2px] transition-opacity duration-200 ' + (open ? 'opacity-100' : 'pointer-events-none opacity-0')}
+        className={'fixed inset-0 z-40 bg-[#302722]/[0.35] backdrop-blur-[2px] transition-opacity duration-200 ' + (open ? 'opacity-100' : 'pointer-events-none opacity-0')}
       />
       <aside
         role="dialog"
@@ -77,7 +77,7 @@ export function MiniBagDrawer({ open, onClose }: MiniBagDrawerProps) {
                       alt={product.titleEn}
                       sizes="72px"
                       quality={76}
-                      className="aspect-square h-[72px] w-[72px] rounded-[1.25rem] bg-white/55 object-contain"
+                      className="aspect-square h-[72px] w-[72px] rounded-[1.25rem] bg-white/[0.55] object-contain"
                     />
                     <div className="self-center text-right">
                       <p className="text-xs font-black text-[#302722]">{product.titleAr}</p>

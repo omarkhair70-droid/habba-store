@@ -136,7 +136,7 @@ export function DropBuilderClient() {
                 اختاري الإحساس واللون والحجم، وحبّة تبني مجموعة كاملة من 4 لـ6 قطع موجودة فعلًا في الكتالوج.
               </p>
 
-              <div className="relative mt-8 min-h-[330px] overflow-hidden rounded-[2.25rem] bg-white/45">
+              <div className="relative mt-8 min-h-[330px] overflow-hidden rounded-[2.25rem] bg-white/[0.45]">
                 <ProductVisual
                   src="/images/habba/products/hbb-green-flower-necklace-card.png"
                   alt="عقد وردة خضراء"
@@ -159,7 +159,7 @@ export function DropBuilderClient() {
           </div>
         </div>
 
-        <div className="rounded-[2.75rem] bg-white/78 p-5 habba-tray-shadow sm:p-7">
+        <div className="rounded-[2.75rem] bg-white/[0.78] p-5 habba-tray-shadow sm:p-7">
           <GuidedChoiceGroup
             step="01"
             label="المود الكبير"
@@ -233,7 +233,7 @@ export function DropBuilderClient() {
                 quality={84}
                 className="absolute inset-[4%] h-[92%] w-[92%] scale-[1.08] object-contain"
               />
-              <p className="absolute bottom-4 right-4 rounded-full bg-[#302722]/88 px-4 py-2 text-xs font-extrabold text-white backdrop-blur">
+              <p className="absolute bottom-4 right-4 rounded-full bg-[#302722]/[0.88] px-4 py-2 text-xs font-extrabold text-white backdrop-blur">
                 {result.heroProduct.titleAr}
               </p>
             </div>
@@ -256,7 +256,7 @@ export function DropBuilderClient() {
           </div>
 
           <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
-            <div className="rounded-[2rem] bg-white/8 p-5">
+            <div className="rounded-[2rem] bg-white/[0.08] p-5">
               <p className="text-xs font-extrabold text-[#F1BBB5]">كابشن جاهز لو حبيتي تشاركي الـDrop</p>
               <p className="mt-2 whitespace-pre-line text-sm leading-7 text-[#DDD0CA]">{result.instagramCaptionAr}</p>
               <p className="mt-2 text-[10px] text-[#AFA09A]">راجعيه قبل النشر.</p>

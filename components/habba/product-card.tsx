@@ -28,7 +28,7 @@ export function ProductCard({ product }: { product: HabbaProduct }) {
         aria-label={'عرض ' + product.titleAr}
         className="relative block aspect-[4/4.35] overflow-hidden"
       >
-        <div className="absolute left-3 top-3 z-10 rounded-full bg-white/72 px-2.5 py-1 text-[10px] font-extrabold backdrop-blur">
+        <div className="absolute left-3 top-3 z-10 rounded-full bg-white/[0.72] px-2.5 py-1 text-[10px] font-extrabold backdrop-blur">
           <span style={{ color: tone.accent }}>{product.collectionAr}</span>
         </div>
         <ProductVisual

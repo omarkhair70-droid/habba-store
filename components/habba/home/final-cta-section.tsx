@@ -15,7 +15,7 @@ export function FinalCtaSection() {
             <span className="habba-bead h-5 w-5 bg-[#E9DEF7]" />
           </div>
           <h2 className="text-3xl font-black leading-tight tracking-[-0.03em] sm:text-5xl">لقيتي حاجة شبهك؟</h2>
-          <p className="mt-4 max-w-2xl text-sm leading-8 text-white/85 sm:text-base">
+          <p className="mt-4 max-w-2xl text-sm leading-8 text-white/[0.85] sm:text-base">
             احفظي القطع في شنطتك، أو ابعتي على واتساب عشان نتأكد من التوفر والسعر والتفاصيل قبل الطلب.
           </p>
           <div className="mt-7 flex flex-wrap gap-3">
@@ -29,7 +29,7 @@ export function FinalCtaSection() {
             </a>
             <Link
               href="/shop"
-              className="rounded-full border border-white/35 bg-white/15 px-6 py-3 text-sm font-extrabold text-white transition hover:bg-white/25"
+              className="rounded-full border border-white/[0.35] bg-white/[0.15] px-6 py-3 text-sm font-extrabold text-white transition hover:bg-white/25"
             >
               كمّلي تصفح
             </Link>

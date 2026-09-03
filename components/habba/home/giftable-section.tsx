@@ -18,7 +18,7 @@ export function GiftableSection() {
             <Link href="/match" className="rounded-full bg-[#302722] px-6 py-3 text-sm font-extrabold text-white transition hover:-translate-y-0.5">
               اختاري هدية مع Habba Match
             </Link>
-            <Link href="/shop?filter=cute-gift" className="rounded-full border border-[#6C532E]/20 bg-white/55 px-6 py-3 text-sm font-extrabold text-[#684F27] transition hover:bg-white/75">
+            <Link href="/shop?filter=cute-gift" className="rounded-full border border-[#6C532E]/20 bg-white/[0.55] px-6 py-3 text-sm font-extrabold text-[#684F27] transition hover:bg-white/75">
               شوفي هدايا صغيرة
             </Link>
           </div>

@@ -41,7 +41,7 @@ export function CollectionsSection() {
               </div>
 
               <div className="absolute bottom-[-7%] left-[-4%] w-[82%] transition duration-500 group-hover:-translate-y-3 group-hover:rotate-2 group-hover:scale-[1.03] md:w-[92%]">
-                <div className="rounded-full bg-white/45 p-5">
+                <div className="rounded-full bg-white/[0.45] p-5">
                   <ProductVisual
                     src={collection.image}
                     alt={collection.imageAlt}

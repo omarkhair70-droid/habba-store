@@ -117,7 +117,7 @@ export function BundleClient() {
               </p>
 
               <div className="mt-8 grid grid-cols-2 gap-2">
-                <div className="overflow-hidden rounded-[1.75rem] bg-white/55">
+                <div className="overflow-hidden rounded-[1.75rem] bg-white/[0.55]">
                   <ProductVisual
                     src="/images/habba/products/hbb-blue-star-heishi-bracelet-card.png"
                     alt="أسورة النجمة الزرقاء"
@@ -138,7 +138,7 @@ export function BundleClient() {
           </div>
         </div>
 
-        <div className="rounded-[2.75rem] bg-white/78 p-5 habba-tray-shadow sm:p-7">
+        <div className="rounded-[2.75rem] bg-white/[0.78] p-5 habba-tray-shadow sm:p-7">
           <GuidedChoiceGroup
             step="01"
             label="الباندل ده لمين أو لإيه؟"
@@ -226,7 +226,7 @@ export function BundleClient() {
               href={whatsappHref}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-[#5C486C]/20 bg-white/45 px-6 py-3 text-center text-sm font-extrabold text-[#55425F] transition hover:bg-white/70"
+              className="rounded-full border border-[#5C486C]/20 bg-white/[0.45] px-6 py-3 text-center text-sm font-extrabold text-[#55425F] transition hover:bg-white/70"
             >
               اسألي عنه على واتساب
             </a>

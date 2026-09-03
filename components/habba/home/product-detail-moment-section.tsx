@@ -67,7 +67,7 @@ export function ProductDetailMomentSection() {
                   className={'h-full w-full object-contain transition duration-700 group-hover:scale-[1.78] ' + moment.imageClass}
                 />
               </div>
-              <div className="absolute inset-x-4 bottom-4 z-10 rounded-[1.75rem] bg-[#302722]/88 p-4 text-right backdrop-blur-md sm:p-5">
+              <div className="absolute inset-x-4 bottom-4 z-10 rounded-[1.75rem] bg-[#302722]/[0.88] p-4 text-right backdrop-blur-md sm:p-5">
                 <div className="flex items-center justify-between gap-4">
                   <span className="text-[10px] font-black tracking-[0.18em] text-[#F2C8C3]">0{index + 1}</span>
                   <span className="text-xs font-extrabold text-[#E8D9D2]">{moment.eyebrow}</span>

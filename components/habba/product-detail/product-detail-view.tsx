@@ -27,10 +27,10 @@ export function ProductDetailView({ product }: { product: HabbaProduct }) {
           style={{ backgroundColor: tone.surface }}
         >
           <div className="absolute left-6 top-6 z-10 flex flex-wrap gap-2">
-            <span className="rounded-full bg-white/72 px-3 py-1.5 text-[11px] font-extrabold backdrop-blur" style={{ color: tone.accent }}>
+            <span className="rounded-full bg-white/[0.72] px-3 py-1.5 text-[11px] font-extrabold backdrop-blur" style={{ color: tone.accent }}>
               {product.collectionAr}
             </span>
-            <span className="rounded-full bg-white/72 px-3 py-1.5 text-[11px] font-extrabold text-[#675A54] backdrop-blur">
+            <span className="rounded-full bg-white/[0.72] px-3 py-1.5 text-[11px] font-extrabold text-[#675A54] backdrop-blur">
               {product.categoryAr}
             </span>
           </div>
@@ -91,7 +91,7 @@ export function ProductDetailView({ product }: { product: HabbaProduct }) {
               href={createWhatsAppLink(product.titleAr)}
               target="_blank"
               rel="noreferrer"
-              className="rounded-full border border-[#4F3B31]/15 bg-white/65 px-6 py-3 text-center text-sm font-extrabold text-[#5C4F49] transition hover:bg-white"
+              className="rounded-full border border-[#4F3B31]/[0.15] bg-white/[0.65] px-6 py-3 text-center text-sm font-extrabold text-[#5C4F49] transition hover:bg-white"
             >
               اسألي على واتساب
             </a>

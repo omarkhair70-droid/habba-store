@@ -49,7 +49,7 @@ export function FeaturedProductsSection() {
               className="h-full w-full scale-[1.08] object-contain transition duration-500 group-hover:-translate-y-2 group-hover:scale-[1.13]"
             />
           </div>
-          <div className="absolute inset-x-6 bottom-6 rounded-[2rem] bg-white/84 p-5 backdrop-blur-md sm:inset-x-8 sm:bottom-8 sm:p-6">
+          <div className="absolute inset-x-6 bottom-6 rounded-[2rem] bg-white/[0.84] p-5 backdrop-blur-md sm:inset-x-8 sm:bottom-8 sm:p-6">
             <p className="text-xs font-bold text-[#7B6C65]">{lead.categoryAr}</p>
             <h3 className="mt-1 text-2xl font-black sm:text-3xl">{lead.titleAr}</h3>
             <p className="mt-2 max-w-xl text-sm leading-7 text-[#6E605A]">{lead.descriptionAr}</p>

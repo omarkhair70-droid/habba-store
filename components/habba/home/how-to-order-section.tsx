@@ -3,7 +3,7 @@ import { habbaOrderSteps } from '@/content/habba-sections';
 export function HowToOrderSection() {
   return (
     <section className="mx-auto w-[94%] max-w-7xl py-8 sm:py-12">
-      <div className="border-y border-[#4F3B31]/12 py-9">
+      <div className="border-y border-[#4F3B31]/[0.12] py-9">
         <div className="grid gap-8 lg:grid-cols-[0.52fr_1.48fr] lg:items-start">
           <div className="text-right">
             <p className="text-xs font-extrabold text-[#A9534D]">من الشنطة لواتساب</p>

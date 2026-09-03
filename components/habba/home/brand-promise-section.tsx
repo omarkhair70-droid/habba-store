@@ -31,7 +31,7 @@ export function BrandPromiseSection() {
               كل قطعة في حبّة معمولة بإيد. ممكن تظهر فروق بسيطة في ترتيب خرزة أو درجة لون حسب الخامات المتاحة، وده جزء طبيعي من القطعة مش عيب مستخبي.
             </p>
 
-            <div className="mt-8 grid gap-5 border-t border-white/15 pt-6 sm:grid-cols-3">
+            <div className="mt-8 grid gap-5 border-t border-white/[0.15] pt-6 sm:grid-cols-3">
               <div>
                 <span className="habba-bead h-3 w-3 bg-[#F56F67]" />
                 <p className="mt-2 text-sm font-bold">معمولة بإيد</p>

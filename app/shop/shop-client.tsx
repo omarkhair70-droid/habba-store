@@ -127,7 +127,7 @@ export default function ShopClient() {
       <HabbaHeader />
 
       <section className="relative overflow-hidden border-b border-[#4F3B31]/10 bg-[#FFF2E8]">
-        <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-[#E7DEF3]/55 blur-3xl" />
+        <div className="absolute -left-20 top-0 h-72 w-72 rounded-full bg-[#E7DEF3]/[0.55] blur-3xl" />
         <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#DDE9CF]/60 blur-3xl" />
 
         <div className="relative mx-auto w-[94%] max-w-7xl py-12 sm:py-16">

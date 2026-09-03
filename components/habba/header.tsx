@@ -43,7 +43,7 @@ export function HabbaHeader() {
           <div className="flex items-center gap-2">
             <button
               onClick={() => setOpenMiniBag(true)}
-              className="rounded-full border border-[#4F3B31]/12 bg-white px-3 py-2 text-xs font-bold text-[#554842] transition hover:-translate-y-0.5 hover:border-[#F1A39B] sm:px-4 sm:text-sm"
+              className="rounded-full border border-[#4F3B31]/[0.12] bg-white px-3 py-2 text-xs font-bold text-[#554842] transition hover:-translate-y-0.5 hover:border-[#F1A39B] sm:px-4 sm:text-sm"
             >
               {itemCount > 0 ? 'شنطتك ' + itemCount : 'شنطتك'}
             </button>
@@ -58,7 +58,7 @@ export function HabbaHeader() {
           </div>
         </div>
 
-        <nav className="mx-auto flex w-[94%] max-w-7xl items-center gap-4 overflow-x-auto border-t border-[#4F3B31]/8 py-2 text-xs font-bold text-[#665A54] md:hidden">
+        <nav className="mx-auto flex w-[94%] max-w-7xl items-center gap-4 overflow-x-auto border-t border-[#4F3B31]/[0.08] py-2 text-xs font-bold text-[#665A54] md:hidden">
           <Link href="/shop" className="whitespace-nowrap">المنتجات</Link>
           <Link href="/match" className="whitespace-nowrap">حبّة ترشحلك</Link>
           <Link href="/bundle" className="whitespace-nowrap">باندل</Link>

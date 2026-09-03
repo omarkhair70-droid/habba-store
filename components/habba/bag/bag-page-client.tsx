@@ -39,7 +39,7 @@ export function BagPageClient() {
             </p>
             <div className="mt-6 flex flex-wrap gap-2">
               <Link href="/shop" className="rounded-full bg-[#302722] px-6 py-3 text-sm font-extrabold text-white">شوفي المنتجات</Link>
-              <Link href="/match" className="rounded-full border border-[#6F5360]/15 bg-white/55 px-6 py-3 text-sm font-extrabold text-[#714F5E]">حبّة ترشحلك</Link>
+              <Link href="/match" className="rounded-full border border-[#6F5360]/[0.15] bg-white/[0.55] px-6 py-3 text-sm font-extrabold text-[#714F5E]">حبّة ترشحلك</Link>
             </div>
           </div>
           <div className="relative min-h-[340px] bg-[#F7E7B9]">
@@ -77,7 +77,7 @@ export function BagPageClient() {
                 className="grid grid-cols-[105px_1fr] gap-4 overflow-hidden rounded-[2rem] p-3 sm:grid-cols-[150px_1fr] sm:p-4"
                 style={{ backgroundColor: toneByCollection[product.collectionAr] ?? '#F1E5DA' }}
               >
-                <Link href={'/product/' + product.slug} className="overflow-hidden rounded-[1.5rem] bg-white/55">
+                <Link href={'/product/' + product.slug} className="overflow-hidden rounded-[1.5rem] bg-white/[0.55]">
                   <ProductVisual
                     src={product.image}
                     alt={product.titleEn}

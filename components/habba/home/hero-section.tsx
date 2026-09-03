@@ -13,8 +13,8 @@ export function HeroSection() {
   return (
     <section className="relative isolate overflow-hidden border-b border-[#4F3B31]/10">
       <div className="habba-soft-grid absolute inset-0 -z-20 opacity-50" />
-      <div className="absolute -left-20 top-12 -z-10 h-72 w-72 rounded-full bg-[#DFD1F4]/45 blur-3xl" />
-      <div className="absolute -right-20 bottom-0 -z-10 h-80 w-80 rounded-full bg-[#CBE9E2]/45 blur-3xl" />
+      <div className="absolute -left-20 top-12 -z-10 h-72 w-72 rounded-full bg-[#DFD1F4]/[0.45] blur-3xl" />
+      <div className="absolute -right-20 bottom-0 -z-10 h-80 w-80 rounded-full bg-[#CBE9E2]/[0.45] blur-3xl" />
 
       <div className="mx-auto grid min-h-[76vh] w-[94%] max-w-7xl items-center gap-10 py-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:py-16">
         <div className="order-1 text-right">
@@ -47,7 +47,7 @@ export function HeroSection() {
             </Link>
           </div>
 
-          <div className="mt-8 grid max-w-xl grid-cols-3 gap-2 border-t border-[#4F3B31]/12 pt-5 text-xs leading-5 text-[#766963] sm:text-sm">
+          <div className="mt-8 grid max-w-xl grid-cols-3 gap-2 border-t border-[#4F3B31]/[0.12] pt-5 text-xs leading-5 text-[#766963] sm:text-sm">
             <p>معمولة بإيد</p>
             <p>التوفر حسب الخامات</p>
             <p>السعر يتأكد على واتساب</p>
@@ -65,8 +65,8 @@ export function HeroSection() {
             ))}
           </div>
 
-          <div className="absolute right-[7%] top-[8%] h-[72%] w-[74%] rotate-[-3deg] rounded-[3.5rem] border border-[#6A4D3E]/12 bg-[#F6E8D8] habba-tray-shadow" />
-          <div className="absolute right-[13%] top-[13%] h-[62%] w-[66%] rotate-[2deg] rounded-[3rem] bg-white/85" />
+          <div className="absolute right-[7%] top-[8%] h-[72%] w-[74%] rotate-[-3deg] rounded-[3.5rem] border border-[#6A4D3E]/[0.12] bg-[#F6E8D8] habba-tray-shadow" />
+          <div className="absolute right-[13%] top-[13%] h-[62%] w-[66%] rotate-[2deg] rounded-[3rem] bg-white/[0.85]" />
 
           <Link
             href="/product/colorful-star-set"
