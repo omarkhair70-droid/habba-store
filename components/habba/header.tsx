@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { createWhatsAppLink } from '@/content/habba-products';
@@ -12,43 +13,58 @@ export function HabbaHeader() {
 
   return (
     <>
-      <header className="sticky top-0 z-20 border-b border-[#F0DED0] bg-[#FFFCF7]/95 backdrop-blur">
-        <div className="mx-auto flex w-[92%] max-w-6xl flex-col gap-1.5 py-2 sm:gap-2 sm:py-2.5">
-          <div className="flex items-center justify-between gap-2">
-            <Link href="/" aria-label="Habba home" className="flex h-12 w-24 items-center sm:h-14 sm:w-28">
-              <img
-                src="/images/habba/brand/hbb-logo-bilingual.png"
-                alt="Habba | حبّة"
-                className="h-auto w-auto max-h-[52px] max-w-full object-contain sm:max-h-[60px]"
-              />
-            </Link>
-            <div className="flex items-center gap-2">
-              <button onClick={() => setOpenMiniBag(true)} className="shrink-0 rounded-full border border-[#F5E6DA] bg-white px-3 py-1.5 text-xs font-semibold text-[#665952] transition hover:border-[#EBCFBE] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#F2C5B0]">
-                {itemCount > 0 ? `شنطتك ${itemCount}` : 'شنطتك'}
-              </button>
-              <a
-                href={createWhatsAppLink('منتجات حبّة')}
-                target="_blank"
-                rel="noreferrer"
-                className="shrink-0 rounded-full border border-[#EBCFBE] bg-white px-3 py-1.5 text-xs font-semibold text-[#4E433D] transition hover:border-[#F87070] hover:text-[#F87070]"
-              >
-                واتساب
-              </a>
-            </div>
-          </div>
+      <header className="sticky top-0 z-30 border-b border-[#4F3B31]/10 bg-[#FFFAF3]/90 backdrop-blur-xl">
+        <div className="mx-auto flex w-[94%] max-w-7xl items-center justify-between gap-3 py-2.5 sm:py-3">
+          <Link href="/" aria-label="Habba home" className="relative flex h-11 w-24 shrink-0 items-center sm:h-12 sm:w-28">
+            <Image
+              src="/images/habba/brand/hbb-logo-bilingual.png"
+              alt="Habba | حبّة"
+              fill
+              sizes="112px"
+              className="object-contain"
+            />
+          </Link>
 
-          <nav className="flex items-center justify-center gap-4 border-t border-[#F5E6DA] pt-1.5 text-sm font-medium text-[#514740] sm:justify-end sm:gap-6 sm:border-0 sm:pt-0">
-            <Link href="/" className="whitespace-nowrap transition hover:text-[#F87070]">
-              الرئيسية
-            </Link>
-            <Link href="/shop" className="whitespace-nowrap transition hover:text-[#F87070]">
+          <nav className="hidden items-center gap-1 rounded-full border border-[#4F3B31]/10 bg-white/70 p-1 text-sm font-semibold text-[#5D5049] md:flex">
+            <Link href="/shop" className="rounded-full px-4 py-2 transition hover:bg-[#FFE8DF] hover:text-[#A94E48]">
               المنتجات
             </Link>
-            <Link href="/about" className="whitespace-nowrap transition hover:text-[#F87070]">
+            <Link href="/match" className="rounded-full px-4 py-2 transition hover:bg-[#E8E0F5] hover:text-[#66507E]">
+              حبّة ترشحلك
+            </Link>
+            <Link href="/drops" className="rounded-full px-4 py-2 transition hover:bg-[#DDEFE9] hover:text-[#42665C]">
+              اعملي Drop
+            </Link>
+            <Link href="/about" className="rounded-full px-4 py-2 transition hover:bg-[#F7EAC6] hover:text-[#705C2F]">
               عن حبّة
             </Link>
           </nav>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setOpenMiniBag(true)}
+              className="rounded-full border border-[#4F3B31]/[0.12] bg-white px-3 py-2 text-xs font-bold text-[#554842] transition hover:-translate-y-0.5 hover:border-[#F1A39B] sm:px-4 sm:text-sm"
+            >
+              {itemCount > 0 ? 'شنطتك ' + itemCount : 'شنطتك'}
+            </button>
+            <a
+              href={createWhatsAppLink('منتجات حبّة')}
+              target="_blank"
+              rel="noreferrer"
+              className="hidden rounded-full bg-[#302722] px-4 py-2 text-xs font-bold text-white transition hover:-translate-y-0.5 hover:bg-[#4B3B34] sm:inline-flex sm:text-sm"
+            >
+              واتساب
+            </a>
+          </div>
         </div>
+
+        <nav className="mx-auto flex w-[94%] max-w-7xl items-center gap-4 overflow-x-auto border-t border-[#4F3B31]/[0.08] py-2 text-xs font-bold text-[#665A54] md:hidden">
+          <Link href="/shop" className="whitespace-nowrap">المنتجات</Link>
+          <Link href="/match" className="whitespace-nowrap">حبّة ترشحلك</Link>
+          <Link href="/bundle" className="whitespace-nowrap">باندل</Link>
+          <Link href="/drops" className="whitespace-nowrap">Drop</Link>
+          <Link href="/about" className="whitespace-nowrap">عن حبّة</Link>
+        </nav>
       </header>
       <MiniBagDrawer open={openMiniBag} onClose={() => setOpenMiniBag(false)} />
     </>

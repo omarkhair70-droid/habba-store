@@ -1,0 +1,296 @@
+# Habba Creative System — H5 QA Status
+Date: 2026-09-03
+Branch: `redesign/creative-system-20260903`
+Draft PR: #31
+Latest verified implementation commit before this document: `6449fdc11e297ab9eebb5510f8ef916d26a5c323`
+
+## Status
+
+**CREATIVE IMPLEMENTATION: COMPLETE THROUGH H4**
+**BUILD QA: PASS**
+**VISUAL QA: PARTIAL / NEEDS DIRECT RENDER REVIEW**
+**MERGE: DO NOT MERGE YET**
+
+The branch now carries one coherent Habba creative system from Home through guided discovery, catalog, PDP, bag, and WhatsApp handoff.
+
+## Completed phases
+
+### H1 — Home creative foundation
+- explicit Arabic RTL document direction;
+- bead / thread / tray primitives;
+- new header;
+- authored hero;
+- editorial featured-products treatment;
+- product macro/detail storytelling;
+- Match / Bundle / Drop entry journey;
+- mood-led collections;
+- handmade proof;
+- gifting;
+- ordering / trust;
+- final conversion;
+- mobile hero hierarchy corrected so copy/CTA precede product composition;
+- below-fold Home imagery marked lazy + async.
+
+### H2 — Shop and cards
+- Shop reframed around mood and intent rather than only category;
+- smart search retained with clearer hierarchy;
+- filter strip retained and made visually distinct;
+- ProductCard simplified around image, Arabic name, mood cue, bag action;
+- WhatsApp removed from every catalog card and kept for intentional conversion moments;
+- catalog cards use lazy image loading.
+
+### H3 — Guided commerce
+Existing backend contracts were preserved.
+
+Match:
+- four visible guided steps;
+- choice states integrated into Habba language;
+- curated result tray.
+
+Bundle:
+- intent → count → composition journey;
+- paired product visual;
+- curated result tray.
+
+Drop:
+- mood → size → focus → color journey;
+- stronger full-mood composition;
+- hero product treatment;
+- existing generated story/caption retained;
+- grouped bag add and WhatsApp handoff retained.
+
+Unchanged:
+- `/api/habba/match`
+- `/api/habba/bundle`
+- `/api/habba/drop`
+- local / AI / fallback behavior
+- validation and catalog truth
+
+### H4 — PDP / Bag / conversion
+- PDP moved from generic two-card layout to product-led editorial layout;
+- handmade variation made visible as product truth;
+- Bag and MiniBag moved into the same creative system;
+- recommendations retained;
+- quantity behavior retained;
+- WhatsApp handoff retained;
+- toast aligned with the new system.
+
+## Build verification
+
+Latest QA commit:
+`6449fdc11e297ab9eebb5510f8ef916d26a5c323`
+
+Vercel:
+- status: READY
+- compile: PASS
+- TypeScript / lint validation: PASS
+- static generation: 15 / 15 pages
+- root preview request: HTTP 200
+
+Build route manifest includes:
+- /
+- /about
+- /shop
+- /match
+- /bundle
+- /drops
+- /bag
+- /product/[slug]
+- all existing Habba API routes
+
+Direct automated requests to protected preview subpaths are redirected by Vercel SSO (302), so this is not recorded as an application-route failure.
+
+## Asset audit
+
+Product image directory:
+- PNG count: 26
+- total raw payload in repository: **41.62 MB**
+- average image: **1.60 MB**
+
+Largest examples:
+- neutral beaded necklace: 2.08 MB
+- berry frost bracelet: 1.83 MB
+- orange tally counter: 1.80 MB
+- aqua speckle bracelet: 1.78 MB
+- wooden bead necklace set: 1.71 MB
+
+The current pass reduces unnecessary initial loading through lazy / async loading below the fold, and catalog cards are lazy.
+
+However, for award-level performance the raw product asset pipeline still needs:
+- responsive image delivery;
+- compressed WebP / AVIF derivatives or equivalent runtime optimization;
+- explicit mobile image sizing;
+- production Lighthouse / Web Vitals after visual closure.
+
+This is the main technical performance blocker now. It is not a reason to undo the creative system.
+
+## Visual QA limitation
+
+Code-level visual hierarchy, RTL structure, mobile ordering, interaction states, reduced-motion behavior, route generation, and build behavior were reviewed.
+
+A true pixel-level desktop/mobile visual review still requires direct rendered screenshots or manual preview inspection. The protected Vercel preview could not be captured as a page image by the current browser tooling.
+
+Do not claim final award readiness until this render review happens.
+
+## Current creative thesis
+
+> Habba is a handmade bead playground you can shop.
+
+The site should remain:
+- cute, not childish;
+- feminine, not generic pink;
+- handmade, not Etsy-template;
+- expressive, not chaotic;
+- commercial, not fake luxury;
+- grounded in Habba's real products.
+
+## Next gate
+
+1. Direct desktop render review.
+2. Direct mobile render review.
+3. Fix visual issues found there only — no broad redesign reset.
+4. Optimize image delivery.
+5. Final performance / accessibility gate.
+6. Only then mark PR ready for merge.
+
+
+## H5.1 — Responsive image delivery closure
+
+Latest verified commit:
+`ae5d707fb18cfc6d1806a6bcec4bb9b16cba7a89`
+
+Vercel deployment:
+- status: READY
+- compile: PASS
+- TypeScript / lint: PASS
+- static generation: 15 / 15
+- Home request: HTTP 200
+- Arabic document direction confirmed
+
+### Runtime image behavior
+
+The large source PNG library is no longer used as direct product-image delivery across the core shopping journey.
+
+Implemented:
+- shared `ProductVisual` built on Next.js `Image`;
+- responsive `sizes` for catalog cards, guided results, Home art, PDP, Bag, MiniBag, Match, Bundle, and Drop;
+- only the primary Hero / PDP visual gets elevated priority where appropriate;
+- below-fold imagery remains lazy by default;
+- Header and Footer brand imagery use Next Image as well.
+
+Rendered Home verification:
+- `srcset` is present;
+- Next image optimizer URLs are present;
+- direct `src="/images/habba/products/..."` product-image requests: **0**.
+
+The repository still contains:
+- 26 PNG product sources;
+- 41.62 MB total raw source weight;
+- 1.60 MB average raw source image.
+
+That raw size is now primarily an asset-management / repository concern rather than the core runtime-delivery blocker it was before H5.1.
+
+### Remaining performance gate
+
+Do not claim a final performance score yet.
+
+Still required after direct visual closure:
+1. production-grade Lighthouse / Web Vitals;
+2. confirm LCP image sizing on real mobile viewport;
+3. inspect image optimizer cache / delivered formats under normal public deployment;
+4. optionally create smaller archival source derivatives later if repository size itself becomes a concern.
+
+The creative system should **not** be rolled back to solve these items.
+
+
+## H5.2 — Final implementation closure
+
+Latest verified implementation HEAD:
+`a0f0531fc2599d46c98bbed837f0f757b579c536`
+
+Vercel:
+- combined GitHub status: SUCCESS
+- deployment: READY
+- compile: PASS
+- TypeScript / lint: PASS
+- static generation: 15 / 15
+
+Build route manifest:
+- /
+- /about
+- /shop
+- /match
+- /bundle
+- /drops
+- /bag
+- /product/[slug]
+- all existing Habba API routes
+
+### Final implementation fixes after H5.1
+
+- removed implementation / prototype language from customer-facing copy;
+- replaced terms such as `controls`, `handoff`, `Categories`, and explanatory design-copy with natural Habba-facing language;
+- exposed the three already-supported Shop moods that had no visible chips:
+  - ألوان ناعمة
+  - أساسيات هادية
+  - ناتشورال
+- added matching Shop context copy and filter colors;
+- retained all existing filter query keys and routing behavior.
+
+### Catalog integrity audit
+
+Catalog:
+- total records: 26
+- visible products: 22
+- missing product image assets: 0
+
+Home product references:
+- every hardcoded Home product slug exists;
+- every referenced Home product is `visible`;
+- every referenced Home product image exists in the repository.
+
+Shop filters:
+- all visible filter keys return at least one visible product;
+- no current Home filter link points to an unsupported filter.
+
+### Guided-commerce contract audit
+
+Client choice values were checked against API validation sets for:
+- Match
+- Bundle
+- Drop
+
+The redesigned clients preserve the API-supported values for:
+- shopping target;
+- product type;
+- mood;
+- color preference;
+- bundle intent;
+- product count;
+- bundle composition;
+- drop mood;
+- drop size;
+- focus type;
+- color direction.
+
+No API contract change was introduced by the visual redesign.
+
+### Latest render verification
+
+The latest deployment root page returns HTTP 200 and renders:
+- `<html lang="ar" dir="rtl">`;
+- the revised customer-facing copy;
+- responsive Next Image `srcset` output;
+- the current mobile / desktop class structure;
+- optimized product image requests.
+
+Protected preview subroutes currently redirect automated fetches to Vercel SSO (302) before their HTML can be inspected by the available fetch tool. This is a preview-protection limitation, not a route-generation failure; all routes are present in the successful production build manifest.
+
+### Remaining blocker
+
+There is no known implementation, routing, catalog, API-contract, or build blocker on the current branch.
+
+The only intentionally open gate is:
+**direct pixel-level desktop/mobile visual review of the protected preview, followed by targeted fixes only if that review finds anything.**
+
+PR #31 should remain DRAFT / DO NOT MERGE until that visual gate is performed.

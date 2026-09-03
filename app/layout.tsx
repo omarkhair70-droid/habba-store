@@ -5,7 +5,7 @@ import { BagRoot } from '@/components/habba/bag/bag-root';
 const siteTitle = 'Habba | حبّة';
 const descriptionAr = 'حبّة — إكسسوارات خرز handmade، ملونة، بسيطة، ومناسبة كهدايا صغيرة.';
 const descriptionEn = 'Handmade bead accessories, colorful, light, and giftable.';
-const siteDescription = `${descriptionAr} ${descriptionEn}`;
+const siteDescription = descriptionAr + ' ' + descriptionEn;
 const siteUrl = 'https://habba-store.vercel.app';
 const socialImage = '/images/habba/brand/hbb-logo-preview.png';
 
@@ -49,5 +49,11 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return <html lang="ar"><body><BagRoot>{children}</BagRoot></body></html>;
+  return (
+    <html lang="ar" dir="rtl">
+      <body>
+        <BagRoot>{children}</BagRoot>
+      </body>
+    </html>
+  );
 }

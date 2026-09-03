@@ -1,20 +1,53 @@
-import { habbaBrandTags } from '@/content/habba-sections';
-
+import { ProductVisual } from '@/components/habba/product-visual';
 export function BrandPromiseSection() {
   return (
-    <section className="mx-auto w-[92%] max-w-6xl py-5">
-      <article className="grid items-center gap-5 rounded-3xl border border-[#F0DED0] bg-[#fff7ee] p-5 md:grid-cols-2 md:gap-8 md:p-6">
-        <div className="order-2 md:order-1 rounded-3xl border border-[#F0DED0] bg-[#FFFCF7] p-3">
-          <img src="/images/habba/products/hbb-lavender-rose-bracelet-card.png" alt="Lavender rose bracelet" className="mx-auto aspect-square w-full max-w-xs rounded-2xl object-contain" />
-        </div>
-        <div className="order-1 md:order-2">
-          <h2 className="text-right text-2xl font-bold leading-tight sm:text-3xl">معمولة بإيد، بألوان تفرّح</h2>
-          <p className="mt-3 max-w-xl text-right text-sm leading-relaxed text-[#615651] sm:text-base">حبّة بتقدّم قطع خرز خفيفة وملونة، معمولة بإيد وبشكل صادق. كل قطعة بسيطة، لطيفة، ومناسبة لتفصيلة يومية أو هدية صغيرة.</p>
-          <div className="mt-4 flex flex-wrap justify-end gap-2 text-sm text-[#6B615B]">
-            {habbaBrandTags.map((tag) => <span key={tag} className="rounded-full border border-[#F0DED0] bg-[#FFFCF7] px-3 py-1">{tag}</span>)}
+    <section className="mx-auto w-[94%] max-w-7xl py-8 sm:py-12">
+      <div className="relative overflow-hidden rounded-[3rem] bg-[#302722] text-[#FFF8EF]">
+        <div className="absolute -left-20 -top-20 h-64 w-64 rounded-full bg-[#A88CC7]/25 blur-3xl" />
+        <div className="absolute -bottom-24 right-0 h-72 w-72 rounded-full bg-[#78A894]/20 blur-3xl" />
+
+        <div className="relative grid gap-8 p-6 sm:p-9 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:p-12">
+          <div className="relative min-h-[360px] overflow-hidden rounded-[2.5rem] bg-[#F6E1D8] sm:min-h-[480px]">
+            <ProductVisual
+              src="/images/habba/products/hbb-colorful-flower-bracelet-card.png"
+              alt="أسورة ورد ملون"
+              sizes="(max-width: 1024px) 84vw, 40vw"
+              className="absolute inset-0 h-full w-full scale-[1.22] object-contain"
+            />
+            <div className="absolute bottom-5 left-5 flex gap-1.5" aria-hidden="true">
+              <span className="habba-bead h-5 w-5 bg-[#F56F67]" />
+              <span className="habba-bead h-4 w-4 bg-[#F4DFA0]" />
+              <span className="habba-bead h-6 w-6 bg-[#CBE9E2]" />
+            </div>
+          </div>
+
+          <div className="text-right">
+            <p className="text-xs font-extrabold text-[#E8B5AF]">handmade يعني التفاصيل لها حياة</p>
+            <h2 className="mt-3 max-w-xl text-3xl font-black leading-[1.2] tracking-[-0.03em] sm:text-5xl">
+              مش نسخة مطبوعة
+              <span className="block text-[#F3C7C2]">من بعضها.</span>
+            </h2>
+            <p className="mt-5 max-w-2xl text-sm leading-8 text-[#E7DBD5] sm:text-base">
+              كل قطعة في حبّة معمولة بإيد. ممكن تظهر فروق بسيطة في ترتيب خرزة أو درجة لون حسب الخامات المتاحة، وده جزء طبيعي من القطعة مش عيب مستخبي.
+            </p>
+
+            <div className="mt-8 grid gap-5 border-t border-white/[0.15] pt-6 sm:grid-cols-3">
+              <div>
+                <span className="habba-bead h-3 w-3 bg-[#F56F67]" />
+                <p className="mt-2 text-sm font-bold">معمولة بإيد</p>
+              </div>
+              <div>
+                <span className="habba-bead h-3 w-3 bg-[#CBE9E2]" />
+                <p className="mt-2 text-sm font-bold">الخامات تحدد التوفر</p>
+              </div>
+              <div>
+                <span className="habba-bead h-3 w-3 bg-[#F4DFA0]" />
+                <p className="mt-2 text-sm font-bold">اختلاف بسيط طبيعي</p>
+              </div>
+            </div>
           </div>
         </div>
-      </article>
+      </div>
     </section>
   );
 }

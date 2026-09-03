@@ -1,14 +1,17 @@
+import Image from 'next/image';
 import { createWhatsAppLink } from '@/content/habba-products';
 
 export function HabbaFooter() {
   return (
     <footer className="mt-10 border-t border-[#F0DED0] bg-[#FFFCF7]">
       <div className="mx-auto flex w-[92%] max-w-6xl flex-col gap-2.5 py-5 text-center md:text-right">
-        <div className="mx-auto flex h-16 w-44 items-center justify-center md:mx-0">
-          <img
+        <div className="relative mx-auto flex h-16 w-44 items-center justify-center md:mx-0">
+          <Image
             src="/images/habba/brand/hbb-logo-bilingual.png"
             alt="Habba | حبّة"
-            className="h-auto w-auto max-h-[56px] max-w-full object-contain"
+            fill
+            sizes="176px"
+            className="object-contain"
           />
         </div>
         <p className="max-w-xl text-sm leading-relaxed text-[#514740] md:max-w-none">حبّة — تفاصيل خرز handmade، ملونة وخفيفة، مناسبة ليومك أو كهدية بسيطة.</p>
