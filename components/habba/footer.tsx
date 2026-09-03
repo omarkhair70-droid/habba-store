@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { createWhatsAppLink } from '@/content/habba-products';
 
 export function HabbaFooter() {
