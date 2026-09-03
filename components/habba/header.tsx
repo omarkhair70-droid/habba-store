@@ -20,7 +20,6 @@ export function HabbaHeader() {
               src="/images/habba/brand/hbb-logo-bilingual.png"
               alt="Habba | حبّة"
               fill
-              priority
               sizes="112px"
               className="object-contain"
             />

@@ -27,12 +27,16 @@ export function MiniBagDrawer({ open, onClose }: MiniBagDrawerProps) {
       <button
         onClick={onClose}
         aria-hidden={!open}
+        aria-label="إغلاق شنطة حبّة"
         tabIndex={open ? 0 : -1}
         className={'fixed inset-0 z-40 bg-[#302722]/35 backdrop-blur-[2px] transition-opacity duration-200 ' + (open ? 'opacity-100' : 'pointer-events-none opacity-0')}
       />
       <aside
+        role="dialog"
+        aria-modal="true"
+        aria-label="شنطة حبّة"
         aria-hidden={!open}
-        className={'fixed bottom-0 right-0 z-50 w-full overflow-hidden rounded-t-[2.5rem] bg-[#FFF9F2] shadow-2xl transition-transform duration-200 sm:top-0 sm:h-full sm:max-w-md sm:rounded-none sm:rounded-l-[2.5rem] ' + (open ? 'translate-y-0 sm:translate-x-0' : 'translate-y-full sm:translate-x-full sm:translate-y-0')}
+        className={'fixed bottom-0 right-0 z-50 w-full overflow-hidden rounded-t-[2.5rem] bg-[#FFF9F2] shadow-2xl transition-transform duration-200 sm:top-0 sm:h-full sm:max-w-md sm:rounded-none sm:rounded-l-[2.5rem] ' + (open ? 'visible translate-y-0 sm:translate-x-0' : 'invisible translate-y-full sm:translate-x-full sm:translate-y-0')}
       >
         <div className="bg-[#302722] p-5 text-white">
           <div className="flex items-center justify-between gap-4">
