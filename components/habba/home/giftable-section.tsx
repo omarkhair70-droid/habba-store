@@ -25,6 +25,8 @@ export function GiftableSection() {
 
         <div className="relative order-1 min-h-[330px] bg-[#F0DCE8] lg:order-2 lg:min-h-[480px]">
           <img
+              loading="lazy"
+              decoding="async"
             src="/images/habba/products/hbb-pink-strawberry-necklace-card.png"
             alt="عقد فراولة وردي"
             className="absolute inset-[8%] h-[84%] w-[84%] object-contain"

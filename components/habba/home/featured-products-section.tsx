@@ -42,6 +42,8 @@ export function FeaturedProductsSection() {
           </div>
           <div className="absolute inset-x-[6%] bottom-[12%] top-[4%] overflow-hidden rounded-[2.4rem]">
             <img
+              loading="lazy"
+              decoding="async"
               src={lead.image}
               alt={lead.titleEn}
               className="h-full w-full scale-[1.08] object-contain transition duration-500 group-hover:-translate-y-2 group-hover:scale-[1.13]"
@@ -70,6 +72,8 @@ export function FeaturedProductsSection() {
                   <p className="mt-2 text-xs leading-6 text-[#6E605A]">قطعة كاملة، من غير زحمة controls</p>
                 </div>
                 <img
+              loading="lazy"
+              decoding="async"
                   src={product.image}
                   alt={product.titleEn}
                   className="aspect-square w-full object-contain transition duration-500 group-hover:-translate-y-1 group-hover:rotate-2 group-hover:scale-[1.06]"

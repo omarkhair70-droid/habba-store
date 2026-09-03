@@ -60,6 +60,8 @@ export function ProductDetailMomentSection() {
             >
               <div className="absolute inset-0 overflow-hidden">
                 <img
+              loading="lazy"
+              decoding="async"
                   src={moment.image}
                   alt={moment.alt}
                   className={'h-full w-full object-contain transition duration-700 group-hover:scale-[1.78] ' + moment.imageClass}

@@ -8,6 +8,8 @@ export function BrandPromiseSection() {
         <div className="relative grid gap-8 p-6 sm:p-9 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:p-12">
           <div className="relative min-h-[360px] overflow-hidden rounded-[2.5rem] bg-[#F6E1D8] sm:min-h-[480px]">
             <img
+              loading="lazy"
+              decoding="async"
               src="/images/habba/products/hbb-colorful-flower-bracelet-card.png"
               alt="أسورة ورد ملون"
               className="absolute inset-0 h-full w-full scale-[1.22] object-contain"

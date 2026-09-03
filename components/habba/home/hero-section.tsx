@@ -16,7 +16,7 @@ export function HeroSection() {
       <div className="absolute -right-20 bottom-0 -z-10 h-80 w-80 rounded-full bg-[#CBE9E2]/45 blur-3xl" />
 
       <div className="mx-auto grid min-h-[76vh] w-[94%] max-w-7xl items-center gap-10 py-12 lg:grid-cols-[0.92fr_1.08fr] lg:gap-14 lg:py-16">
-        <div className="order-2 text-right lg:order-1">
+        <div className="order-1 text-right">
           <div className="mb-5 flex items-center justify-start gap-2 text-xs font-extrabold tracking-wide text-[#786861] sm:text-sm">
             <span className="habba-bead h-3 w-3 bg-[#F56F67]" />
             <span>إكسسوارات خرز معمولة بإيد</span>
@@ -53,7 +53,7 @@ export function HeroSection() {
           </div>
         </div>
 
-        <div className="relative order-1 mx-auto min-h-[420px] w-full max-w-2xl lg:order-2 lg:min-h-[560px]">
+        <div className="relative order-2 mx-auto min-h-[420px] w-full max-w-2xl lg:min-h-[560px]">
           <div className="absolute left-[7%] top-[4%] flex items-center gap-2">
             {beads.map((bead, index) => (
               <span
