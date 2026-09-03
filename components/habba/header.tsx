@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { createWhatsAppLink } from '@/content/habba-products';
@@ -14,11 +15,14 @@ export function HabbaHeader() {
     <>
       <header className="sticky top-0 z-30 border-b border-[#4F3B31]/10 bg-[#FFFAF3]/90 backdrop-blur-xl">
         <div className="mx-auto flex w-[94%] max-w-7xl items-center justify-between gap-3 py-2.5 sm:py-3">
-          <Link href="/" aria-label="Habba home" className="flex h-11 w-24 shrink-0 items-center sm:h-12 sm:w-28">
-            <img
+          <Link href="/" aria-label="Habba home" className="relative flex h-11 w-24 shrink-0 items-center sm:h-12 sm:w-28">
+            <Image
               src="/images/habba/brand/hbb-logo-bilingual.png"
               alt="Habba | حبّة"
-              className="h-auto w-auto max-h-11 max-w-full object-contain sm:max-h-12"
+              fill
+              priority
+              sizes="112px"
+              className="object-contain"
             />
           </Link>
 
