@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 
 const tones = ['#F2DFE9', '#DDE9CF', '#E1EAF0', '#F3E6B8', '#E8E0F4', '#F5DED8'];
 
@@ -27,9 +28,10 @@ export function GuidedResultCard({
         <span className="absolute left-3 top-3 z-10 rounded-full bg-white/75 px-2.5 py-1 text-[10px] font-black text-[#685B55] backdrop-blur">
           0{index + 1}
         </span>
-        <img
+        <ProductVisual
           src={product.image}
           alt={product.titleEn}
+          sizes="(max-width: 640px) 46vw, (max-width: 1024px) 31vw, 23vw"
           className="h-full w-full scale-[1.04] object-contain p-2 transition duration-500 group-hover:scale-[1.1]"
         />
       </div>

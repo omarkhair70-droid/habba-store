@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 import type { HabbaProduct } from '@/content/habba-products';
 import { useBag } from '@/components/habba/bag/bag-provider';
 
@@ -30,10 +31,10 @@ export function ProductCard({ product }: { product: HabbaProduct }) {
         <div className="absolute left-3 top-3 z-10 rounded-full bg-white/72 px-2.5 py-1 text-[10px] font-extrabold backdrop-blur">
           <span style={{ color: tone.accent }}>{product.collectionAr}</span>
         </div>
-        <img
+        <ProductVisual
           src={product.image}
           alt={product.titleEn}
-          loading="lazy"
+          sizes="(max-width: 640px) 46vw, (max-width: 1024px) 31vw, 23vw"
           className="h-full w-full scale-[1.03] object-contain p-2 transition duration-500 group-hover:-translate-y-1 group-hover:rotate-[1deg] group-hover:scale-[1.08]"
         />
       </Link>
