@@ -201,3 +201,96 @@ Still required after direct visual closure:
 4. optionally create smaller archival source derivatives later if repository size itself becomes a concern.
 
 The creative system should **not** be rolled back to solve these items.
+
+
+## H5.2 — Final implementation closure
+
+Latest verified implementation HEAD:
+`a0f0531fc2599d46c98bbed837f0f757b579c536`
+
+Vercel:
+- combined GitHub status: SUCCESS
+- deployment: READY
+- compile: PASS
+- TypeScript / lint: PASS
+- static generation: 15 / 15
+
+Build route manifest:
+- /
+- /about
+- /shop
+- /match
+- /bundle
+- /drops
+- /bag
+- /product/[slug]
+- all existing Habba API routes
+
+### Final implementation fixes after H5.1
+
+- removed implementation / prototype language from customer-facing copy;
+- replaced terms such as `controls`, `handoff`, `Categories`, and explanatory design-copy with natural Habba-facing language;
+- exposed the three already-supported Shop moods that had no visible chips:
+  - ألوان ناعمة
+  - أساسيات هادية
+  - ناتشورال
+- added matching Shop context copy and filter colors;
+- retained all existing filter query keys and routing behavior.
+
+### Catalog integrity audit
+
+Catalog:
+- total records: 26
+- visible products: 22
+- missing product image assets: 0
+
+Home product references:
+- every hardcoded Home product slug exists;
+- every referenced Home product is `visible`;
+- every referenced Home product image exists in the repository.
+
+Shop filters:
+- all visible filter keys return at least one visible product;
+- no current Home filter link points to an unsupported filter.
+
+### Guided-commerce contract audit
+
+Client choice values were checked against API validation sets for:
+- Match
+- Bundle
+- Drop
+
+The redesigned clients preserve the API-supported values for:
+- shopping target;
+- product type;
+- mood;
+- color preference;
+- bundle intent;
+- product count;
+- bundle composition;
+- drop mood;
+- drop size;
+- focus type;
+- color direction.
+
+No API contract change was introduced by the visual redesign.
+
+### Latest render verification
+
+The latest deployment root page returns HTTP 200 and renders:
+- `<html lang="ar" dir="rtl">`;
+- the revised customer-facing copy;
+- responsive Next Image `srcset` output;
+- the current mobile / desktop class structure;
+- optimized product image requests.
+
+Protected preview subroutes currently redirect automated fetches to Vercel SSO (302) before their HTML can be inspected by the available fetch tool. This is a preview-protection limitation, not a route-generation failure; all routes are present in the successful production build manifest.
+
+### Remaining blocker
+
+There is no known implementation, routing, catalog, API-contract, or build blocker on the current branch.
+
+The only intentionally open gate is:
+**direct pixel-level desktop/mobile visual review of the protected preview, followed by targeted fixes only if that review finds anything.**
+
+PR #31 should remain DRAFT / DO NOT MERGE until that visual gate is performed.
