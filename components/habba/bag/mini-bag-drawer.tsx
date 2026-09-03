@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 import { visibleProducts } from '@/content/habba-products';
 import { createBagWhatsAppLink } from '@/lib/habba-bag';
 import { useBag } from '@/components/habba/bag/bag-provider';
@@ -67,7 +68,13 @@ export function MiniBagDrawer({ open, onClose }: MiniBagDrawerProps) {
                     className="grid grid-cols-[72px_1fr] gap-3 rounded-[1.75rem] p-2.5"
                     style={{ backgroundColor: tones[index % tones.length] }}
                   >
-                    <img src={product.image} alt={product.titleEn} className="aspect-square h-[72px] w-[72px] rounded-[1.25rem] bg-white/55 object-contain" />
+                    <ProductVisual
+                      src={product.image}
+                      alt={product.titleEn}
+                      sizes="72px"
+                      quality={76}
+                      className="aspect-square h-[72px] w-[72px] rounded-[1.25rem] bg-white/55 object-contain"
+                    />
                     <div className="self-center text-right">
                       <p className="text-xs font-black text-[#302722]">{product.titleAr}</p>
                       <p className="mt-1 text-[10px] font-bold text-[#786A63]">{product.collectionAr}</p>

@@ -5,6 +5,7 @@ import { whatsappNumber } from '@/content/habba-products';
 import { useBag } from '@/components/habba/bag/bag-provider';
 import { GuidedChoiceGroup } from '@/components/habba/guided-choice';
 import { GuidedResultCard } from '@/components/habba/guided-result-card';
+import { ProductVisual } from '@/components/habba/product-visual';
 
 type MatchPayload = {
   shoppingFor: 'for-me' | 'gift';
@@ -135,9 +136,10 @@ export function MatchClient() {
               </div>
 
               <div className="mt-8 overflow-hidden rounded-[2rem] bg-white/55">
-                <img
+                <ProductVisual
                   src="/images/habba/products/hbb-pastel-candy-bracelet-card.png"
                   alt="أسورة ألوان باستيل"
+                  sizes="(max-width: 1024px) 84vw, 32vw"
                   className="aspect-square w-full scale-[1.08] object-contain"
                 />
               </div>

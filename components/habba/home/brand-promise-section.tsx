@@ -1,3 +1,4 @@
+import { ProductVisual } from '@/components/habba/product-visual';
 export function BrandPromiseSection() {
   return (
     <section className="mx-auto w-[94%] max-w-7xl py-8 sm:py-12">
@@ -7,11 +8,10 @@ export function BrandPromiseSection() {
 
         <div className="relative grid gap-8 p-6 sm:p-9 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:p-12">
           <div className="relative min-h-[360px] overflow-hidden rounded-[2.5rem] bg-[#F6E1D8] sm:min-h-[480px]">
-            <img
-              loading="lazy"
-              decoding="async"
+            <ProductVisual
               src="/images/habba/products/hbb-colorful-flower-bracelet-card.png"
               alt="أسورة ورد ملون"
+              sizes="(max-width: 1024px) 84vw, 40vw"
               className="absolute inset-0 h-full w-full scale-[1.22] object-contain"
             />
             <div className="absolute bottom-5 left-5 flex gap-1.5" aria-hidden="true">

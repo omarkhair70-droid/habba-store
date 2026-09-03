@@ -5,6 +5,7 @@ import { whatsappNumber } from '@/content/habba-products';
 import { useBag } from '@/components/habba/bag/bag-provider';
 import { GuidedChoiceGroup } from '@/components/habba/guided-choice';
 import { GuidedResultCard } from '@/components/habba/guided-result-card';
+import { ProductVisual } from '@/components/habba/product-visual';
 
 type DropPayload = {
   dropMood: 'soft-gift' | 'green-calm' | 'colorful-day' | 'cute-pieces' | 'everyday-calm' | 'natural-simple';
@@ -136,14 +137,16 @@ export function DropBuilderClient() {
               </p>
 
               <div className="relative mt-8 min-h-[330px] overflow-hidden rounded-[2.25rem] bg-white/45">
-                <img
+                <ProductVisual
                   src="/images/habba/products/hbb-green-flower-necklace-card.png"
                   alt="عقد وردة خضراء"
+                  sizes="(max-width: 1024px) 58vw, 26vw"
                   className="absolute right-[4%] top-[3%] w-[68%] rotate-[4deg] object-contain"
                 />
-                <img
+                <ProductVisual
                   src="/images/habba/products/hbb-pink-smiley-bracelet-card.png"
                   alt="أسورة سمايلي وردي"
+                  sizes="(max-width: 1024px) 42vw, 19vw"
                   className="absolute bottom-[-6%] left-[-1%] w-[49%] rotate-[-7deg] object-contain"
                 />
                 <div className="absolute bottom-5 right-5 flex gap-1.5" aria-hidden="true">
@@ -223,9 +226,11 @@ export function DropBuilderClient() {
               <span className="absolute left-4 top-4 z-10 rounded-full bg-white/70 px-3 py-1.5 text-[10px] font-black text-[#496656] backdrop-blur">
                 قطعة البطلة
               </span>
-              <img
+              <ProductVisual
                 src={result.heroProduct.image}
                 alt={result.heroProduct.titleEn}
+                sizes="(max-width: 1024px) 86vw, 38vw"
+                quality={84}
                 className="absolute inset-[4%] h-[92%] w-[92%] scale-[1.08] object-contain"
               />
               <p className="absolute bottom-4 right-4 rounded-full bg-[#302722]/88 px-4 py-2 text-xs font-extrabold text-white backdrop-blur">

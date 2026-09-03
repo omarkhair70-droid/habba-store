@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 import { ProductCard } from '@/components/habba/product-card';
 import { visibleProducts } from '@/content/habba-products';
 import { createBagWhatsAppLink, getBagRecommendations } from '@/lib/habba-bag';
@@ -42,9 +43,10 @@ export function BagPageClient() {
             </div>
           </div>
           <div className="relative min-h-[340px] bg-[#F7E7B9]">
-            <img
+            <ProductVisual
               src="/images/habba/products/hbb-pastel-candy-bracelet-card.png"
               alt="أسورة ألوان باستيل"
+              sizes="(max-width: 1024px) 90vw, 42vw"
               className="absolute inset-[6%] h-[88%] w-[88%] scale-[1.08] object-contain"
             />
           </div>
@@ -76,7 +78,12 @@ export function BagPageClient() {
                 style={{ backgroundColor: toneByCollection[product.collectionAr] ?? '#F1E5DA' }}
               >
                 <Link href={'/product/' + product.slug} className="overflow-hidden rounded-[1.5rem] bg-white/55">
-                  <img src={product.image} alt={product.titleEn} className="aspect-square h-full w-full object-contain p-1" />
+                  <ProductVisual
+                    src={product.image}
+                    alt={product.titleEn}
+                    sizes="(max-width: 640px) 105px, 150px"
+                    className="aspect-square h-full w-full object-contain p-1"
+                  />
                 </Link>
                 <div className="flex min-w-0 flex-col justify-between text-right">
                   <div>

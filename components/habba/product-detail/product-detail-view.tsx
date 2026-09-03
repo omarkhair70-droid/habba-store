@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 import type { HabbaProduct } from '@/content/habba-products';
 import { createWhatsAppLink } from '@/content/habba-products';
 import { useBag } from '@/components/habba/bag/bag-provider';
@@ -34,9 +35,12 @@ export function ProductDetailView({ product }: { product: HabbaProduct }) {
             </span>
           </div>
 
-          <img
+          <ProductVisual
             src={product.image}
             alt={product.titleEn}
+            sizes="(max-width: 1024px) 90vw, 52vw"
+            priority
+            quality={84}
             className="absolute inset-[5%] h-[90%] w-[90%] scale-[1.04] object-contain"
           />
 

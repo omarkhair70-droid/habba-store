@@ -5,6 +5,7 @@ import { whatsappNumber } from '@/content/habba-products';
 import { useBag } from '@/components/habba/bag/bag-provider';
 import { GuidedChoiceGroup } from '@/components/habba/guided-choice';
 import { GuidedResultCard } from '@/components/habba/guided-result-card';
+import { ProductVisual } from '@/components/habba/product-visual';
 
 type BundlePayload = {
   bundleIntent: 'gift' | 'everyday' | 'colorful' | 'calm' | 'green' | 'cute';
@@ -117,16 +118,18 @@ export function BundleClient() {
 
               <div className="mt-8 grid grid-cols-2 gap-2">
                 <div className="overflow-hidden rounded-[1.75rem] bg-white/55">
-                  <img
+                  <ProductVisual
                     src="/images/habba/products/hbb-blue-star-heishi-bracelet-card.png"
                     alt="أسورة النجمة الزرقاء"
+                    sizes="(max-width: 1024px) 40vw, 16vw"
                     className="aspect-square w-full scale-[1.1] object-contain"
                   />
                 </div>
                 <div className="overflow-hidden rounded-[1.75rem] bg-[#F4E8BF]/70">
-                  <img
+                  <ProductVisual
                     src="/images/habba/products/hbb-white-daisy-smile-necklace-card.png"
                     alt="عقد دايزي سمايل"
+                    sizes="(max-width: 1024px) 40vw, 16vw"
                     className="aspect-square w-full scale-[1.08] object-contain"
                   />
                 </div>

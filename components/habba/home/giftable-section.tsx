@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 
 export function GiftableSection() {
   return (
@@ -24,11 +25,10 @@ export function GiftableSection() {
         </div>
 
         <div className="relative order-1 min-h-[330px] bg-[#F0DCE8] lg:order-2 lg:min-h-[480px]">
-          <img
-              loading="lazy"
-              decoding="async"
+          <ProductVisual
             src="/images/habba/products/hbb-pink-strawberry-necklace-card.png"
             alt="عقد فراولة وردي"
+            sizes="(max-width: 1024px) 88vw, 42vw"
             className="absolute inset-[8%] h-[84%] w-[84%] object-contain"
           />
           <div className="absolute left-6 top-6 flex gap-2" aria-hidden="true">
