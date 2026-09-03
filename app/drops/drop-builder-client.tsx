@@ -1,15 +1,287 @@
 'use client';
-import Link from 'next/link';
+
 import { useMemo, useState } from 'react';
 import { whatsappNumber } from '@/content/habba-products';
 import { useBag } from '@/components/habba/bag/bag-provider';
+import { GuidedChoiceGroup } from '@/components/habba/guided-choice';
+import { GuidedResultCard } from '@/components/habba/guided-result-card';
 
-type DropPayload = { dropMood:'soft-gift'|'green-calm'|'colorful-day'|'cute-pieces'|'everyday-calm'|'natural-simple'; dropSize:4|5|6; focusType:'mixed'|'bracelets'|'necklaces'|'giftable'; colorDirection:'surprise'|'green'|'pink'|'blue'|'colorful'|'neutral'; optionalNote?:string };
-type DropResponse = { dropNameAr:string; dropSubtitleAr:string; dropStoryAr:string; heroProduct:{slug:string;titleAr:string;titleEn:string;image:string;categoryAr:string;collectionAr:string}; products:Array<{slug:string;titleAr:string;titleEn:string;image:string;categoryAr:string;collectionAr:string;reasonAr:string}>; instagramCaptionAr:string; whatsappMessageAr:string; source:'ai'|'local'|'fallback' };
-const aiSourceLabel = (source: 'ai' | 'local' | 'fallback') => source === 'ai' ? 'openai' : source === 'local' ? 'local-brain' : 'fallback';
-const chips={dropMood:[{value:'soft-gift',label:'هدايا ناعمة'},{value:'green-calm',label:'جرين مود'},{value:'colorful-day',label:'يوم ملون'},{value:'cute-pieces',label:'كيوت وخفيف'},{value:'everyday-calm',label:'يومي وهادي'},{value:'natural-simple',label:'ناتشورال بسيط'}],dropSize:[{value:4,label:'4'},{value:5,label:'5'},{value:6,label:'6'}],focusType:[{value:'mixed',label:'متنوع'},{value:'bracelets',label:'أساور'},{value:'necklaces',label:'عقود'},{value:'giftable',label:'مناسب للهدايا'}],colorDirection:[{value:'surprise',label:'فاجئيني'},{value:'green',label:'أخضر'},{value:'pink',label:'وردي'},{value:'blue',label:'أزرق'},{value:'colorful',label:'ملون'},{value:'neutral',label:'هادي ومحايد'}]} as const;
-function ChipGroup<T extends string|number>({items,value,onChange}:{items:ReadonlyArray<{value:T;label:string}>;value:T;onChange:(v:T)=>void}){return <div className="mt-2 flex flex-wrap justify-end gap-2">{items.map((i)=><button key={String(i.value)} type="button" onClick={()=>onChange(i.value)} className={`rounded-full border px-3 py-1.5 text-sm transition ${value===i.value?'border-[#F87070] bg-[#FEE9E2] text-[#A44E44]':'border-[#EAD8CA] bg-white text-[#6D625C]'}`}>{i.label}</button>)}</div>;}
-export function DropBuilderClient(){const { addItems } = useBag(); const [payload,setPayload]=useState<DropPayload>({dropMood:'soft-gift',dropSize:4,focusType:'mixed',colorDirection:'surprise',optionalNote:''}); const [loading,setLoading]=useState(false); const [error,setError]=useState(''); const [result,setResult]=useState<DropResponse|null>(null); const whatsappHref=useMemo(()=>result?`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(result.whatsappMessageAr)}`:'#',[result]);
-const isAiDebug = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === 'ai';
-const submit=async()=>{setLoading(true);setError('');try{const res=await fetch('/api/habba/drop',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});const data=await res.json();if(!res.ok){setError(data?.error||'حصلت مشكلة بسيطة، جربي تاني.');setResult(null);}else setResult(data as DropResponse);}catch{setError('حصلت مشكلة بسيطة، جربي تاني.');}finally{setLoading(false);}};
-return <section className="mx-auto w-[92%] max-w-6xl py-6 sm:py-8" dir="rtl"><div className="rounded-3xl border border-[#EEDFD2] bg-[#FFFCF8] p-4 shadow-sm sm:p-6"><h1 className="text-2xl font-bold text-[#3E322D] sm:text-3xl">اعملي Drop من حبّة</h1><p className="mt-2 text-sm text-[#6D625C] sm:text-base">اختاري المود، وحبّة تجمعلك مجموعة صغيرة من المنتجات الموجودة فعلًا في الكتالوج.</p><div className="mt-5 space-y-4"><div><p className="text-sm font-semibold text-[#5A4F49]">مود الـ Drop</p><ChipGroup items={chips.dropMood} value={payload.dropMood} onChange={(v)=>setPayload((p)=>({...p,dropMood:v}))}/></div><div><p className="text-sm font-semibold text-[#5A4F49]">عدد القطع</p><ChipGroup items={chips.dropSize} value={payload.dropSize} onChange={(v)=>setPayload((p)=>({...p,dropSize:v}))}/></div><div><p className="text-sm font-semibold text-[#5A4F49]">نوع التركيز</p><ChipGroup items={chips.focusType} value={payload.focusType} onChange={(v)=>setPayload((p)=>({...p,focusType:v}))}/></div><div><p className="text-sm font-semibold text-[#5A4F49]">اتجاه الألوان</p><ChipGroup items={chips.colorDirection} value={payload.colorDirection} onChange={(v)=>setPayload((p)=>({...p,colorDirection:v}))}/></div><label className="block"><span className="text-sm font-semibold text-[#5A4F49]">ملاحظة صغيرة</span><textarea maxLength={120} value={payload.optionalNote||''} onChange={(e)=>setPayload((p)=>({...p,optionalNote:e.target.value}))} placeholder="مثال: عايزاها هدية لصاحبتي أو بحب الألوان الهادية" className="mt-2 min-h-20 w-full rounded-2xl border border-[#EBDCCF] bg-white p-3 text-sm outline-none ring-[#F7ABA0] focus:ring"/></label></div><button onClick={submit} disabled={loading} className="mt-5 w-full rounded-full bg-[#F87070] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#ef6666] disabled:opacity-70">{loading?'بنجهزلك Drop مناسب...':'اعملي Drop'}</button>{error?<p className="mt-3 text-sm text-[#B14E4E]">{error}</p>:null}</div>{result && isAiDebug ? <div className="mt-4 text-right text-[11px] text-[#8a7d76]">AI source: {aiSourceLabel(result.source)}</div> : null}{result?<div className="mt-6 rounded-3xl border border-[#EEDFD2] bg-[#FFFCF8] p-4 shadow-sm sm:p-6"><h2 className="text-xl font-bold text-[#3E322D]">Drop حبّة ليكي</h2><h3 className="mt-1 text-lg font-semibold text-[#4D413C]">{result.dropNameAr}</h3><p className="text-sm text-[#6D625C]">{result.dropSubtitleAr}</p><div className="mt-4 rounded-2xl border border-[#F0DED0] bg-white p-3"><img src={result.heroProduct.image} alt={result.heroProduct.titleEn} className="aspect-square w-full rounded-xl border border-[#F4E5D8] object-contain"/><p className="mt-2 text-sm font-bold text-[#3E322D]">قطعة البطلة: {result.heroProduct.titleAr}</p></div><p className="mt-4 text-sm text-[#5E534E]">{result.dropStoryAr}</p><div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">{result.products.map((p)=><article key={p.slug} className="rounded-2xl border border-[#F0DED0] bg-white p-3"><img src={p.image} alt={p.titleEn} className="aspect-square w-full rounded-xl border border-[#F4E5D8] object-contain"/><h4 className="mt-2 text-sm font-bold text-[#3E322D]">{p.titleAr}</h4><p className="mt-1 text-xs text-[#6A5E58]">{p.reasonAr}</p><Link href={`/product/${p.slug}`} className="mt-2 inline-block text-xs font-medium text-[#D07D70] hover:underline">عرض القطعة ←</Link></article>)}</div><div className="mt-4 rounded-2xl border border-[#F0DED0] bg-[#fff7ee] p-3"><p className="text-sm font-bold text-[#4D413C]">كابشن جاهز للإنستجرام</p><p className="mt-2 whitespace-pre-line text-sm text-[#5E534E]">{result.instagramCaptionAr}</p><p className="mt-2 text-xs text-[#7A6D67]">راجعي الكابشن قبل النشر.</p></div><div className="mt-5 space-y-2"><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-block w-full rounded-full bg-[#F87070] px-4 py-3 text-center text-sm font-bold text-white hover:bg-[#ef6666]">اسألي عن الـ Drop على واتساب</a><button type="button" onClick={() => addItems(result.products.map((product) => product.slug), { title: 'اتضاف الـ Drop لشنطتك', body: 'الاختيارات اتسجلت في شنطة حبّة 🌷' })} className="w-full rounded-full border border-[#E8D0C1] bg-white px-4 py-3 text-center text-sm font-semibold text-[#7B6056] transition hover:bg-[#FFF7EE]">ضيفي الـ Drop لشنطتك</button></div></div>:null}</section>;}
+type DropPayload = {
+  dropMood: 'soft-gift' | 'green-calm' | 'colorful-day' | 'cute-pieces' | 'everyday-calm' | 'natural-simple';
+  dropSize: 4 | 5 | 6;
+  focusType: 'mixed' | 'bracelets' | 'necklaces' | 'giftable';
+  colorDirection: 'surprise' | 'green' | 'pink' | 'blue' | 'colorful' | 'neutral';
+  optionalNote?: string;
+};
+
+type DropResponse = {
+  dropNameAr: string;
+  dropSubtitleAr: string;
+  dropStoryAr: string;
+  heroProduct: {
+    slug: string;
+    titleAr: string;
+    titleEn: string;
+    image: string;
+    categoryAr: string;
+    collectionAr: string;
+  };
+  products: Array<{
+    slug: string;
+    titleAr: string;
+    titleEn: string;
+    image: string;
+    categoryAr: string;
+    collectionAr: string;
+    reasonAr: string;
+  }>;
+  instagramCaptionAr: string;
+  whatsappMessageAr: string;
+  source: 'ai' | 'local' | 'fallback';
+};
+
+const aiSourceLabel = (source: 'ai' | 'local' | 'fallback') =>
+  source === 'ai' ? 'openai' : source === 'local' ? 'local-brain' : 'fallback';
+
+const choices = {
+  dropMood: [
+    { value: 'soft-gift', label: 'هدايا ناعمة' },
+    { value: 'green-calm', label: 'جرين مود' },
+    { value: 'colorful-day', label: 'يوم ملون' },
+    { value: 'cute-pieces', label: 'كيوت وخفيف' },
+    { value: 'everyday-calm', label: 'يومي وهادي' },
+    { value: 'natural-simple', label: 'ناتشورال بسيط' }
+  ],
+  dropSize: [
+    { value: 4, label: '4 قطع' },
+    { value: 5, label: '5 قطع' },
+    { value: 6, label: '6 قطع' }
+  ],
+  focusType: [
+    { value: 'mixed', label: 'متنوع' },
+    { value: 'bracelets', label: 'أساور' },
+    { value: 'necklaces', label: 'عقود' },
+    { value: 'giftable', label: 'مناسب للهدايا' }
+  ],
+  colorDirection: [
+    { value: 'surprise', label: 'فاجئيني' },
+    { value: 'green', label: 'أخضر' },
+    { value: 'pink', label: 'وردي' },
+    { value: 'blue', label: 'أزرق' },
+    { value: 'colorful', label: 'ملون' },
+    { value: 'neutral', label: 'هادي ومحايد' }
+  ]
+} as const;
+
+export function DropBuilderClient() {
+  const { addItems } = useBag();
+  const [payload, setPayload] = useState<DropPayload>({
+    dropMood: 'soft-gift',
+    dropSize: 4,
+    focusType: 'mixed',
+    colorDirection: 'surprise',
+    optionalNote: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [result, setResult] = useState<DropResponse | null>(null);
+  const isAiDebug =
+    typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === 'ai';
+
+  const whatsappHref = useMemo(
+    () =>
+      result
+        ? 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(result.whatsappMessageAr)
+        : '#',
+    [result]
+  );
+
+  const submit = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const res = await fetch('/api/habba/drop', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data?.error || 'حصلت مشكلة بسيطة، جربي تاني.');
+        setResult(null);
+      } else {
+        setResult(data as DropResponse);
+      }
+    } catch {
+      setError('حصلت مشكلة بسيطة، جربي تاني.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <section className="mx-auto w-[94%] max-w-7xl py-10 sm:py-14" dir="rtl">
+      <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+        <div className="lg:sticky lg:top-28">
+          <div className="relative overflow-hidden rounded-[2.75rem] bg-[#DDEBE5] p-6 sm:p-8">
+            <div className="absolute -left-12 top-0 h-44 w-44 rounded-full bg-[#F4E8BF]/70 blur-2xl" />
+            <div className="relative">
+              <p className="text-xs font-extrabold text-[#4D705F]">Habba Drop</p>
+              <h1 className="mt-2 text-4xl font-black leading-[1.12] tracking-[-0.04em] text-[#302722] sm:text-5xl">
+                مش pairing بس،
+                <span className="block text-[#638873]">ده مود كامل.</span>
+              </h1>
+              <p className="mt-4 text-sm leading-8 text-[#655851] sm:text-base">
+                اختاري الإحساس واللون والحجم، وحبّة تبني مجموعة كاملة من 4 لـ6 قطع موجودة فعلًا في الكتالوج.
+              </p>
+
+              <div className="relative mt-8 min-h-[330px] overflow-hidden rounded-[2.25rem] bg-white/45">
+                <img
+                  src="/images/habba/products/hbb-green-flower-necklace-card.png"
+                  alt="عقد وردة خضراء"
+                  className="absolute right-[4%] top-[3%] w-[68%] rotate-[4deg] object-contain"
+                />
+                <img
+                  src="/images/habba/products/hbb-pink-smiley-bracelet-card.png"
+                  alt="أسورة سمايلي وردي"
+                  className="absolute bottom-[-6%] left-[-1%] w-[49%] rotate-[-7deg] object-contain"
+                />
+                <div className="absolute bottom-5 right-5 flex gap-1.5" aria-hidden="true">
+                  <span className="habba-bead h-4 w-4 bg-[#F56F67]" />
+                  <span className="habba-bead h-6 w-6 bg-[#9274B3]" />
+                  <span className="habba-bead h-5 w-5 bg-[#A88636]" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="rounded-[2.75rem] bg-white/78 p-5 habba-tray-shadow sm:p-7">
+          <GuidedChoiceGroup
+            step="01"
+            label="المود الكبير"
+            hint="ده اللي هيقود شكل الـDrop كله."
+            items={choices.dropMood}
+            value={payload.dropMood}
+            onChange={(value) => setPayload((current) => ({ ...current, dropMood: value }))}
+            tone="sage"
+          />
+          <GuidedChoiceGroup
+            step="02"
+            label="حجم الـDrop"
+            hint="كل ما العدد يزيد، حبّة توسّع التكوين."
+            items={choices.dropSize}
+            value={payload.dropSize}
+            onChange={(value) => setPayload((current) => ({ ...current, dropSize: value }))}
+            tone="butter"
+          />
+          <GuidedChoiceGroup
+            step="03"
+            label="نوع التركيز"
+            hint="خليه mix، أو وجّهي المجموعة لنوع معين."
+            items={choices.focusType}
+            value={payload.focusType}
+            onChange={(value) => setPayload((current) => ({ ...current, focusType: value }))}
+            tone="lavender"
+          />
+          <GuidedChoiceGroup
+            step="04"
+            label="اتجاه الألوان"
+            hint="لون واضح، مود محايد، أو مفاجأة."
+            items={choices.colorDirection}
+            value={payload.colorDirection}
+            onChange={(value) => setPayload((current) => ({ ...current, colorDirection: value }))}
+            tone="coral"
+          />
+
+          <label className="block border-t border-[#4F3B31]/10 pt-6">
+            <span className="text-sm font-black text-[#40342F]">ملاحظة صغيرة</span>
+            <textarea
+              maxLength={120}
+              value={payload.optionalNote || ''}
+              onChange={(event) => setPayload((current) => ({ ...current, optionalNote: event.target.value }))}
+              placeholder="مثال: عايزاها هدية لصاحبتي أو بحب الألوان الهادية"
+              className="mt-3 min-h-24 w-full rounded-[1.5rem] border border-[#4F3B31]/10 bg-[#FFF8F2] p-4 text-sm outline-none"
+            />
+          </label>
+
+          <button
+            onClick={submit}
+            disabled={loading}
+            className="mt-6 w-full rounded-full bg-[#302722] px-5 py-3.5 text-sm font-extrabold text-white transition hover:bg-[#4B3B34] disabled:opacity-65"
+          >
+            {loading ? 'بنكوّن الـDrop...' : 'كوّني الـDrop'}
+          </button>
+          {error ? <p className="mt-3 text-right text-sm font-semibold text-[#B14E4E]">{error}</p> : null}
+        </div>
+      </div>
+
+      {result ? (
+        <section className="mt-12 overflow-hidden rounded-[3rem] bg-[#302722] p-5 text-white sm:p-8 lg:p-10">
+          <div className="grid gap-7 lg:grid-cols-[0.76fr_1.24fr] lg:items-center">
+            <div className="relative min-h-[360px] overflow-hidden rounded-[2.5rem] bg-[#DDEBE5]">
+              <span className="absolute left-4 top-4 z-10 rounded-full bg-white/70 px-3 py-1.5 text-[10px] font-black text-[#496656] backdrop-blur">
+                قطعة البطلة
+              </span>
+              <img
+                src={result.heroProduct.image}
+                alt={result.heroProduct.titleEn}
+                className="absolute inset-[4%] h-[92%] w-[92%] scale-[1.08] object-contain"
+              />
+              <p className="absolute bottom-4 right-4 rounded-full bg-[#302722]/88 px-4 py-2 text-xs font-extrabold text-white backdrop-blur">
+                {result.heroProduct.titleAr}
+              </p>
+            </div>
+
+            <div className="text-right">
+              <p className="text-xs font-extrabold text-[#A9D0BF]">Drop حبّة ليكي</p>
+              <h2 className="mt-2 text-3xl font-black leading-tight sm:text-5xl">{result.dropNameAr}</h2>
+              <p className="mt-2 text-sm font-bold text-[#D9CDC7]">{result.dropSubtitleAr}</p>
+              <p className="mt-5 max-w-xl text-sm leading-8 text-[#D9CDC7]">{result.dropStoryAr}</p>
+              {isAiDebug ? (
+                <p className="mt-3 text-[10px] text-[#AFA09A]">AI source: {aiSourceLabel(result.source)}</p>
+              ) : null}
+            </div>
+          </div>
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {result.products.map((product, index) => (
+              <GuidedResultCard key={product.slug} product={product} index={index} />
+            ))}
+          </div>
+
+          <div className="mt-8 grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
+            <div className="rounded-[2rem] bg-white/8 p-5">
+              <p className="text-xs font-extrabold text-[#F1BBB5]">كابشن جاهز لو حبيتي تشاركي الـDrop</p>
+              <p className="mt-2 whitespace-pre-line text-sm leading-7 text-[#DDD0CA]">{result.instagramCaptionAr}</p>
+              <p className="mt-2 text-[10px] text-[#AFA09A]">راجعيه قبل النشر.</p>
+            </div>
+
+            <div className="flex flex-col gap-2">
+              <button
+                type="button"
+                onClick={() =>
+                  addItems(result.products.map((product) => product.slug), {
+                    title: 'اتضاف الـ Drop لشنطتك',
+                    body: 'الاختيارات اتسجلت في شنطة حبّة 🌷'
+                  })
+                }
+                className="rounded-full bg-[#F56F67] px-6 py-3 text-sm font-extrabold text-white transition hover:bg-[#E9625B]"
+              >
+                ضيفي الـDrop لشنطتك
+              </button>
+              <a
+                href={whatsappHref}
+                target="_blank"
+                rel="noreferrer"
+                className="rounded-full border border-white/20 px-6 py-3 text-center text-sm font-extrabold text-white transition hover:bg-white/10"
+              >
+                اسألي عنه على واتساب
+              </a>
+            </div>
+          </div>
+        </section>
+      ) : null}
+    </section>
+  );
+}

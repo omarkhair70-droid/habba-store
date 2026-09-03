@@ -1,9 +1,10 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
 import { whatsappNumber } from '@/content/habba-products';
 import { useBag } from '@/components/habba/bag/bag-provider';
+import { GuidedChoiceGroup } from '@/components/habba/guided-choice';
+import { GuidedResultCard } from '@/components/habba/guided-result-card';
 
 type MatchPayload = {
   shoppingFor: 'for-me' | 'gift';
@@ -16,13 +17,23 @@ type MatchPayload = {
 type MatchResponse = {
   headlineAr: string;
   summaryAr: string;
-  products: Array<{slug:string;titleAr:string;titleEn:string;image:string;categoryAr:string;collectionAr:string;reasonAr:string}>;
+  products: Array<{
+    slug: string;
+    titleAr: string;
+    titleEn: string;
+    image: string;
+    categoryAr: string;
+    collectionAr: string;
+    reasonAr: string;
+  }>;
   whatsappMessageAr: string;
   source: 'ai' | 'local' | 'fallback';
 };
 
-const aiSourceLabel = (source: 'ai' | 'local' | 'fallback') => source === 'ai' ? 'openai' : source === 'local' ? 'local-brain' : 'fallback';
-const chips = {
+const aiSourceLabel = (source: 'ai' | 'local' | 'fallback') =>
+  source === 'ai' ? 'openai' : source === 'local' ? 'local-brain' : 'fallback';
+
+const choices = {
   shoppingFor: [
     { value: 'for-me', label: 'لنفسي' },
     { value: 'gift', label: 'هدية' }
@@ -50,29 +61,39 @@ const chips = {
   ]
 } as const;
 
-function ChipGroup<T extends string>({items, value, onChange}:{items:ReadonlyArray<{value:T;label:string}>;value:T;onChange:(v:T)=>void}) {
-  return <div className="mt-2 flex flex-wrap justify-end gap-2">{items.map((item)=><button key={item.value} type="button" onClick={()=>onChange(item.value)} className={`rounded-full border px-3 py-1.5 text-sm transition ${value===item.value?'border-[#F87070] bg-[#FEE9E2] text-[#A44E44]':'border-[#EAD8CA] bg-white text-[#6D625C]'}`}>{item.label}</button>)}</div>;
-}
-
 export function MatchClient() {
-  const [payload, setPayload] = useState<MatchPayload>({ shoppingFor: 'for-me', productType: 'any', mood: 'calm', colorPreference: 'surprise', optionalNote: '' });
+  const [payload, setPayload] = useState<MatchPayload>({
+    shoppingFor: 'for-me',
+    productType: 'any',
+    mood: 'calm',
+    colorPreference: 'surprise',
+    optionalNote: ''
+  });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [result, setResult] = useState<MatchResponse | null>(null);
   const { addItems } = useBag();
-  const isAiDebug = typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === 'ai';
+  const isAiDebug =
+    typeof window !== 'undefined' && new URLSearchParams(window.location.search).get('debug') === 'ai';
 
   const whatsappHref = useMemo(() => {
     if (!result) return '#';
-    const fallbackMsg = `أهلًا، حابة أسأل عن الترشيحات دي:\n${result.products.map((p) => `- ${p.titleAr}`).join('\n')}\nهل متاحين؟ والتفاصيل إيه؟`;
-    return `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(result.whatsappMessageAr || fallbackMsg)}`;
+    const fallbackMsg =
+      'أهلًا، حابة أسأل عن الترشيحات دي:\n' +
+      result.products.map((product) => '- ' + product.titleAr).join('\n') +
+      '\nهل متاحين؟ والتفاصيل إيه؟';
+    return 'https://wa.me/' + whatsappNumber + '?text=' + encodeURIComponent(result.whatsappMessageAr || fallbackMsg);
   }, [result]);
 
   const submit = async () => {
     setLoading(true);
     setError('');
     try {
-      const res = await fetch('/api/habba/match', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+      const res = await fetch('/api/habba/match', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
       const data = await res.json();
       if (!res.ok) {
         setError(data?.error || 'حصلت مشكلة بسيطة، جربي تاني.');
@@ -88,31 +109,148 @@ export function MatchClient() {
   };
 
   return (
-    <section className="mx-auto w-[92%] max-w-5xl py-6 sm:py-8" dir="rtl">
-      <div className="rounded-3xl border border-[#EEDFD2] bg-[#FFFCF8] p-4 shadow-sm sm:p-6">
-        <h1 className="text-2xl font-bold text-[#3E322D] sm:text-3xl">اختاري مودك، وحبّة ترشحلك</h1>
-        <p className="mt-2 text-sm text-[#6D625C] sm:text-base">جاوبي كام سؤال بسيط، ونرشحلك قطع مناسبة من منتجات حبّة الحقيقية.</p>
+    <section className="mx-auto w-[94%] max-w-7xl py-10 sm:py-14" dir="rtl">
+      <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+        <div className="lg:sticky lg:top-28">
+          <div className="relative overflow-hidden rounded-[2.75rem] bg-[#F2DFE9] p-6 sm:p-8">
+            <div className="absolute -left-10 -top-10 h-40 w-40 rounded-full bg-[#E1EAF0]/70 blur-2xl" />
+            <div className="relative">
+              <p className="text-xs font-extrabold text-[#95566F]">Habba Match</p>
+              <h1 className="mt-2 text-4xl font-black leading-[1.12] tracking-[-0.04em] text-[#302722] sm:text-5xl">
+                قولي مودك،
+                <span className="block text-[#B25D7B]">مش اسم المنتج.</span>
+              </h1>
+              <p className="mt-4 text-sm leading-8 text-[#655851] sm:text-base">
+                أربع خطوات خفاف، وفي الآخر حبّة ترشحلك 3 قطع من المنتجات الموجودة فعلًا.
+              </p>
 
-        <div className="mt-5 space-y-4">
-          <div><p className="text-sm font-semibold text-[#5A4F49]">بتشتري لمين؟</p><ChipGroup items={chips.shoppingFor} value={payload.shoppingFor} onChange={(v) => setPayload((p) => ({ ...p, shoppingFor: v }))} /></div>
-          <div><p className="text-sm font-semibold text-[#5A4F49]">نوع القطعة</p><ChipGroup items={chips.productType} value={payload.productType} onChange={(v) => setPayload((p) => ({ ...p, productType: v }))} /></div>
-          <div><p className="text-sm font-semibold text-[#5A4F49]">مودك</p><ChipGroup items={chips.mood} value={payload.mood} onChange={(v) => setPayload((p) => ({ ...p, mood: v }))} /></div>
-          <div><p className="text-sm font-semibold text-[#5A4F49]">تفضيل اللون</p><ChipGroup items={chips.colorPreference} value={payload.colorPreference} onChange={(v) => setPayload((p) => ({ ...p, colorPreference: v }))} /></div>
-          <label className="block">
-            <span className="text-sm font-semibold text-[#5A4F49]">ملاحظة صغيرة</span>
-            <textarea maxLength={120} value={payload.optionalNote || ''} onChange={(e) => setPayload((p) => ({ ...p, optionalNote: e.target.value }))} placeholder="مثال: بحب الألوان الهادية أو عايزاها هدية لصاحبتي" className="mt-2 min-h-20 w-full rounded-2xl border border-[#EBDCCF] bg-white p-3 text-sm outline-none ring-[#F7ABA0] focus:ring" />
-          </label>
+              <div className="mt-7 flex items-center gap-2" aria-hidden="true">
+                <span className="habba-bead h-4 w-4 bg-[#F56F67]" />
+                <span className="habba-thread w-10" />
+                <span className="habba-bead h-5 w-5 bg-[#9274B3]" />
+                <span className="habba-thread w-10" />
+                <span className="habba-bead h-4 w-4 bg-[#6E927F]" />
+                <span className="habba-thread w-10" />
+                <span className="habba-bead h-5 w-5 bg-[#A88636]" />
+              </div>
+
+              <div className="mt-8 overflow-hidden rounded-[2rem] bg-white/55">
+                <img
+                  src="/images/habba/products/hbb-pastel-candy-bracelet-card.png"
+                  alt="أسورة ألوان باستيل"
+                  className="aspect-square w-full scale-[1.08] object-contain"
+                />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <button onClick={submit} disabled={loading} className="mt-5 w-full rounded-full bg-[#F87070] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#ef6666] disabled:opacity-70">
-          {loading ? 'بنختارلك قطع مناسبة...' : 'رشحيلي قطع مناسبة'}
-        </button>
-        {error ? <p className="mt-3 text-sm text-[#B14E4E]">{error}</p> : null}
+        <div>
+          <div className="rounded-[2.75rem] bg-white/78 p-5 habba-tray-shadow sm:p-7">
+            <GuidedChoiceGroup
+              step="01"
+              label="بتشتري لمين؟"
+              hint="لنفسك ولا هدية؟ دي أول إشارة للترشيح."
+              items={choices.shoppingFor}
+              value={payload.shoppingFor}
+              onChange={(value) => setPayload((current) => ({ ...current, shoppingFor: value }))}
+              tone="coral"
+            />
+            <GuidedChoiceGroup
+              step="02"
+              label="نوع القطعة"
+              hint="لو مش فارقة، سيبي حبّة تختار من كل الكتالوج."
+              items={choices.productType}
+              value={payload.productType}
+              onChange={(value) => setPayload((current) => ({ ...current, productType: value }))}
+              tone="lavender"
+            />
+            <GuidedChoiceGroup
+              step="03"
+              label="المود"
+              hint="الإحساس أهم من اسم الـcollection."
+              items={choices.mood}
+              value={payload.mood}
+              onChange={(value) => setPayload((current) => ({ ...current, mood: value }))}
+              tone="sage"
+            />
+            <GuidedChoiceGroup
+              step="04"
+              label="اتجاه اللون"
+              hint="اختاري لون، أو سيبيها مفاجأة."
+              items={choices.colorPreference}
+              value={payload.colorPreference}
+              onChange={(value) => setPayload((current) => ({ ...current, colorPreference: value }))}
+              tone="butter"
+            />
+
+            <label className="block border-t border-[#4F3B31]/10 pt-6">
+              <span className="text-sm font-black text-[#40342F]">حاجة صغيرة تحبي نعرفها؟</span>
+              <textarea
+                maxLength={120}
+                value={payload.optionalNote || ''}
+                onChange={(event) => setPayload((current) => ({ ...current, optionalNote: event.target.value }))}
+                placeholder="مثال: بحب الألوان الهادية أو عايزاها هدية لصاحبتي"
+                className="mt-3 min-h-24 w-full rounded-[1.5rem] border border-[#4F3B31]/10 bg-[#FFF8F2] p-4 text-sm outline-none"
+              />
+            </label>
+
+            <button
+              onClick={submit}
+              disabled={loading}
+              className="mt-6 w-full rounded-full bg-[#302722] px-5 py-3.5 text-sm font-extrabold text-white transition hover:bg-[#4B3B34] disabled:opacity-65"
+            >
+              {loading ? 'بنرتب الاختيارات...' : 'رشحيلي 3 قطع'}
+            </button>
+            {error ? <p className="mt-3 text-right text-sm font-semibold text-[#B14E4E]">{error}</p> : null}
+          </div>
+        </div>
       </div>
 
-      {result && isAiDebug ? <div className="mt-4 text-right text-[11px] text-[#8a7d76]">AI source: {aiSourceLabel(result.source)}</div> : null}
+      {result ? (
+        <section className="mt-12 overflow-hidden rounded-[3rem] bg-[#302722] p-5 text-white sm:p-8 lg:p-10">
+          <div className="grid gap-6 lg:grid-cols-[0.58fr_1.42fr] lg:items-end">
+            <div className="text-right">
+              <p className="text-xs font-extrabold text-[#F1BBB5]">اختيارات حبّة ليكي</p>
+              <h2 className="mt-2 text-3xl font-black leading-tight sm:text-4xl">{result.headlineAr}</h2>
+            </div>
+            <p className="max-w-2xl text-sm leading-7 text-[#DDD0CA]">{result.summaryAr}</p>
+          </div>
 
-      {result ? <div className="mt-6 rounded-3xl border border-[#EEDFD2] bg-[#FFFCF8] p-4 shadow-sm sm:p-6"><h2 className="text-xl font-bold text-[#3E322D]">اختيارات حبّة ليكي</h2><h3 className="mt-2 text-lg font-semibold text-[#4D413C]">{result.headlineAr}</h3><p className="mt-1 text-sm text-[#6D625C]">{result.summaryAr}</p><div className="mt-4 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">{result.products.map((product)=><article key={product.slug} className="rounded-2xl border border-[#F0DED0] bg-white p-3"><img src={product.image} alt={product.titleEn} className="aspect-square w-full rounded-xl border border-[#F4E5D8] object-contain" /><h4 className="mt-2 text-sm font-bold text-[#3E322D]">{product.titleAr}</h4><p className="text-xs text-[#7E736D]">{product.titleEn}</p><p className="text-xs text-[#8A7D76]">{product.categoryAr} • {product.collectionAr}</p><p className="mt-1 text-xs text-[#6A5E58]">{product.reasonAr}</p><Link href={`/product/${product.slug}`} className="mt-2 inline-block text-xs font-medium text-[#D07D70] hover:underline">عرض القطعة ←</Link></article>)}</div><div className="mt-5 space-y-2"><a href={whatsappHref} target="_blank" rel="noreferrer" className="inline-block w-full rounded-full bg-[#F87070] px-4 py-3 text-center text-sm font-bold text-white hover:bg-[#ef6666]">اسألي عن الترشيحات على واتساب</a><button type="button" onClick={() => addItems(result.products.map((product) => product.slug), { title: 'اتضافت الترشيحات لشنطتك', body: 'اختياراتك بقت محفوظة في شنطة حبّة 💛' })} className="w-full rounded-full border border-[#E8D0C1] bg-white px-4 py-3 text-center text-sm font-semibold text-[#7B6056] transition hover:bg-[#FFF7EE]">ضيفي الترشيحات لشنطتك</button></div></div> : null}
+          {result && isAiDebug ? (
+            <p className="mt-3 text-right text-[10px] text-[#AFA09A]">AI source: {aiSourceLabel(result.source)}</p>
+          ) : null}
+
+          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {result.products.map((product, index) => (
+              <GuidedResultCard key={product.slug} product={product} index={index} />
+            ))}
+          </div>
+
+          <div className="mt-7 flex flex-col gap-2 sm:flex-row">
+            <button
+              type="button"
+              onClick={() =>
+                addItems(result.products.map((product) => product.slug), {
+                  title: 'اتضافت الترشيحات لشنطتك',
+                  body: 'اختياراتك بقت محفوظة في شنطة حبّة 💛'
+                })
+              }
+              className="rounded-full bg-[#F56F67] px-6 py-3 text-sm font-extrabold text-white transition hover:bg-[#E9625B]"
+            >
+              ضيفي الاختيارات لشنطتك
+            </button>
+            <a
+              href={whatsappHref}
+              target="_blank"
+              rel="noreferrer"
+              className="rounded-full border border-white/20 px-6 py-3 text-center text-sm font-extrabold text-white transition hover:bg-white/10"
+            >
+              اسألي عنهم على واتساب
+            </a>
+          </div>
+        </section>
+      ) : null}
     </section>
   );
 }
