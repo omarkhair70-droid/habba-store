@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 
 const beads = [
   { color: '#F56F67', size: 'h-5 w-5' },
@@ -71,9 +72,12 @@ export function HeroSection() {
             href="/product/colorful-star-set"
             className="habba-float absolute right-[14%] top-[14%] z-10 block w-[64%] overflow-hidden rounded-[2.5rem] border border-white/80 bg-white/90 p-3 shadow-[0_24px_70px_rgba(86,57,46,0.14)] transition hover:scale-[1.015]"
           >
-            <img
+            <ProductVisual
               src="/images/habba/products/hbb-colorful-star-set-card.png"
               alt="طقم النجوم الملونة"
+              sizes="(max-width: 1024px) 58vw, 34vw"
+              priority
+              quality={84}
               className="aspect-square w-full rounded-[2rem] object-contain"
             />
           </Link>
@@ -82,9 +86,11 @@ export function HeroSection() {
             href="/product/lavender-rose-bracelet"
             className="habba-float-slow absolute bottom-[4%] left-[2%] z-20 block w-[37%] rotate-[-5deg] rounded-[2rem] border border-[#6A4D3E]/10 bg-[#E9DEF7] p-2.5 shadow-[0_18px_50px_rgba(86,57,46,0.12)] transition hover:rotate-[-2deg]"
           >
-            <img
+            <ProductVisual
               src="/images/habba/products/hbb-lavender-rose-bracelet-card.png"
               alt="أسورة لافندر بوردة"
+              sizes="(max-width: 1024px) 34vw, 18vw"
+              quality={80}
               className="aspect-square w-full rounded-[1.55rem] bg-white/75 object-contain"
             />
           </Link>
@@ -93,9 +99,11 @@ export function HeroSection() {
             href="/product/green-speckle-bracelet"
             className="absolute bottom-[8%] right-[3%] z-20 block w-[30%] rotate-[6deg] rounded-[2rem] border border-[#6A4D3E]/10 bg-[#DDE9C9] p-2 shadow-[0_16px_44px_rgba(86,57,46,0.1)] transition hover:rotate-[2deg]"
           >
-            <img
+            <ProductVisual
               src="/images/habba/products/hbb-green-speckle-bracelet-card.png"
               alt="أسورة خضراء مرقطة"
+              sizes="(max-width: 1024px) 28vw, 15vw"
+              quality={80}
               className="aspect-square w-full rounded-[1.55rem] bg-white/75 object-contain"
             />
           </Link>

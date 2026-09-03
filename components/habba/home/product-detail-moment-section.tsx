@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 
 const moments = [
   {
@@ -59,11 +60,10 @@ export function ProductDetailMomentSection() {
               style={{ backgroundColor: moment.bg }}
             >
               <div className="absolute inset-0 overflow-hidden">
-                <img
-              loading="lazy"
-              decoding="async"
+                <ProductVisual
                   src={moment.image}
                   alt={moment.alt}
+                  sizes="(max-width: 1024px) 88vw, 30vw"
                   className={'h-full w-full object-contain transition duration-700 group-hover:scale-[1.78] ' + moment.imageClass}
                 />
               </div>

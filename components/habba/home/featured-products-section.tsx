@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 import { visibleProducts } from '@/content/habba-products';
 
 const editorialSlugs = [
@@ -41,11 +42,10 @@ export function FeaturedProductsSection() {
             {lead.collectionAr}
           </div>
           <div className="absolute inset-x-[6%] bottom-[12%] top-[4%] overflow-hidden rounded-[2.4rem]">
-            <img
-              loading="lazy"
-              decoding="async"
+            <ProductVisual
               src={lead.image}
               alt={lead.titleEn}
+              sizes="(max-width: 1024px) 86vw, 50vw"
               className="h-full w-full scale-[1.08] object-contain transition duration-500 group-hover:-translate-y-2 group-hover:scale-[1.13]"
             />
           </div>
@@ -71,11 +71,10 @@ export function FeaturedProductsSection() {
                   <h3 className="mt-1 text-lg font-black leading-tight">{product.titleAr}</h3>
                   <p className="mt-2 text-xs leading-6 text-[#6E605A]">قطعة كاملة، من غير زحمة controls</p>
                 </div>
-                <img
-              loading="lazy"
-              decoding="async"
+                <ProductVisual
                   src={product.image}
                   alt={product.titleEn}
+                  sizes="(max-width: 640px) 42vw, (max-width: 1024px) 25vw, 19vw"
                   className="aspect-square w-full object-contain transition duration-500 group-hover:-translate-y-1 group-hover:rotate-2 group-hover:scale-[1.06]"
                 />
               </Link>

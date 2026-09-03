@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { ProductVisual } from '@/components/habba/product-visual';
 import { habbaCollections } from '@/content/habba-sections';
 
 const collectionTone = {
@@ -41,7 +42,12 @@ export function CollectionsSection() {
 
               <div className="absolute bottom-[-7%] left-[-4%] w-[82%] transition duration-500 group-hover:-translate-y-3 group-hover:rotate-2 group-hover:scale-[1.03] md:w-[92%]">
                 <div className="rounded-full bg-white/45 p-5">
-                  <img loading="lazy" decoding="async" src={collection.image} alt={collection.imageAlt} className="aspect-square w-full object-contain" />
+                  <ProductVisual
+                    src={collection.image}
+                    alt={collection.imageAlt}
+                    sizes="(max-width: 768px) 78vw, 28vw"
+                    className="aspect-square w-full object-contain"
+                  />
                 </div>
               </div>
 
