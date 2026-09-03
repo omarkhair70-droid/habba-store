@@ -42,12 +42,12 @@ export function ProductDetailMomentSection() {
           <div className="text-right">
             <p className="text-xs font-extrabold text-[#EAB7B1]">قربي أكتر</p>
             <h2 className="mt-2 text-3xl font-black leading-tight tracking-[-0.03em] sm:text-5xl">
-              المنتج مش
-              <span className="block text-[#F2C8C3]">صورة كارت بس.</span>
+              التفاصيل
+              <span className="block text-[#F2C8C3]">هي اللي بتفرق.</span>
             </h2>
           </div>
           <p className="max-w-2xl text-sm leading-8 text-[#E5D9D3] sm:text-base">
-            نفس صور حبّة الحالية نقدر نستخدمها بأكتر من مسافة وزاوية عرض: مرة كقطعة كاملة، ومرة كتفصيلة قريبة، ومرة كجزء من مود. ده يدي للمنتجات مساحة تتنفس من غير ما نخترع منتج مش موجود.
+            قربي للورد والفراولة وترتيب الخرز. الحاجات الصغيرة دي هي اللي بتدي كل قطعة روحها، وبتخلي نفس اللون يحس مختلف من قطعة للتانية.
           </p>
         </div>
 

@@ -12,7 +12,7 @@ export function CollectionsSection() {
   return (
     <section className="mx-auto w-[94%] max-w-7xl py-16 sm:py-20">
       <div className="mb-8 max-w-2xl text-right">
-        <p className="text-xs font-extrabold text-[#A9534D]">مش مجرد Categories</p>
+        <p className="text-xs font-extrabold text-[#A9534D]">اختاري بالإحساس</p>
         <h2 className="mt-2 text-3xl font-black tracking-[-0.03em] sm:text-4xl">اختاري بالمود</h2>
         <p className="mt-3 text-sm leading-7 text-[#6E605A] sm:text-base">
           نفس نوع القطعة ممكن يحس مختلف تمامًا حسب اللون والتفاصيل. عشان كده حبّة بتجمع المنتجات كمودات قبل ما تكون أقسام.
@@ -34,7 +34,7 @@ export function CollectionsSection() {
                   className="inline-flex rounded-full border border-black/10 bg-white/50 px-3 py-1 text-[11px] font-extrabold"
                   style={{ color: tone.accent }}
                 >
-                  mood collection
+                  مود من حبّة
                 </span>
                 <h3 className="mt-3 text-2xl font-black leading-tight">{collection.title}</h3>
                 <p className="mt-2 max-w-xs text-sm leading-7 text-[#655851]">{collection.description}</p>

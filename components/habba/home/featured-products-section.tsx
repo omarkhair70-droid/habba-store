@@ -22,10 +22,10 @@ export function FeaturedProductsSection() {
     <section className="mx-auto w-[94%] max-w-7xl py-16 sm:py-20">
       <div className="mb-8 flex items-end justify-between gap-4">
         <div className="text-right">
-          <p className="mb-2 text-xs font-extrabold text-[#B3544F]">اختيارات مختلفة عن أول الشاشة</p>
+          <p className="mb-2 text-xs font-extrabold text-[#B3544F]">اختيارات حبّة النهارده</p>
           <h2 className="text-3xl font-black tracking-[-0.03em] sm:text-4xl">كل قطعة لها شخصية</h2>
           <p className="mt-3 max-w-2xl text-sm leading-7 text-[#6E605A] sm:text-base">
-            بدل ما نكرر نفس الـhero products، هنا بنقرب من تفاصيل تانية في الكتالوج: سمايل، دايزي، باستيل ونجوم.
+            سمايل ودايزي وباستيل ونجوم — تفاصيل صغيرة تغيّر إحساس القطعة كلها.
           </p>
         </div>
         <Link href="/shop" className="hidden text-sm font-bold text-[#6E5D55] underline decoration-[#DABCB0] underline-offset-4 sm:block">
@@ -69,7 +69,7 @@ export function FeaturedProductsSection() {
                 <div className="text-right">
                   <p className="text-[11px] font-extrabold text-[#786A63]">{product.collectionAr}</p>
                   <h3 className="mt-1 text-lg font-black leading-tight">{product.titleAr}</h3>
-                  <p className="mt-2 text-xs leading-6 text-[#6E605A]">قطعة كاملة، من غير زحمة controls</p>
+                  <p className="mt-2 text-xs leading-6 text-[#6E605A]">تفصيلة خفيفة تغيّر المود</p>
                 </div>
                 <ProductVisual
                   src={product.image}

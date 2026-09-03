@@ -64,7 +64,7 @@ export function BagPageClient() {
         <p className="text-xs font-extrabold text-[#A9534D]">اختياراتك اتجمعت</p>
         <h1 className="mt-2 text-4xl font-black tracking-[-0.04em] text-[#302722] sm:text-5xl">شنطة حبّة</h1>
         <p className="mt-3 text-sm leading-7 text-[#746761] sm:text-base">
-          هنا بنجمع القطع قبل handoff واحد على واتساب. التوفر والسعر النهائي يتأكدوا هناك.
+          هنا بتتجمع كل اختياراتك، وبعدها تبعتيهم مرة واحدة على واتساب عشان نأكد التوفر والسعر النهائي.
         </p>
       </div>
 
@@ -141,7 +141,7 @@ export function BagPageClient() {
         <aside className="h-fit overflow-hidden rounded-[2.5rem] bg-[#302722] p-6 text-right text-white lg:sticky lg:top-28">
           <div className="flex items-center justify-between gap-4">
             <span className="habba-bead h-7 w-7 bg-[#F56F67]" aria-hidden="true" />
-            <p className="text-xs font-extrabold text-[#F0BBB5]">جاهزة للhandoff</p>
+            <p className="text-xs font-extrabold text-[#F0BBB5]">جاهزة للسؤال</p>
           </div>
           <h2 className="mt-5 text-2xl font-black">ملخص الشنطة</h2>
           <p className="mt-2 text-sm text-[#DCCFC9]">{itemCount} قطع مختارة</p>

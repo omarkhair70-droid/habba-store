@@ -5,7 +5,7 @@ const discoveryPaths = [
     step: '01',
     label: 'ابدئي بإجابات بسيطة',
     title: 'حبّة ترشحلك',
-    description: 'لو لسه مش محددة قطعة، اختاري المناسبة والمود واللون وخدي 3 ترشيحات من الكتالوج الحقيقي.',
+    description: 'لو لسه مش محددة قطعة، اختاري المناسبة والمود واللون وخدي 3 ترشيحات من القطع المتاحة.',
     cta: 'جربي Habba Match',
     href: '/match',
     bg: '#F8DCD7',
@@ -46,7 +46,7 @@ export function MatchEntrySection() {
             </h2>
           </div>
           <p className="max-w-2xl text-sm leading-8 text-[#6E605A] sm:text-base">
-            Habba Match وBundle وDrop مش إضافات منفصلة؛ دول 3 درجات من المساعدة. اختاري قد إيه عايزة حبّة تدخل معاكي في القرار.
+            عايزة ترشيح سريع؟ ابدئي بـMatch. عايزة قطعتين يليقوا على بعض؟ اعملي Bundle. ولو نفسك في مود كامل، خلي الـDrop يجمعهولك.
           </p>
         </div>
 

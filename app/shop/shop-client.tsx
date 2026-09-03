@@ -131,7 +131,7 @@ export default function ShopClient() {
         <div className="absolute -right-20 bottom-0 h-72 w-72 rounded-full bg-[#DDE9CF]/60 blur-3xl" />
 
         <div className="relative mx-auto w-[94%] max-w-7xl py-12 sm:py-16">
-          <p className="text-xs font-extrabold text-[#A9534D]">الكتالوج الحقيقي</p>
+          <p className="text-xs font-extrabold text-[#A9534D]">كل حبّة في مكان واحد</p>
           <h1 className="mt-2 max-w-3xl text-4xl font-black leading-[1.12] tracking-[-0.04em] text-[#302722] sm:text-6xl">
             اختاري على مزاجك،
             <span className="block text-[#D95F58]">مش على اسم القسم بس.</span>

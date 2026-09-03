@@ -74,7 +74,7 @@ export function ProductDetailView({ product }: { product: HabbaProduct }) {
           </div>
 
           <div className="mt-5 rounded-[2rem] bg-[#302722] p-5 text-white">
-            <p className="text-xs font-extrabold text-[#F0BBB5]">handmade note</p>
+            <p className="text-xs font-extrabold text-[#F0BBB5]">عن القطعة</p>
             <p className="mt-2 text-sm leading-7 text-[#E4D8D2]">
               كل قطعة معمولة بإيد، فممكن يحصل اختلاف بسيط في ترتيب خرزة أو درجة لون حسب الخامات المتاحة. بنأكد التفاصيل قبل الطلب.
             </p>
