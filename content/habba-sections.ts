@@ -13,7 +13,7 @@ export const habbaCollections: HabbaCollectionCard[] = [
     href: '/shop?filter=green-mood',
     title: 'قطع يومية',
     description: 'أساور وعقود بسيطة وسهلة اللبس.',
-    image: '/images/habba/products/hbb-green-speckle-bracelet-card.png',
+    image: '/images/habba/products/hbb-green-flower-necklace-card.png',
     imageAlt: 'Green Mood collection'
   },
   {
@@ -21,7 +21,7 @@ export const habbaCollections: HabbaCollectionCard[] = [
     href: '/shop?filter=cute-gift',
     title: 'هدايا صغيرة',
     description: 'اختيارات لطيفة للهدايا البسيطة.',
-    image: '/images/habba/products/hbb-lavender-rose-bracelet-card.png',
+    image: '/images/habba/products/hbb-pink-smiley-bracelet-card.png',
     imageAlt: 'Cute Gift collection'
   },
   {

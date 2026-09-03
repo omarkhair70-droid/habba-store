@@ -9,6 +9,7 @@ import { GiftableSection } from '@/components/habba/home/giftable-section';
 import { HeroSection } from '@/components/habba/home/hero-section';
 import { HowToOrderSection } from '@/components/habba/home/how-to-order-section';
 import { MatchEntrySection } from '@/components/habba/home/match-entry-section';
+import { ProductDetailMomentSection } from '@/components/habba/home/product-detail-moment-section';
 import { TrustNotesSection } from '@/components/habba/home/trust-notes-section';
 
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ export default function HabbaHomePage() {
       <HabbaHeader />
       <HeroSection />
       <FeaturedProductsSection />
+      <ProductDetailMomentSection />
       <MatchEntrySection />
       <CollectionsSection />
       <BrandPromiseSection />

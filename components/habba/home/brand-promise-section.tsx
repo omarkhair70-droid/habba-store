@@ -6,11 +6,11 @@ export function BrandPromiseSection() {
         <div className="absolute -bottom-24 right-0 h-72 w-72 rounded-full bg-[#78A894]/20 blur-3xl" />
 
         <div className="relative grid gap-8 p-6 sm:p-9 lg:grid-cols-[0.95fr_1.05fr] lg:items-center lg:p-12">
-          <div className="relative min-h-[360px] rounded-[2.5rem] bg-[#F5E1ED] p-4 sm:min-h-[480px]">
+          <div className="relative min-h-[360px] overflow-hidden rounded-[2.5rem] bg-[#F6E1D8] sm:min-h-[480px]">
             <img
-              src="/images/habba/products/hbb-lavender-rose-bracelet-card.png"
-              alt="أسورة لافندر بوردة"
-              className="absolute inset-[6%] h-[88%] w-[88%] object-contain"
+              src="/images/habba/products/hbb-colorful-flower-bracelet-card.png"
+              alt="أسورة ورد ملون"
+              className="absolute inset-0 h-full w-full scale-[1.22] object-contain"
             />
             <div className="absolute bottom-5 left-5 flex gap-1.5" aria-hidden="true">
               <span className="habba-bead h-5 w-5 bg-[#F56F67]" />
