@@ -17,7 +17,10 @@ export const habbaFilterChips: { key: HabbaFilterKey; label: string }[] = [
   { key: 'sets', label: 'أطقم' },
   { key: 'cute-gift', label: 'هدايا صغيرة' },
   { key: 'green-mood', label: 'جرين مود' },
-  { key: 'colorful-star', label: 'كولرفل ستار' }
+  { key: 'colorful-star', label: 'كولرفل ستار' },
+  { key: 'soft-colors', label: 'ألوان ناعمة' },
+  { key: 'calm-basics', label: 'أساسيات هادية' },
+  { key: 'natural', label: 'ناتشورال' }
 ];
 
 export const habbaValidFilters: HabbaFilterKey[] = [

@@ -34,7 +34,10 @@ const filterContext: Partial<Record<HabbaFilterKey, string>> = {
   sets: 'أطقم جاهزة لما تحبي أكتر من قطعة في نفس المود.',
   'green-mood': 'درجات خضراء وهادية للبس اليومي.',
   'cute-gift': 'قطع صغيرة ولطيفة تنفع هدية أو تفصيلة مرحة.',
-  'colorful-star': 'نجوم وألوان واضحة لما المود محتاج يبقى أجرأ.'
+  'colorful-star': 'نجوم وألوان واضحة لما المود محتاج يبقى أجرأ.',
+  'soft-colors': 'لافندر وباستيل ودرجات هادية لما تحبي اللون يبقى خفيف.',
+  'calm-basics': 'قطع بسيطة وسهلة تتلبس كل يوم من غير ما تزحم اللوك.',
+  natural: 'درجات وخامات إحساسها طبيعي وهادي.'
 };
 
 const filterTone: Partial<Record<HabbaFilterKey, string>> = {
@@ -44,7 +47,10 @@ const filterTone: Partial<Record<HabbaFilterKey, string>> = {
   sets: '#C0A351',
   'cute-gift': '#C887A2',
   'green-mood': '#78966A',
-  'colorful-star': '#B99235'
+  'colorful-star': '#B99235',
+  'soft-colors': '#8F78A9',
+  'calm-basics': '#6E8490',
+  natural: '#8A7358'
 };
 
 export default function ShopClient() {
