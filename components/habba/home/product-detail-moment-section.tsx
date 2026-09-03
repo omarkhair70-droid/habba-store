@@ -51,12 +51,12 @@ export function ProductDetailMomentSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 lg:grid-cols-3">
+        <div className="habba-scrollbar-none mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0">
           {moments.map((moment, index) => (
             <Link
               key={moment.href}
               href={moment.href}
-              className="group relative min-h-[430px] overflow-hidden rounded-[2.5rem]"
+              className="group relative min-h-[430px] min-w-[82vw] snap-center overflow-hidden rounded-[2.5rem] sm:min-w-[62vw] lg:min-w-0"
               style={{ backgroundColor: moment.bg }}
             >
               <div className="absolute inset-0 overflow-hidden">

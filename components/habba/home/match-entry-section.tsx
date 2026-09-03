@@ -50,13 +50,13 @@ export function MatchEntrySection() {
           </p>
         </div>
 
-        <div className="relative mt-10 grid gap-4 lg:grid-cols-3">
+        <div className="habba-scrollbar-none relative mt-10 flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:grid lg:grid-cols-3 lg:overflow-visible lg:pb-0">
           <div className="habba-thread absolute left-[8%] right-[8%] top-8 hidden lg:block" aria-hidden="true" />
           {discoveryPaths.map((path) => (
             <Link
               key={path.href}
               href={path.href}
-              className="group relative z-10 min-h-[320px] overflow-hidden rounded-[2.5rem] p-6 transition duration-300 hover:-translate-y-1 sm:p-7"
+              className="group relative z-10 min-h-[300px] min-w-[82vw] snap-center overflow-hidden rounded-[2.5rem] p-6 transition duration-300 hover:-translate-y-1 sm:min-w-[58vw] sm:p-7 lg:min-h-[320px] lg:min-w-0"
               style={{ backgroundColor: path.bg }}
             >
               <div className="flex items-center justify-between">

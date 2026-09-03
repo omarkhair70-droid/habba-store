@@ -130,3 +130,13 @@ textarea:focus-visible {
     transition-duration: 0.001ms !important;
   }
 }
+
+
+.habba-scrollbar-none {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.habba-scrollbar-none::-webkit-scrollbar {
+  display: none;
+}

@@ -56,14 +56,14 @@ export function FeaturedProductsSection() {
           </div>
         </Link>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
+        <div className="habba-scrollbar-none flex snap-x snap-mandatory gap-3 overflow-x-auto pb-2 sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-1">
           {rest.map((product, index) => {
             const tones = ['#F4E5B9', '#DDE9F4', '#F2DFE9'];
             return (
               <Link
                 key={product.slug}
                 href={'/product/' + product.slug}
-                className="group grid min-h-[176px] grid-cols-[0.9fr_1.1fr] items-center overflow-hidden rounded-[2rem] p-4 sm:min-h-[210px]"
+                className="group grid min-h-[176px] min-w-[78vw] snap-start grid-cols-[0.9fr_1.1fr] items-center overflow-hidden rounded-[2rem] p-4 sm:min-h-[210px] sm:min-w-0"
                 style={{ backgroundColor: tones[index % tones.length] }}
               >
                 <div className="text-right">

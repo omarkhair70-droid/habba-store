@@ -19,14 +19,14 @@ export function CollectionsSection() {
         </p>
       </div>
 
-      <div className="grid gap-4 md:grid-cols-12">
+      <div className="habba-scrollbar-none flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 md:grid md:grid-cols-12 md:overflow-visible md:pb-0">
         {habbaCollections.map((collection) => {
           const tone = collectionTone[collection.key];
           return (
             <Link
               key={collection.key}
               href={collection.href}
-              className={'group relative min-h-[390px] overflow-hidden rounded-[2.5rem] p-5 transition hover:-translate-y-1 ' + tone.span}
+              className={'group relative min-h-[370px] min-w-[82vw] snap-center overflow-hidden rounded-[2.5rem] p-5 transition hover:-translate-y-1 sm:min-w-[58vw] md:min-h-[390px] md:min-w-0 ' + tone.span}
               style={{ backgroundColor: tone.bg }}
             >
               <div className="relative z-10">
