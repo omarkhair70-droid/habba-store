@@ -12,12 +12,12 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
   if (!product) {
     return {
-      title: 'المنتج غير موجود | Habba',
+      title: 'المنتج غير موجود',
       description: 'هذا المنتج غير متاح حاليًا على حبّة.'
     };
   }
 
-  const title = `${product.titleAr} | Habba`;
+  const title = product.titleAr;
   const description = `${product.descriptionAr} ${product.descriptionEn}`;
   return {
     title,
